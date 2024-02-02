@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo-list</title>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <div class="content">
+        <div class="addProject">
+            <dialog data-modal id ='dialog-project'>
+                <form action="get" method="post">
+                    <li class="input-name">
+                        <label for="projectTitle">Project</label>
+                        <input type="text" id="projectTitle">
+                    </li>
+                    <li>
+                        <label for="startDate">Start</label>
+                        <input type="date" id="startDate">
+                    </li>
+                    <li>
+                        <label for="endDate">End</label>
+                        <input type="date" id="endDate">
+                    </li>
+
+                    <div>
+                        <input type="checkbox" id ="projectStatus" class="check" name="status" >
+                    </div>
+                </form>
+                <button type="submit" data-close-modal id="addProject" class="btn">+</button>
+            </dialog>
+        </div>
+        <div class="addTask">
+            <dialog data-modal id = 'dialog-task'>
+                    <form action="get" method="post">
+                        <li> 
+                            <label for="date">day:</label>
+                            <input type="date" id = 'date'>
+                        </li>
+                        <li>
+                            <label for="hourDue">hour</label>
+                            <input type="time" id="hourDue">
+                        </li>
+                        <li class="input-name">
+                            <label for="title">to do:</label>
+                            <input type="text" id = 'title' >
+                        </li>
+                        <div>
+                            <input type="checkbox" id ="taskStatus" class="check" >
+
+                        </div>           
+                    </form>
+                    <button type="submit" data-close-modal id="addToDo" class="btn">+</button>
+            </dialog>
+
+        </div>
+        <div class="projects">
+            <div>
+                <h2>Projects</h2>
+                <button type="submit" data-open-modal id="call-project-form" class="btn">+</button>
+            </div>
+            <div id="projects-list">
+                <div>
+                    <div class="name">visit america</div>
+                    <div class="start width">Start: 17/06/2024</div>
+                    <div class="end width">End: 31/12/2024</div>
+                    <input type="checkbox" class="check" name="status">
+
+                </div>
+                <div>
+                    <div class="name">visit america</div>
+                    <div class="start width">Start: 17/06/2024</div>
+                    <div class="end width">End: 31/12/2024</div>
+                    <input type="checkbox" class="check" name="status">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="to_do">
+                <div>
+                    <h3>to do list</h3>
+                    <button  type = 'submit' id="remove-task" style="font-size: 1.2rem;"> delete</button>
+                    <button type="submit" open-data-modal id="call-task-form" class="btn">+</button>
+                </div>
+                <div id ="task_list">
+                   <div class="task">
+                        <div class="date width">03/03/2024</div>
+                        <div class="hour width">Start: 13:30</div>
+                        <div class="title">meet Elon Musk</div>
+                        <input type="checkbox" class="check" name="status">
+    
+                    </div>
+            
+                </div>
+        </div>        
+       
+
+    </div>
+
+</body>
+</html>

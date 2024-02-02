@@ -1,0 +1,161 @@
+*{
+    border: 1px solid red;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    text-align: center;
+    max-width: 1100px;
+}
+.content{
+    max-width: 1200px;
+    background-color: lightyellow;
+
+}
+.addTask, .addProject{
+    display: flex;
+    max-width: 480px;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    margin: 1px;
+}
+
+.input-name{
+    min-width: 370px;
+}
+dialog{
+    max-width: 400px;
+    min-height: 200px;
+    background: linear-gradient(20deg, grey, white, grey, white, grey);
+    border: 0.3rem solid gray;
+    border-radius: 10px;
+    padding: 1px;
+
+}
+dialog::backdrop{
+    background-color: rgba(250, 235, 215, 0.518);
+
+}
+#title, #projectTitle{
+    min-width: 300px;
+}
+form{
+    margin: 1px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.check{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 10px;
+
+}
+#addProject, #addToDo{
+    margin-top: 20px;
+}
+.btn{
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2rem;
+    border-radius: 50% 50% 50% 50%;
+    margin: 1px;
+    background-color: rgb(38, 234, 169);
+}
+
+li{
+    display: flex;
+    width: 200px;
+    margin: 10px;
+    list-style: none;
+    align-items: center;
+
+}
+label{
+    margin-right: 10px;
+    width: 60px;
+}
+.projects{
+    border: 0.5rem solid darkorange;
+    background-color: turquoise;
+    min-height: 200px;
+}
+.projects > div:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 0px;
+}
+
+div.name{
+    padding: 5px;
+    margin-right: 5px;
+    background-color: rgb(243, 60, 78);
+    font-size: 1.1rem;
+    min-width: 300px;
+    font-weight: 700;
+}
+#projects-list > div{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightgreen;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.width{
+    width: 120px;
+    margin-left: 5px;
+}
+
+.to_do{
+    border: 0.5rem solid darkcyan;
+    margin-top: 20px;
+    background-color: deepskyblue;
+    min-height: 200px;
+}
+.to_do > div:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 0px;
+}
+#task_list > div{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    margin: 10px;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-around;
+    background-color: bisque;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#task_list .title{
+    display: block;
+    padding: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    background-color: rgb(103, 242, 191);
+    height: auto;
+    text-align: left;
+    font-size: 1rem;
+    min-width: 300px;
+    max-width: 600px;
+    flex: 1 1 0;
+}
