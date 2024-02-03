@@ -27,7 +27,7 @@ callTaskForm.addEventListener('click', () => {
 
 //projects
 
-let j = 0; //index number for projects
+let j = projectsList.length; //index number for projects
 addProjectBtn.addEventListener('click', () =>{
   dialogProject.close();
   if(n.value == '' && s.value == '') return;
