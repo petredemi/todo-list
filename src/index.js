@@ -26,6 +26,20 @@ callTaskForm.addEventListener('click', () => {
 });
 
 //projects
+let projectTasks = Array.from(document.querySelectorAll('#projects-list > div'));
+let project_index;
+projectTasks.forEach((div) => div.addEventListener('click', (e) =>{
+        div.style.backgroundColor = 'red'; 
+          function projectIndex(){
+            if( div.style.backgroundColor == 'red'){
+            return div;}
+          }
+          project_index = projectTasks.findIndex(div);
+          console.log(projectTasks[0]);
+          console.log(project_index);
+          console.log(projectTasks);
+
+    })); 
 
 let j = projectsList.length; //index number for projects
 addProjectBtn.addEventListener('click', () =>{
@@ -85,12 +99,13 @@ addTaskBtn.addEventListener('click', () =>{
     div2.textContent = 'day: ' + tasksList[i].date;
     div3.textContent = 'hour: ' + tasksList[i].hour;
     checkbox.checked = tasksList[i].status;
-    task_list.appendChild(div0);
     div0.append(div2, div3, div1, checkbox);
+    task_list.appendChild(div0);
     t.value = '';
     d.value = '';
     hourDue.value = '';
     taskStatus.checked = false;
+
     i =  i + 1;
     backgroundDiv();
 });

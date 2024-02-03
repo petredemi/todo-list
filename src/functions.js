@@ -2,7 +2,6 @@ export  {hiYou, addProject, addItems, backgroundDiv, removeTask};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
-
 function hiYou(){
     console.log('how are you');
 }
@@ -46,35 +45,40 @@ function addItems(){ //add to do items
 
 let arrTask = Array.from(document.querySelectorAll('#task_list > div.task'));
 let indexTask;
-let click = false;
-
 
 function backgroundDiv(){
-      click = false;
-    if( click == false){
+      let click = true;
         arrTask = Array.from(document.querySelectorAll('#task_list > div.task'));
         arrTask.forEach((div) => div.addEventListener('mouseover', (e) => {
+     //   if ( click == true){
           div.setAttribute('style', 'background-color: grey');
+     //   }
           console.log(arrTask);
         }));
         arrTask.forEach((div) => div.addEventListener('mouseleave', (e) => {
+   //       if ( click == true){
           div.removeAttribute('style');
+       //   }
+          
         }));
-      };      
-      backgroundDiv();
       arrTask.forEach((div) => div.addEventListener( 'click', (e) => {
-            div.style.backgroundColor = 'red';    
-            function checkIndex(div){
+        function checkIndex(div){
               if(div.style.backgroundColor == 'red'){
-                click = true;
                 return div; 
-            }}          
-              indexTask = arrTask.findIndex(checkIndex);
+          }} 
+              if(click == true){ 
+                div.style.backgroundColor = 'red'; 
+                indexTask = arrTask.findIndex(checkIndex);
+                click = false;}
+              else if (click == false){
+          //      div.setAttribute('style', 'background-color: grey');
+                click = true;
+              }
               console.log(indexTask);
-              if ( click == true) { click = false};
+              console.log(click);
         }));
-        console.log(click);
-    }
+      }
+      backgroundDiv();
 
     function removeTask(){
           tasksList.splice(indexTask, 1);
