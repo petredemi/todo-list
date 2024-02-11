@@ -59,7 +59,8 @@ form{
 .check{
     width: 1.2rem;
     height: 1.2rem;
-    margin-top: 10px;
+    top: 50%;
+    right: 50%
 
 }
 #addProject, #addToDo{
@@ -69,6 +70,8 @@ form{
     width: 2.5rem;
     height: 2.5rem;
     font-size: 2rem;
+    top: 50%;
+    right: 50%;
     border-radius: 50% 50% 50% 50%;
     margin: 1px;
     background-color: rgb(38, 234, 126);
@@ -85,6 +88,9 @@ li{
 label{
     margin-right: 10px;
     width: 60px;
+    margin: 2px solid red;
+    top: 50%;
+    bottom: 50%;
 }
 .projects{
     border: 0.5rem solid darkorange;
@@ -100,7 +106,7 @@ label{
 }
 
 div.name{
-    padding: 2px;
+    padding: 6px;
     margin-right: 5px;
     background-color: rgb(60, 145, 243);
     font-size: 1.1rem;
