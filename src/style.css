@@ -18,6 +18,9 @@ h1{
     background-color: lightyellow;
 
 }
+.del{
+    font-size: 1.1rem;
+}
 .addTask, .addProject{
     display: flex;
     max-width: 480px;
@@ -68,7 +71,7 @@ form{
     font-size: 2rem;
     border-radius: 50% 50% 50% 50%;
     margin: 1px;
-    background-color: rgb(38, 234, 169);
+    background-color: rgb(38, 234, 126);
 }
 
 li{
@@ -99,7 +102,7 @@ label{
 div.name{
     padding: 5px;
     margin-right: 5px;
-    background-color: rgb(243, 60, 78);
+    background-color: rgb(60, 145, 243);
     font-size: 1.1rem;
     min-width: 300px;
     font-weight: 700;

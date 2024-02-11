@@ -1,11 +1,15 @@
-export  {hiYou, addProject, addItems, backgroundDiv, removeTask};
+export  {hiYou, addProject, addItems, backgroundDiv,
+  removeTask};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
 function hiYou(){
     console.log('how are you');
 }
+//add projects
 const projectsList = ['item'];
+const tasksList = ['item'];
+
 const n = document.querySelector('#projectTitle');
 const s = document.querySelector('#startDate');
 const endDate = document.querySelector('#startDate');
@@ -17,13 +21,14 @@ function addProject(){ //add projects items
       const start = s.value;
       const end = endDate.value;
       const status = projectStatus.checked;
-      return { name, start, end, status};
+      tasksList;
+      return { name, start, end, status, tasksList};
     }
     const item = createProject();
     projectsList.push(item);
 }
 
-const tasksList = [];
+//add todo tasks
 const t = document.querySelector('#title');
 const d = document.querySelector('#date');
 const hourDue = document.querySelector('#hourDue')
@@ -32,16 +37,14 @@ const taskStatus = document.querySelector('#taskStatus');
 function addItems(){ //add to do items
     function createTask(title){ //create object with factory function
      title = t.value;
-      const date = d.value;
-      const hour = hourDue.value;
-      const status = taskStatus.checked;
-      return { title, date, hour, status};
+     const date = d.value;
+     const hour = hourDue.value;
+     const status = taskStatus.checked;
+    return { title, date, hour, status};
   }
   const item = createTask();
   tasksList.push(item);
 }
-
-
 
 let arrTask = Array.from(document.querySelectorAll('#task_list > div.task'));
 let indexTask;
@@ -53,11 +56,11 @@ function backgroundDiv(){
      //   if ( click == true){
           div.setAttribute('style', 'background-color: grey');
      //   }
-          console.log(arrTask);
         }));
         arrTask.forEach((div) => div.addEventListener('mouseleave', (e) => {
    //       if ( click == true){
           div.removeAttribute('style');
+          click = true;
        //   }
           
         }));
@@ -69,7 +72,8 @@ function backgroundDiv(){
               if(click == true){ 
                 div.style.backgroundColor = 'red'; 
                 indexTask = arrTask.findIndex(checkIndex);
-                click = false;}
+                click = false;
+              }
               else if (click == false){
           //      div.setAttribute('style', 'background-color: grey');
                 click = true;
@@ -80,8 +84,45 @@ function backgroundDiv(){
       }
       backgroundDiv();
 
-    function removeTask(){
+  function removeTask(){
+    if( indexTask == undefined) return;
           tasksList.splice(indexTask, 1);
           arrTask[indexTask].remove(indexTask);
           arrTask.splice(indexTask, 1);
+          indexTask = undefined;
     }
+
+
+
+
+
+
+
+/*
+  //    delProject.forEach((button) => button.addEventListener('mouseup', (e) => {
+  //  removeProject();
+    //    j = j -1;
+
+      //  button.style.backgroundColor = '';
+   // }))
+   function deleteProject(){
+    projectsList.splice(indexDel, 1);
+    projects[indexDel].remove(indexDel);
+    delProject[indexDel].remove(indexDel);
+    projects.splice(indexDel, 1);
+    delProject.splice(indexDel, 1);
+    console.log(indexDel);
+  }
+  function del1(){
+    delProject = Array.from(document.querySelectorAll('#projects-list button'));
+    projects = Array.from(document.querySelectorAll('#projects-list > div.project'));
+
+      delProject.forEach((button) => button.addEventListener('click', (e) => {
+        removeProject();
+          deleteProject();
+
+      }));
+  
+    }
+*/
+

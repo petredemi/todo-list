@@ -8,6 +8,7 @@ module.exports = {
     index: './src/index.js',
     print: './src/print.js',
     functions: './src/functions.js',
+    others: '/src/others.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
