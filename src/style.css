@@ -100,14 +100,14 @@ label{
 }
 
 div.name{
-    padding: 5px;
+    padding: 2px;
     margin-right: 5px;
     background-color: rgb(60, 145, 243);
     font-size: 1.1rem;
     min-width: 300px;
     font-weight: 700;
 }
-#projects-list > div{
+#projects-list > .item1 > div.project{
     display: flex;
     flex-wrap: wrap;
     margin: 5px;
@@ -118,6 +118,20 @@ div.name{
     border: 2px solid black;
     border-radius: 10px;
 }
+.todo{
+    border: 0.5rem solid darkcyan;
+    margin-top: 20px;
+    background-color: white;
+    min-height: 200px;
+}
+.todo1{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 0px;
+}
+
 .width{
     width: 120px;
     margin-left: 5px;
@@ -136,7 +150,8 @@ div.name{
     padding: 5px;
     margin: 0px;
 }
-#task_list > div{
+
+div.task{
     display: flex;
     flex-wrap: wrap;
     height: auto;
@@ -149,9 +164,9 @@ div.name{
     border-radius: 10px;
 }
 
-#task_list .title{
+.title{
     display: block;
-    padding: 10px;
+    padding: 1px;
     margin-right: 5px;
     margin-left: 5px;
     background-color: rgb(103, 242, 191);
