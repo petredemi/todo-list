@@ -126,7 +126,8 @@ div.name{
 }
 .todo{
     border: 0.5rem solid darkcyan;
-    margin-top: 20px;
+    border-top: none;
+    margin-top: 1px;
     background-color: white;
     min-height: 200px;
 }
@@ -135,7 +136,7 @@ div.name{
     align-items: center;
     justify-content: space-between;
     padding: 5px;
-    margin: 0px;
+    margin: 2px;
 }
 
 .width{

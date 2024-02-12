@@ -98,31 +98,3 @@ function backgroundDiv(){
 
 
 
-/*
-  //    delProject.forEach((button) => button.addEventListener('mouseup', (e) => {
-  //  removeProject();
-    //    j = j -1;
-
-      //  button.style.backgroundColor = '';
-   // }))
-   function deleteProject(){
-    projectsList.splice(indexDel, 1);
-    projects[indexDel].remove(indexDel);
-    delProject[indexDel].remove(indexDel);
-    projects.splice(indexDel, 1);
-    delProject.splice(indexDel, 1);
-    console.log(indexDel);
-  }
-  function del1(){
-    delProject = Array.from(document.querySelectorAll('#projects-list button'));
-    projects = Array.from(document.querySelectorAll('#projects-list > div.project'));
-
-      delProject.forEach((button) => button.addEventListener('click', (e) => {
-        removeProject();
-          deleteProject();
-
-      }));
-  
-    }
-*/
-
