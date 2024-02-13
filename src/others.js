@@ -1,8 +1,29 @@
+export { showTask};
 
 
+function showTask(){ //show and hide task for project
+  let click = true;
+  let project = document.querySelectorAll('div.item1 > div.project');
+  let todo = document.querySelectorAll('div.item1 > div.todo');
+console.log(todo);
+        project.forEach((node, index) => node.addEventListener('click', (e) => {
+         if( click == true){
+              console.log(' i am here');
+              todo[index].setAttribute('style', 'background-color: yellow');
+              todo[index].setAttribute('style', 'display: block');
+           click = false;
+          }
+          else if( click == false){
+              project = document.querySelectorAll('div.item1 > div.project');
+              todo[index].setAttribute('style', 'background-color: none')
+              todo[index].setAttribute('style', 'display: none');
 
-
-
+           console.log('none');
+           click = true;
+          }
+  
+        }));
+    }
 
 
 

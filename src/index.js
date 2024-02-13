@@ -5,6 +5,7 @@ import { addProject, addItems, hiYou, backgroundDiv,
       removeTask} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
+import { showTask} from './others.js';
 
 printMe();
 hiYou();
@@ -103,8 +104,10 @@ addProjectBtn.addEventListener('click', () =>{
       myFunction2();
       myFunction();
       myFunction3();
+      showTask();
        
 });
+showTask();
 
 //tasks
 let i = tasksList.length; // index and node number for task
