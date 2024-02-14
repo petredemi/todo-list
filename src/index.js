@@ -2,7 +2,7 @@ import _ from 'lodash';
 import './style.css';
 import printMe from'./print.js';
 import { addProject, addItems, hiYou, backgroundDiv, 
-      removeTask} from './functions.js';
+      removeTask, domTask} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask} from './others.js';
@@ -63,8 +63,8 @@ addProjectBtn.addEventListener('click', () =>{
         div1.classList.add('name');
         div2.classList.add('start', 'width');
         div3.classList.add('end', 'width');
-     //   div4.classList.add('todo');
         del.classList.add('del');
+
         checkbox.setAttribute('type', 'checkbox');
         checkbox.classList.add('check');
         checkbox.setAttribute('name', 'status');
@@ -76,7 +76,7 @@ addProjectBtn.addEventListener('click', () =>{
         del.textContent = 'delete';
         checkbox.checked = projectsList[j].status;
         div0.append(div1, div2, div3, del, checkbox);
-     //   div00.append(div0, div4);
+/*
         const todo = document.createElement('div');
         const todo1 = document.createElement('div');
         const todo2 = document.createElement('div');
@@ -93,8 +93,8 @@ addProjectBtn.addEventListener('click', () =>{
         h3.textContent = 'to do list';
         todo.append(todo1, todo2);
         todo1.append(h3, btn1);
-  
-        div00.append(div0, todo);
+  */
+        div00.append(div0, domTask());
         projects_list.appendChild(div00);
         n.value = '';
         s.value = '';
@@ -164,7 +164,7 @@ addTaskBtn.addEventListener('click', () =>{
     backgroundDiv();
 });
 
-removeBtn.addEventListener('click', () => {
+removeBtn.addEventListener('click', () => { //remove  daily tasks
   removeTask();
   i = tasksList.length;
 });

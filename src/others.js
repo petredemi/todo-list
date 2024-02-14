@@ -25,7 +25,20 @@ console.log(todo);
         }));
     }
 
-
+    function time(){
+      const currentDate = document.querySelector('.currentDate');
+      const currentHour = document.querySelector('.currentHour');
+      const d = new Date();
+      const day = d.getDate();
+      const month = d.getMonth() + 1;
+      const year = d.getUTCFullYear();
+      const hour = d.getHours();
+      const min = d.getMinutes();
+      const sec = d.getSeconds();
+      currentDate.textContent = day +'.' + month + '.' + year ;
+      currentHour.textContent = hour + ':' + min + ':' + sec;
+    }
+    setInterval(time, 1000);
 
 
 

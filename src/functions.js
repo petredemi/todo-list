@@ -1,5 +1,5 @@
 export  {hiYou, addProject, addItems, backgroundDiv,
-  removeTask};
+  removeTask, domTask};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
@@ -92,7 +92,27 @@ function backgroundDiv(){
           indexTask = undefined;
     }
 
+function domTask(){
 
+  const todo = document.createElement('div');
+  const todo1 = document.createElement('div');
+  const todo2 = document.createElement('div');
+  const h3 = document.createElement('h3');
+  const btn1 = document.createElement('button');
+
+  todo.classList.add('todo');
+  todo1.classList.add('todo1');
+  todo2.classList.add('task_list');
+  btn1.setAttribute('type', 'submit');
+  btn1.setAttribute('open-data-modal', '');
+  btn1.classList.add('project-task-form', 'btn');
+  btn1.textContent = '+';
+  h3.textContent = 'to do list';
+  todo1.append(h3, btn1);
+  todo.append(todo1, todo2);
+ return todo;
+
+  }
 
 
 
