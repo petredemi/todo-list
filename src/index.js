@@ -14,8 +14,6 @@ let node1 = document.querySelectorAll('#projects-list > div.item1 > div.project'
 let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
 let node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
 let node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list, #task_list');
-console.log(node4);
-console.log(node4[0]);
 
 
 let j = projectsList.length; //index number for projects
@@ -23,7 +21,6 @@ let j = projectsList.length; //index number for projects
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 const projects_list = document.querySelector('#projects-list');
-const task_list = document.querySelector('#task_list');
 const removeBtn = document.querySelector('#remove-task');
 
 const dialogProject = document.querySelector('#dialog-project');
@@ -136,14 +133,13 @@ removeBtn.addEventListener('click', () => { //remove  daily tasks
   i = tasksList.length;
 });
 
-function myFunction3(){ //call dilog modal  for each task for project 
+function myFunction3(){ //call dialog modal  for each task for project 
   call_project_task = document.querySelectorAll('div.item1 button.project-task-form, #call-task-form');
   node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list, #task_list');   
   call_project_task.forEach((node, index) => node.addEventListener('click', (e) => {
       dialogTask.showModal();
       
     taskListNumber = node4[index];
-      //console.log(call_project_task);
   }));
 }
  
@@ -186,6 +182,7 @@ function myFunction2(){ //remove button , change color
     console.log[node2[index]]
     projectsList.splice(index1, 1);
     j = projectsList.length;
+    console.log(projectsList);
   }));
 }
 
