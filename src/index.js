@@ -13,6 +13,9 @@ hiYou();
 let node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
 let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
 let node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
+let node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list, #task_list');
+console.log(node4);
+console.log(node4[0]);
 
 
 let j = projectsList.length; //index number for projects
@@ -21,35 +24,32 @@ const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 const projects_list = document.querySelector('#projects-list');
 const task_list = document.querySelector('#task_list');
-const callProjectForm = document.querySelector('#call-project-form'); //button
-const callTaskForm = document.querySelector('#call-task-form'); //button
+const removeBtn = document.querySelector('#remove-task');
+
 const dialogProject = document.querySelector('#dialog-project');
 const dialogTask = document.querySelector('#dialog-task');
-const removeBtn = document.querySelector('#remove-task');
-let  call_project_task = Array.from( document.querySelectorAll('div.item1 button.project-task-form'));
+const callProjectForm = document.querySelector('#call-project-form'); //button
+const callTaskForm = document.querySelector('#call-task-form'); //button
+let call_project_task = document.querySelectorAll('div.item1 button.project-task-form, #call-task-form');
+let taskListNumber;
 
-console.log(call_project_task);
-callProjectForm.addEventListener('click', () => {
-   dialogProject.showModal(); 
-});
-call_project_task.forEach((button) => button.addEventListener('click', (e) => {
-  dialogTask.showModal();
-  console.log(call_project_task);
-}));
-
-callTaskForm.addEventListener('click', () => {
-     dialogTask.showModal();
-});
+  callProjectForm.addEventListener('click', () => {
+     dialogProject.showModal(); 
+  });
+  callTaskForm.addEventListener('click', () => {
+       dialogTask.showModal();
+  });
 
 //projects
 addProjectBtn.addEventListener('click', () =>{
-  node1 = document.querySelector('#projects-list > div.item1 > div.project');
-  node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
-  node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo'); 
-  call_project_task = Array.from( document.querySelectorAll('div.item1 button.project-task-form'));
 
-  dialogProject.close();
-    if(n.value == '' && s.value == '') return;
+      node1 = document.querySelector('#projects-list > div.item1 > div.project');
+      node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
+      node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo'); 
+      call_project_task = document.querySelectorAll('div.item1 button.project-task-form, #call-task-form');
+      node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list, #task_list');
+      dialogProject.close();
+      if(n.value == '' && s.value == '') return;
         const div00 = document.createElement('div');
         const div0 = document.createElement('div');
         const div1 = document.createElement('div');
@@ -76,24 +76,6 @@ addProjectBtn.addEventListener('click', () =>{
         del.textContent = 'delete';
         checkbox.checked = projectsList[j].status;
         div0.append(div1, div2, div3, del, checkbox);
-/*
-        const todo = document.createElement('div');
-        const todo1 = document.createElement('div');
-        const todo2 = document.createElement('div');
-        const h3 = document.createElement('h3');
-        const btn1 = document.createElement('button');
-    
-        todo.classList.add('todo');
-        todo1.classList.add('todo1');
-        todo2.classList.add('task_list');
-        btn1.setAttribute('type', 'submit');
-        btn1.setAttribute('open-data-modal', '');
-        btn1.classList.add('project-task-form', 'btn');
-        btn1.textContent = '+';
-        h3.textContent = 'to do list';
-        todo.append(todo1, todo2);
-        todo1.append(h3, btn1);
-  */
         div00.append(div0, domTask());
         projects_list.appendChild(div00);
         n.value = '';
@@ -105,33 +87,17 @@ addProjectBtn.addEventListener('click', () =>{
       myFunction();
       myFunction3();
       showTask();
-       
+      console.log(node4);
+      console.log(call_project_task);
 });
 showTask();
 
 //tasks
 let i = tasksList.length; // index and node number for task
-
 addTaskBtn.addEventListener('click', () =>{
   
     dialogTask.close();
     if(t.value == '' && d.value == '') return;
-
-    /*const todo = document.createElement('div');
-    const todo1 = document.createElement('div');
-    const todo2 = document.createElement('div');
-    const h3 = document.createElement('h3');
-    const btn1 = document.createElement('button');
-
-    todo.classList.add('todo');
-    todo1.classList.add('todo1');
-    //todo2.classList('task_list');
-    btn1.setAttribute('open-data-modal', '');
-    btn1.classList.add('call-form btn');
-    h1.textContent = '+';
-    todo.append(todo1, todo2);
-    todo1.append(h3, btn1);
-*/
     const div0 = document.createElement('div');
     const div1 = document.createElement('div');
     const div2 = document.createElement('div');
@@ -155,7 +121,7 @@ addTaskBtn.addEventListener('click', () =>{
     del.textContent = 'delete';
     checkbox.checked = tasksList[i].status;
     div0.append(div2, div3, div1, del, checkbox);
-    task_list.appendChild(div0);
+    taskListNumber.appendChild(div0);
     t.value = '';
     d.value = '';
     hourDue.value = '';
@@ -164,26 +130,28 @@ addTaskBtn.addEventListener('click', () =>{
     backgroundDiv();
 });
 
+
 removeBtn.addEventListener('click', () => { //remove  daily tasks
   removeTask();
   i = tasksList.length;
 });
 
-//  myFunction2();
-  //myFunction();
-function myFunction3(){
-  call_project_task = Array.from( document.querySelectorAll('div.item1 button.project-task-form'));
-      call_project_task.forEach((button) => button.addEventListener('click', (e) => {
+function myFunction3(){ //call dilog modal  for each task for project 
+  call_project_task = document.querySelectorAll('div.item1 button.project-task-form, #call-task-form');
+  node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list, #task_list');   
+  call_project_task.forEach((node, index) => node.addEventListener('click', (e) => {
       dialogTask.showModal();
-      console.log(call_project_task);
-  }))
+      
+    taskListNumber = node4[index];
+      //console.log(call_project_task);
+  }));
 }
-
-let index1;
+ 
+let index1;  //remove project;
 function rempj(x){
   x[index1].remove();
 }
-function myFunction(){     
+function myFunction(){     //change background for each project by mouse over
     node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
     node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
     node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
@@ -194,7 +162,7 @@ function myFunction(){
     }));
 }
 
-function myFunction2(){
+function myFunction2(){ //remove button , change color 
   node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
   node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
   node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
@@ -202,17 +170,20 @@ function myFunction2(){
   node2.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     index1 = index;
     node2[index].setAttribute('style' , 'background-color: yellow');
-    console.log(index);
-    console.log(index1);
-
+   // console.log(node1[index]);
+    //console.log(node1);
+    //console.log(index1);
   }));
+
   node2.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
     node2[index].setAttribute('style' , 'background-color: none');
+    
   }));
 
   node2.forEach((node, index) => node.addEventListener('click', (e) => { 
     rempj(node1);
     rempj(node3);
+    console.log[node2[index]]
     projectsList.splice(index1, 1);
     j = projectsList.length;
   }));

@@ -92,8 +92,7 @@ function backgroundDiv(){
           indexTask = undefined;
     }
 
-function domTask(){
-
+function domTask(){ //create dom task for each project
   const todo = document.createElement('div');
   const todo1 = document.createElement('div');
   const todo2 = document.createElement('div');
