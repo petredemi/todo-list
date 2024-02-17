@@ -212,9 +212,10 @@ div.task{
     padding: 5px;
     align-items: center;
     justify-content: space-around;
-    background-color: bisque;
+ /*   background: linear-gradient(50Deg, white, rgb(164, 163, 163), white, rgb(167, 165, 165),white);*/
+    background-color: rgb(249, 238, 153);
     border-radius: 10px;
-    border-left: 0.8rem solid darkred;
+    border-left: 0.8rem solid rgb(192, 1, 1);
 }
 
 .title{

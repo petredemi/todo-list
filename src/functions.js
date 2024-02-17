@@ -1,5 +1,5 @@
 export  {hiYou, addProject, addItems, backgroundDiv,
-  removeTask, domTask};
+  removeTask, domTask, taskBackground, taskDelBtn, removeT};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
@@ -54,7 +54,7 @@ function backgroundDiv(){
         arrTask = Array.from(document.querySelectorAll('#task_list > div.task'));
         arrTask.forEach((div) => div.addEventListener('mouseover', (e) => {
      //   if ( click == true){
-          div.setAttribute('style', 'background-color: grey');
+        //  div.setAttribute('style', 'background-color: grey');
      //   }
         }));
         arrTask.forEach((div) => div.addEventListener('mouseleave', (e) => {
@@ -75,15 +75,14 @@ function backgroundDiv(){
                 click = false;
               }
               else if (click == false){
-          //      div.setAttribute('style', 'background-color: grey');
+            //    div.setAttribute('style', 'background-color: grey');
                 click = true;
               }
               console.log(indexTask);
               console.log(click);
         }));
       }
-      backgroundDiv();
-
+   //   backgroundDiv();
   function removeTask(){
     if( indexTask == undefined) return;
           tasksList.splice(indexTask, 1);
@@ -109,11 +108,43 @@ function domTask(){ //create dom task for each project
   h3.textContent = 'to do list';
   todo1.append(h3, btn1);
   todo.append(todo1, todo2);
- return todo;
+  return todo;
 
+}
+
+//task remove button
+let index1;  //remove task;
+let node1 = document.querySelectorAll('#task_list > div.task');
+let node2 = document.querySelectorAll('#task_list button');
+  function taskBackground(){     //change background for each task by mouse over
+    node1 = document.querySelectorAll('#task_list > div.task');
+    node2 = document.querySelectorAll('#task_list button');
+
+      node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+        node1[index].setAttribute('style', 'background-color: green');
+      }));
+      node1.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+        node1[index].setAttribute('style' , 'background-color: none');
+      }));
   }
-
-
-
+  
+  function taskDelBtn(){ //remove button , change color 
+  //  node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
+    node1 = document.querySelectorAll('#task_list > div.task');
+    node2 = document.querySelectorAll('#task_list button');
+    node2.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+      index1 = index;
+      node2[index].setAttribute('style' , 'background-color: yellow');
+    }));
+  
+    node2.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+        node2[index].setAttribute('style' , 'background-color: none');
+    }));
+  }
+  function removeT(){ //remove task 
+    node1[index1].remove();
+    tasksList.splice(index1, 1);
+    node2[index1].remove();
+  }
 
 
