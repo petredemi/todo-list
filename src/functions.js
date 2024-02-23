@@ -1,5 +1,5 @@
 
-export  {hiYou, addProject, addItems, domTask, taskBackground, taskDelBtn};
+export  {hiYou, addProject, addItems, domTask, taskBackground};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
@@ -47,6 +47,7 @@ function addItems(){ //add to do items
       const status = taskStatus.checked;
     return { title, date, hour, status};
   }
+
   const item = createTask();
   tasksList.push(item);
   tasksList.sort((hour1, hour2) => {
@@ -75,48 +76,21 @@ function domTask(){ //create dom task for each project
       todo.append(todo1, todo2);
       return todo;
 }
-
 //task remove button
-let index1;  //remove index
-function removeT(x){ //remove task function 
-      x[index1].remove();
-}
+let node7 = document.querySelectorAll('#task_list > div.task');
+//let node2 = document.querySelectorAll('#task_list button');
 
-let node1 = document.querySelectorAll('#task_list > div.task');
-let node2 = document.querySelectorAll('#task_list button');
 function taskBackground(){     //change background for each task by mouse over
-      node1 = document.querySelectorAll('#task_list > div.task');
-
-      node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-        node1[index].setAttribute('style', 'background-color: green');
+        node7 = document.querySelectorAll('#task_list > div.task');
+        node7.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+        node7[index].setAttribute('style', 'background-color: green');
       }));
-      node1.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-        node1[index].setAttribute('style' , 'background-color: none');
+      node7.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+        node7[index].setAttribute('style' , 'background-color: none');
       }));
   }
   
-  function taskDelBtn(){ //remove button , change color 
-     //  node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
-       node1 = document.querySelectorAll('#task_list > div.task');
-       node2 = document.querySelectorAll('#task_list button');
-       node2.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-         index1 = index;
-         node2[index].setAttribute('style' , 'background-color: yellow');
-       }));
-     
-       node2.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-           node2[index].setAttribute('style' , 'background-color: none');
-       }));
 
-       node2.forEach((node, index) => node.addEventListener('click', (e) => {
-        removeT(node1);
-        tasksList.splice(index1, 1);
-        console.table(tasksList);
-        node1 = document.querySelectorAll('#task_list > div.task');
-
-       }));
-
-    }
 
 
 

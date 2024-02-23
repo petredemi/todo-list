@@ -1,4 +1,4 @@
-export { showTask};
+export { showTask, dialogProject, dialogTask, callDialog};
 
 
 function showTask(){ //show and hide task for project
@@ -36,5 +36,24 @@ function showTask(){ //show and hide task for project
     }
     setInterval(time, 1000);
 
+    const dialogProject = document.querySelector('#dialog-project');
+    const dialogTask = document.querySelector('#dialog-task');
+   // let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
 
+  function callDialog(){
+        
+        const callProjectForm = document.querySelector('#call-project-form'); //button
+    //    callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
+        let callDayTask = document.querySelector('#call-task-form');
+        
+          callProjectForm.addEventListener('click', () => {
+            dialogProject.showModal(); 
+          });
+          callDayTask.addEventListener('click', (e) => {
+              dialogTask.showModal();
+          })
+  //        callTaskForm.forEach(( node, index) => node.addEventListener('click', () => {
+    //          dialogTask.showModal();
+      //    }));
+  }
   
