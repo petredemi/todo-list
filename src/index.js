@@ -156,18 +156,9 @@ addTaskBtn.addEventListener('click', () =>{
             del.textContent = 'delete';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
             div0.append(div2, div3, div1, del, checkbox);
-            if ( ti == 0){ 
-              node4[projindex].appendChild(div0);
-            }else {
             node4[projindex].insertBefore(div0, node4[projindex].children[ti]);
-            }
             projindex = undefined;
       }
-          // node4[projindex].appendChild(div0);
-        
-       // node4[projindex].appendChild(div0);
-        //node8[projindex].insertBefore(div0, node8.children[ti]);
-
         t.value = '';
         d.value = '';
         hourDue.value = '';
