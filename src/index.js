@@ -19,8 +19,6 @@ let node7 = document.querySelectorAll('#task_list > div.task');
 let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
 let node8 = document.querySelectorAll('div.task_list > div.task > button') // list del btn for task project
 let node9 = document.querySelectorAll('div.todo > div.task_list > div.task');
-
-
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
@@ -104,15 +102,11 @@ console.log(node2);
 
 //tasks
 taskDelBtn();
+const taskDate = document.querySelector('#disply');
+taskDate.setAttribute('style', 'display: none');
+
 
 addTaskBtn.addEventListener('click', () =>{ 
-      //callTaskForm = document.querySelectorAll('div.item1 button.project-task-form, #call-task-form');
-      // node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list, #task_list');
-    //  node1 = document.querySelectorAll('#task_list > div.task');
-    //  node2 = document.querySelectorAll('#task_list button');      
-    //  dayTask = document.querySelector(' #task_list');
-      //  node5 = document.querySelectorAll('#task_list button');
-      //  node7 = document.querySelectorAll('#task_list > div.task');
 
     dialogTask.close();
     if(t.value == '' && d.value == '') return;
@@ -145,6 +139,7 @@ addTaskBtn.addEventListener('click', () =>{
           div0.append(div2, div3, div1, del, checkbox);
           dayTask.insertBefore(div0, dayTask.children[ti]);
           projindex = undefined;
+          div2.setAttribute('style', 'display: none');
 
       }else if (projindex != undefined){
          let ti = projectsList[projindex].projectTasks.findIndex(function(tsk){
@@ -188,6 +183,7 @@ function myFunction3(){ //call dialog modal  for each task for projects
   callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
   node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');   
   callTaskForm.forEach((node, index) => node.addEventListener('click', (e) => {
+    taskDate.setAttribute('style', 'display: flex')
     dialogTask.showModal();   
     projindex = index;
     console.log(projindex + 'index');
@@ -204,7 +200,7 @@ function rempj(projx){
 function myFunction(){     //change background for each project by mouse over
     node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
     node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-    node1[index].setAttribute('style', 'background-color: pink');
+    node1[index].setAttribute('style', 'background-color: grey');
     }));
     node1.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
       node1[index].setAttribute('style' , 'background-color: none');

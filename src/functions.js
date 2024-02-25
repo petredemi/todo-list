@@ -89,6 +89,8 @@ function domTask(){ //create dom task for each project
 //task remove button
 let node7 = document.querySelectorAll('#task_list > div.task');
 
+
+
 function taskBackground(){     //change background for each task by mouse over
         node7 = document.querySelectorAll('#task_list > div.task');
         node7.forEach((node, index) => node.addEventListener('mouseover', (e) => {

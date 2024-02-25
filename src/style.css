@@ -46,6 +46,22 @@ h1{
     font-family: font2;
     color: red;
     text-shadow: 1px 1px 1px #000000;
+    font-size: 4rem;
+}
+h2{
+    font-family: font2;
+    font-size: 3rem;
+    margin-left: 40px;
+    margin: 30px;
+    color: darkblue;
+}
+h3{
+    font-family: font3;
+    font-size: 3rem;
+    color: silver;
+    margin: 10px;
+    margin-left: 30px;
+    text-shadow: 2px 2px 1px black;
 }
 .content{
     max-width: 1200px;
@@ -71,8 +87,8 @@ h1{
 dialog{
     max-width: 400px;
     min-height: 200px;
-    background-color:bisque;
-    border: 0.3rem solid rgb(23, 20, 20);
+    background:linear-gradient( 50deg, rgb(244, 212, 154), rgb(243, 180, 180), rgb(243, 214, 159), rgb(244, 177, 177));
+    border: 0.3rem solid rgb(255, 16, 16);
     border-radius: 10px;
     padding: 1px;
 
@@ -138,9 +154,6 @@ label{
     padding: 5px;
     margin: 0px;
 }
-.project{
-    border-left: 0.8 solid darkorange;
-}
 
 div.name{
     padding: 6px;
@@ -150,7 +163,7 @@ div.name{
     font-size: 1.2rem;
     min-width: 300px;
     font-weight: 400;
-    font-family: font1;
+    font-family: font2;
 }
 #projects-list > .item1 > div.project{
     display: flex;
@@ -159,9 +172,9 @@ div.name{
     padding: 5px;
     align-items: center;
     justify-content: space-between;
-    background-color: lightgreen;
-    border: 2px solid black;
-    border-left: 0.8rem solid darkorange;
+    background-color:steelblue;
+    border: 3px solid red;
+    border-left: 1.2rem solid orange;
     border-radius: 10px;
 }
 .todo{
@@ -169,7 +182,7 @@ div.name{
     border: 0.5rem solid darkcyan;
     border-top: none;
     margin-top: 1px;
-    background-color: white;
+    background:linear-gradient( 30deg, grey, white, rgb(169, 164, 164), white);
     min-height: 200px;
 }
 .todo1{
@@ -188,7 +201,7 @@ div.name{
 .to_do{
     border: 0.5rem solid darkcyan;
     margin-top: 20px;
-    background-color: deepskyblue;
+    background-color:teal;
     min-height: 200px;
 }
 .currentTime{
@@ -212,9 +225,9 @@ div.task{
     padding: 5px;
     align-items: center;
     justify-content: space-around;
- /*   background: linear-gradient(50Deg, white, rgb(164, 163, 163), white, rgb(167, 165, 165),white);*/
-    background-color: rgb(249, 238, 153);
+    background-color: rgb(253, 96, 119);
     border-radius: 10px;
+    border: 2px solid red;
     border-left: 0.8rem solid rgb(192, 1, 1);
 }
 

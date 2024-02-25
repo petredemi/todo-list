@@ -36,21 +36,25 @@ function showTask(){ //show and hide task for project
     }
     setInterval(time, 1000);
 
-
     const dialogProject = document.querySelector('#dialog-project');
     const dialogTask = document.querySelector('#dialog-task');
+    const taskDate = document.querySelector('#disply');
+    
+
 
   function callDialog(){
         const callProjectForm = document.querySelector('#call-project-form'); //button
-        let callDayTask = document.querySelector('#call-task-form');
+        const callDayTask = document.querySelector('#call-task-form');
 
         callDayTask.addEventListener('click', (e) => {
+              taskDate.setAttribute('style', 'display: none');
               dialogTask.showModal()
-        })
-
-        
+        });
           callProjectForm.addEventListener('click', () => {
               dialogProject.showModal();
           });
   }
-  
+let done = document.querySelectorAll('input.check');
+let projtaskdone = document.querySelectorAll('div.project, div.task');
+
+
