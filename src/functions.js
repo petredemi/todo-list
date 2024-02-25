@@ -25,21 +25,22 @@ function addProject(){ //add projects items
 
       return { name, start, end, status, projectTasks};
     }
-const item = createProject(n.value);
-projectsList.push(item);
-projectsList.sort((start1, start2) => {
-   if (start1.start < start2.start) return -1;
-   if (start1.start > start2.start) return 1;
-    return 0;
-  });
+
+    const item = createProject(n.value);
+    projectsList.push(item);
+    projectsList.sort((start1, start2) => {
+      if (start1.start < start2.start) return -1;
+      if (start1.start > start2.start) return 1;
+        return 0;
+      });
 }
 //add todo tasks
 const t = document.querySelector('#title');
 const d = document.querySelector('#date');
-const hourDue = document.querySelector('#hourDue')
+const hourDue = document.querySelector('#hourDue');
 const taskStatus = document.querySelector('#taskStatus');
-
-function addItems(){ //add to do items
+//let x = 1;
+function addItems(x){ //add to do items
     function createTask(title){ //create task object with factory function
       title = t.value;
       const date = d.value;
@@ -47,15 +48,24 @@ function addItems(){ //add to do items
       const status = taskStatus.checked;
     return { title, date, hour, status};
   }
-
-  const item = createTask();
-  tasksList.push(item);
-  tasksList.sort((hour1, hour2) => {
-    if ( hour1.hour < hour2.hour) return -1;
-    if (  hour1.hour > hour2.hour) return 1;
-    return 0;
-  });
-}
+      const item = createTask();
+      if ( x == undefined){ 
+          tasksList.push(item);
+          tasksList.sort((hour1, hour2) => {
+             if ( hour1.hour < hour2.hour) return -1;
+            if (  hour1.hour > hour2.hour) return 1;
+          return 0;
+       }); 
+        }
+      if ( x !== undefined ){ 
+        projectsList[x].projectTasks.push(item);
+        projectsList[x].projectTasks.sort((hour1, hour2) => {
+          if ( hour1.hour < hour2.hour) return -1;
+          if (  hour1.hour > hour2.hour) return 1;
+          return 0;
+    });
+      };
+  };
 
 function domTask(){ //create dom task for each project
       const todo = document.createElement('div');
@@ -75,10 +85,9 @@ function domTask(){ //create dom task for each project
       todo1.append(h3, btn1);
       todo.append(todo1, todo2);
       return todo;
-}
+    };
 //task remove button
 let node7 = document.querySelectorAll('#task_list > div.task');
-//let node2 = document.querySelectorAll('#task_list button');
 
 function taskBackground(){     //change background for each task by mouse over
         node7 = document.querySelectorAll('#task_list > div.task');

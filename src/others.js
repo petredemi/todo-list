@@ -1,4 +1,4 @@
-export { showTask, dialogProject, dialogTask, callDialog};
+export { showTask, dialogProject, dialogTask, callDialog, };
 
 
 function showTask(){ //show and hide task for project
@@ -7,7 +7,7 @@ function showTask(){ //show and hide task for project
   let todo = document.querySelectorAll('div.item1 > div.todo');
         project.forEach((node, index) => node.addEventListener('click', (e) => {
          if( click == true){
-              todo[index].setAttribute('style', 'background-color: yellow');
+              todo[index].setAttribute('style', 'background-color: blue');
               todo[index].setAttribute('style', 'display: block');
            click = false;
           }
@@ -36,24 +36,21 @@ function showTask(){ //show and hide task for project
     }
     setInterval(time, 1000);
 
+
     const dialogProject = document.querySelector('#dialog-project');
     const dialogTask = document.querySelector('#dialog-task');
-   // let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
 
   function callDialog(){
-        
         const callProjectForm = document.querySelector('#call-project-form'); //button
-    //    callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
         let callDayTask = document.querySelector('#call-task-form');
+
+        callDayTask.addEventListener('click', (e) => {
+              dialogTask.showModal()
+        })
+
         
           callProjectForm.addEventListener('click', () => {
-            dialogProject.showModal(); 
+              dialogProject.showModal();
           });
-          callDayTask.addEventListener('click', (e) => {
-              dialogTask.showModal();
-          })
-  //        callTaskForm.forEach(( node, index) => node.addEventListener('click', () => {
-    //          dialogTask.showModal();
-      //    }));
   }
   
