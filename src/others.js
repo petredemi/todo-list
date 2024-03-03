@@ -1,4 +1,4 @@
-export { showTask, dialogProject, dialogTask, callDialog, };
+export { showTask, dialogProject, dialogTask, callDialog};
 
 
 function showTask(){ //show and hide task for project
@@ -15,7 +15,7 @@ function showTask(){ //show and hide task for project
               project = document.querySelectorAll('div.item1 > div.project');
               todo[index].setAttribute('style', 'background-color: none')
               todo[index].setAttribute('style', 'display: none');
-           click = true;
+              click = true;
           }
   
         }));
@@ -54,7 +54,3 @@ function showTask(){ //show and hide task for project
               dialogProject.showModal();
           });
   }
-let done = document.querySelectorAll('input.check');
-let projtaskdone = document.querySelectorAll('div.project, div.task');
-
-

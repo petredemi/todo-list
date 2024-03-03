@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _, { sortedIndexOf } from 'lodash';
 import './style.css';
 import printMe from'./print.js';
 import { addProject, addItems, hiYou, domTask, taskBackground} from './functions.js';
@@ -9,16 +9,12 @@ import { showTask, dialogProject, dialogTask, callDialog} from './others.js';
 printMe();
 hiYou();
 
-let node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
 let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button'); // delet button for each project
-//let node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
 let node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 let node5 = document.querySelectorAll('#task_list button'); // delete button for each task
 let node6 = document.querySelectorAll('#projects-list > div.item1');
 let node7 = document.querySelectorAll('#task_list > div.task');
 let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
-let node8 = document.querySelectorAll('div.task_list > div.task > button') // list del btn for task project
-let node9 = document.querySelectorAll('div.todo > div.task_list > div.task');
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
@@ -29,12 +25,6 @@ let projindex = undefined; // add task to a project
 
 //projects
 addProjectBtn.addEventListener('click', () =>{
-    //  node1 = document.querySelector('#projects-list > div.item1 > div.project');
-   //   node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button'); //delete btn
-     // node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo'); 
-     // callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
-     // node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');
-    //  node5 = document.querySelectorAll('#task_list button');
 
       dialogProject.close();
       if(n.value == '' && s.value == '') return;
@@ -78,36 +68,21 @@ addProjectBtn.addEventListener('click', () =>{
              projectStatus.checked = false;
       node6 = document.querySelectorAll('#projects-list div.item1');
       callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
-      node1 = document.querySelector('#projects-list > div.item1 > div.project');
       node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');
-     // node8 = document.querySelectorAll('div.task_list > div.task > button') // list del btn for task project
-     // node9 = document.querySelectorAll('div.todo > div.task_list > div.task');
 
-    //  node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo'); 
-
-      console.log(projectsList);
-      console.log(div00);
-      console.log(node6);
-      console.log(node2);
-      console.log(node4);
       myFunction2();
       myFunction();
       myFunction3();
       showTask();
+      deleteProjectTasks();
 });
-
 showTask();
-console.log(node6);
-console.log(node2);
-
 //tasks
-taskDelBtn();
+daytaskDelete();
 const taskDate = document.querySelector('#disply');
 taskDate.setAttribute('style', 'display: none');
 
-
 addTaskBtn.addEventListener('click', () =>{ 
-
     dialogTask.close();
     if(t.value == '' && d.value == '') return;
     const div0 = document.createElement('div');
@@ -144,7 +119,7 @@ addTaskBtn.addEventListener('click', () =>{
       }else if (projindex != undefined){
          let ti = projectsList[projindex].projectTasks.findIndex(function(tsk){
           return tsk.title === t.value;
-        });
+          });
             div1.textContent = projectsList[projindex].projectTasks[ti].title;
             div2.textContent = 'day: ' + projectsList[projindex].projectTasks[ti].date;
             div3.textContent = 'hour: ' + projectsList[projindex].projectTasks[ti].hour;
@@ -162,15 +137,11 @@ addTaskBtn.addEventListener('click', () =>{
     node7 = document.querySelectorAll('#task_list div.task');
     node5 = document.querySelectorAll('#task_list button');
     node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');
-    node8 = document.querySelectorAll('div.task_list > div.task > button') // list del btn for task project
-    node9 = document.querySelectorAll('div.todo > div.task_list > div.task');
-   // node8 = document.querySelectorAll('div.todo > div.task_list')
-    //node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo'); 
+
     myFunction3();
-    console.table(tasksList);
-    console.log(projectsList);
     taskBackground();
-    taskDelBtn();
+    daytaskDelete();
+    deleteProjectTasks();
     projindex = undefined;
 });
 
@@ -179,26 +150,23 @@ myFunction();
 myFunction3();
 taskBackground();
 
+
 function myFunction3(){ //call dialog modal  for each task for projects 
   callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
   node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');   
   callTaskForm.forEach((node, index) => node.addEventListener('click', (e) => {
     taskDate.setAttribute('style', 'display: flex')
     dialogTask.showModal();   
-    projindex = index;
-    console.log(projindex + 'index');
+    projindex = index;  //where to add task for project
   //  projindex = node4[index];
   }));
 }
-
-
-
 let indexproj;  //remove project index button;
 function rempj(projx){
   projx[indexproj].remove();
 }
 function myFunction(){     //change background for each project by mouse over
-    node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
+let node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
     node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     node1[index].setAttribute('style', 'background-color: grey');
     }));
@@ -222,51 +190,72 @@ function myFunction2(){ //remove button , change color
 
   node2.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
     rempj(node6);
-    console.log[node2[index]]
     projectsList.splice(indexproj, 1);
-    console.table(projectsList);
-    console.log(node6);
   }));
 }
 
-
-function taskDelBtn(){ //remove button , change color 
-  //  node3 = document.querySelectorAll('#projects-list > div.item1 > div.todo');
+function daytaskDelete(){ //remove button , change color 
    let removeindex;  //remove index;
    node5 = document.querySelectorAll('#task_list button');
    node5.forEach((node, index) => node.addEventListener('mouseover', (e) => {
        removeindex = index;
        node5[index].setAttribute('style' , 'background-color: yellow');
-       console.log(index);
     }));
 
    node5.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
         node5[index].setAttribute('style' , 'background-color: none');
-        console.log(removeindex)
    }));
 
    node5.forEach((node, index) => node.addEventListener('click', (e) => {
        node7[removeindex].remove();
        tasksList.splice(removeindex, 1);
-       console.log(node7);
-       console.table(tasksList);
        return node7;
 
     }));
  };
-/*
-function delTasks(){
-   // node8 = document.querySelectorAll('div.task_list > div.task > button') // list del btn for task project
-   // node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
-   // node8.forEach((node, index) => node.addEventListener('mouseenter', (e) => {
-       // node[index].setAttribute( 'style', 'background-color: blue');
-      //  console.log(index);
-   // }));
-    node9 = document.querySelectorAll('div.todo > div.task_list > div.task');
 
-    node9.forEach((node, index ) => node.addEventListener( 'mouseover', (e) => {
-      node[index].setAttribute( 'style', 'background-color: grey');
+function deleteProjectTasks(){
+  let  node8 = document.querySelectorAll('div.task_list > div.task > button') // list del btn for task project
+  let  node9 = document.querySelectorAll('div.item1 > div.todo > div.task_list > div.task'); 
+  let  node10 = document.querySelectorAll('div.item1 > div.todo'); //get index for each project arrey
+  let node11 = document.querySelectorAll('div.task_list');
+
+    node8.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+        node8[index].setAttribute( 'style', 'background-color: lightblue');
+    }));
+    node8.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+      node8[index].setAttribute( 'style', 'background-color: none');
+  }));
+
+    node9.forEach((node, index ) => node.addEventListener( 'mouseenter', (e) => {
+      node9[index].setAttribute( 'style', 'background-color: pink');
+    }));
+    node9.forEach((node, index ) => node.addEventListener( 'mouseleave', (e) => {
+      node9[index].setAttribute( 'style', 'background-color: none');
+    }));
+
+function checkIndex(div){
+   if(div.style.backgroundColor == 'pink'){
+      return div;
+   }
+}
+    node10.forEach((node, index ) => node.addEventListener('mouseenter', (e) => {
+      console.log(index);
+      console.log(node10);
+      let arrT = Array.from(node11[index].children);
+      console.log(arrT);
+   //   let indextsk = arrT.findIndex(checkIndex);
+      node9.forEach((node, index ) => node.addEventListener( 'click', (e) => {
+      let indextsk = arrT.findIndex(checkIndex);
+        console.log(indextsk);
+      }));
 
     }));
 
-}*/
+    node11.forEach((node, index) => node.addEventListener('click', (e) => {
+      console.log(projectsList[index].projectTasks);
+    //  console.log(node11[index].children);
+    }));
+}
+
+deleteProjectTasks();

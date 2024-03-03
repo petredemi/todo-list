@@ -88,21 +88,20 @@ function domTask(){ //create dom task for each project
     };
 //task remove button
 let node7 = document.querySelectorAll('#task_list > div.task');
-
-
+let taskCheck = document.querySelectorAll('#task_list input.check');
 
 function taskBackground(){     //change background for each task by mouse over
+        let on = taskCheck.value;
         node7 = document.querySelectorAll('#task_list > div.task');
         node7.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-        node7[index].setAttribute('style', 'background-color: green');
+        node7[index].setAttribute('style', 'background-color: lightyellow');
       }));
       node7.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-        node7[index].setAttribute('style' , 'background-color: none');
+         node7[index].setAttribute('style' , 'background-color: none');
+      
       }));
+
   }
-  
-
-
-
+ 
 
 
