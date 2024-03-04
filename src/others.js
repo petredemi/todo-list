@@ -31,8 +31,8 @@ function showTask(){ //show and hide task for project
       const hour = d.getHours();
       const min = d.getMinutes();
       const sec = d.getSeconds();
-      currentDate.textContent = day +'.' + month + '.' + year ;
-      currentHour.textContent = hour + ':' + min + ':' + sec;
+      currentDate.textContent = 'Date: ' + day +'.' + month + '.' + year ;
+      currentHour.textContent = 'Time: ' + hour + ':' + min + ':' + sec;
     }
     setInterval(time, 1000);
 
@@ -54,3 +54,4 @@ function showTask(){ //show and hide task for project
               dialogProject.showModal();
           });
   }
+

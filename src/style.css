@@ -30,10 +30,6 @@
         font-weight: 600;
         font-style: normal;
 }
-*{
-    border: 1px solid red;
-}
-
 body{
     display: flex;
     flex-direction: column;
@@ -88,7 +84,7 @@ h3{
 dialog{
     max-width: 400px;
     min-height: 200px;
-    background:linear-gradient( 40deg, rgb(246, 182, 104), rgb(181, 181, 181), rgb(255, 202, 138), rgb(167, 164, 164),rgb(255, 190, 110),rgb(172, 171, 171));
+    background:linear-gradient( 60deg, rgb(246, 182, 104), rgb(181, 181, 181), rgb(255, 202, 138), rgb(167, 164, 164),rgb(255, 190, 110),rgb(172, 171, 171));
     border: 0.3rem solid rgb(255, 16, 16);
     border-radius: 10px;
     padding: 1px;
@@ -154,6 +150,7 @@ label{
     justify-content: space-between;
     padding: 5px;
     margin: 0px;
+    border-bottom: 5px solid rgb(5, 48, 126);
 }
 
 div.name{
@@ -166,17 +163,23 @@ div.name{
     font-weight: 400;
     font-family: font2;
 }
+.item1{
+    margin-bottom: 20px;
+
+}
 #projects-list > .item1 > div.project{
     display: flex;
     flex-wrap: wrap;
-    margin: 5px;
-    padding: 5px;
+    padding: 6px;
+    margin: 20px;
+    border: 2px solid darkorange;
+    box-shadow: 3px -3px 5px black;
     align-items: center;
     justify-content: space-between;
     background-color:steelblue;
-    border: 3px solid red;
-    border-left: 1.2rem solid orange;
+    border-left: 1.2rem solid darkorange;
     border-radius: 10px;
+
 }
 .todo{
     display: none;
@@ -200,7 +203,7 @@ div.name{
 }
 
 .to_do{
-    border: 0.5rem solid darkcyan;
+    border: 0.5rem solid rgb(0, 69, 139);
     margin-top: 20px;
     background-color:teal;
     min-height: 200px;
@@ -208,28 +211,31 @@ div.name{
 .currentTime{
     display: flex;
     justify-content: space-between;
-    margin: 5px;
+    margin: 10px;
 }
 .to_do > .headertask{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 3px;
-    margin: 3px;
+    margin: 10px;
 }
 
 div.task{
     display: flex;
     flex-wrap: wrap;
     height: auto;
-    margin: 10px;
-    padding: 5px;
+    margin: 20px;
+    padding: 10px;
     align-items: center;
     justify-content: space-around;
-    background-color: rgb(0, 191, 255);
+    background-color: mediumturquoise;
+
     border-radius: 10px;
     border: 2px solid red;
-    border-left: 0.8rem solid rgb(192, 1, 1);
+    border-left: 1rem solid rgb(192, 1, 1);
+    box-shadow: 3px -3px 5px black;
+
 }
 
 .title{
