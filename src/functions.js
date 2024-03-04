@@ -1,5 +1,5 @@
 
-export  {hiYou, addProject, addItems, domTask, taskBackground, deleteProjectTasks,
+export  {hiYou, addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
@@ -40,8 +40,7 @@ const t = document.querySelector('#title');
 const d = document.querySelector('#date');
 const hourDue = document.querySelector('#hourDue');
 const taskStatus = document.querySelector('#taskStatus');
-//let x = 1;
-function addItems(x){ //add to do items
+function addTasks(x){ //add to do items
     function createTask(title){ //create task object with factory function
       title = t.value;
       const date = d.value;
@@ -60,9 +59,9 @@ function addItems(x){ //add to do items
         }
       if ( x !== undefined ){ 
         projectsList[x].projectTasks.push(item);
-        projectsList[x].projectTasks.sort((hour1, hour2) => {
-          if ( hour1.hour < hour2.hour) return -1;
-          if (  hour1.hour > hour2.hour) return 1;
+        projectsList[x].projectTasks.sort((date1, date2) => {
+          if ( date1.date < date2.date) return -1;
+          if (  date1.date > date2.date) return 1;
           return 0;
     });
       };
@@ -88,11 +87,9 @@ function domTask(){ //create dom task for each project
       return todo;
     };
 //task remove button
-let node7 = document.querySelectorAll('#task_list > div.task');
-let taskCheck = document.querySelectorAll('#task_list input.check');
 
 function taskBackground(){     //change background for each task by mouse over
-        let on = taskCheck.value;
+      let node7 = document.querySelectorAll('#task_list > div.task');
         node7 = document.querySelectorAll('#task_list > div.task');
         node7.forEach((node, index) => node.addEventListener('mouseover', (e) => {
         node7[index].setAttribute('style', 'background-color: lightyellow');

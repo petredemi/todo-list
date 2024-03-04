@@ -1,7 +1,7 @@
 import _, { sortedIndexOf } from 'lodash';
 import './style.css';
 import printMe from'./print.js';
-import { addProject, addItems, hiYou, domTask, taskBackground, deleteProjectTasks,
+import { addProject, addTasks, hiYou, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
@@ -10,12 +10,13 @@ import { showTask, dialogProject, dialogTask, callDialog} from './others.js';
 printMe();
 hiYou();
 
-let node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
 let dayTask = document.querySelector('#task_list');
+let node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
+
 callDialog();
 
 let projindex = undefined; // add task to a project
@@ -95,7 +96,7 @@ addTaskBtn.addEventListener('click', () =>{
     checkbox.classList.add('check');
     checkbox.setAttribute('name', 'status');
 
-    addItems(projindex); 
+    addTasks(projindex); 
      if ( projindex == undefined){
          let ti = tasksList.findIndex(function(tsk){
           return tsk.title === t.value;
