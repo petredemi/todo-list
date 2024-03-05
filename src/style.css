@@ -32,10 +32,17 @@
 }
 body{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+.screenleft{
+    border: 1px solid red;
+    display: flex;
+}
+.todoprojects-lists{
+    border: 1px solid red;
+}
+
 h1{
     text-align: center;
     max-width: 1100px;
@@ -171,7 +178,9 @@ div.name{
     display: flex;
     flex-wrap: wrap;
     padding: 6px;
-    margin: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 20px;
     border: 2px solid darkorange;
     box-shadow: 3px -3px 5px black;
     align-items: center;
@@ -188,6 +197,8 @@ div.name{
     margin-top: 1px;
     background:linear-gradient( 30deg, grey, white, rgb(169, 164, 164), white);
     min-height: 200px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 .todo1{
     display: flex;

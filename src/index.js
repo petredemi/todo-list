@@ -15,7 +15,7 @@ const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
 let dayTask = document.querySelector('#task_list');
-let node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
+let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 
 callDialog();
 
@@ -65,7 +65,7 @@ addProjectBtn.addEventListener('click', () =>{
              endDate.value = '';
              projectStatus.checked = false;
       callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
-      node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');
+      tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
 
       myFunction2();
       myFunction();
@@ -121,14 +121,14 @@ addTaskBtn.addEventListener('click', () =>{
             del.textContent = 'delete';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
             div0.append(div2, div3, div1, del, checkbox);
-            node4[projindex].insertBefore(div0, node4[projindex].children[ti]);
+            tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
             projindex = undefined;
       }
         t.value = '';
         d.value = '';
         hourDue.value = '';
         taskStatus.checked = false;
-    node4 = document.querySelectorAll('div.item1 > div.todo > div.task_list');
+    tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
     myFunction3();
     taskBackground();
     daytaskDelete();
@@ -170,7 +170,7 @@ function myFunction(){     //change background for each project by mouse over
 
 function myFunction2(){ //remove project button , change color 
   let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
-  let node6 = document.querySelectorAll('#projects-list > div.item1');
+  let node3 = document.querySelectorAll('#projects-list > div.item1');
 
   node2.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     indexproj = index;
@@ -183,7 +183,7 @@ function myFunction2(){ //remove project button , change color
   }));
 
   node2.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
-    remproject(node6);
+    remproject(node3);
     projectsList.splice(indexproj, 1);
   }));
 }

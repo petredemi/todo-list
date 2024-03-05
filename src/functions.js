@@ -89,59 +89,56 @@ function domTask(){ //create dom task for each project
 //task remove button
 
 function taskBackground(){     //change background for each task by mouse over
-      let node7 = document.querySelectorAll('#task_list > div.task');
-        node7 = document.querySelectorAll('#task_list > div.task');
-        node7.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-        node7[index].setAttribute('style', 'background-color: lightyellow');
+      let task = document.querySelectorAll('#task_list > div.task');
+        task = document.querySelectorAll('#task_list > div.task');
+        task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+        task[index].setAttribute('style', 'background-color: lightyellow');
       }));
-      node7.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-         node7[index].setAttribute('style' , 'background-color: none');
-      
+      task.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+         task[index].setAttribute('style' , 'background-color: none');
       }));
-
   }
  
   function deleteProjectTasks(){
-    let  node1 = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
-    let  node2 = document.querySelectorAll('div.item1 > div.todo > div.task_list > div.task'); 
-    let  node3 = document.querySelectorAll('div.task_list');// get index for each project task list
-  
-      node1.forEach((button, index) => button.addEventListener('mouseenter', (e) => {
-          node1[index].setAttribute( 'style', 'background-color: green');
+    let  btn = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
+    let  task = document.querySelectorAll('div.item1 > div.todo > div.task_list > div.task'); 
+    let  tsklist = document.querySelectorAll('div.task_list');// get index for each project task list
+    function checkIndex(div){
+      if(div.style.backgroundColor == 'lightyellow'){
+         return div;
+      }
+   }
+      btn.forEach((button, index) => button.addEventListener('mouseenter', (e) => {
+          btn[index].setAttribute( 'style', 'background-color: green');
       }));
-      node1.forEach((button, index) => button.addEventListener('mouseleave', (e) => {
-        node1[index].setAttribute( 'style', 'background-color: none');
-      }));
-  
-      node2.forEach((node, index ) => node.addEventListener( 'mouseenter', (e) => {
-        node2[index].setAttribute( 'style', 'background-color: lightyellow');
-      }));
-      node2.forEach((node, index ) => node.addEventListener( 'mouseleave', (e) => {
-        node2[index].setAttribute( 'style', 'background-color: none');
+      btn.forEach((button, index) => button.addEventListener('mouseleave', (e) => {
+        btn[index].setAttribute( 'style', 'background-color: none');
       }));
   
-  function checkIndex(div){
-     if(div.style.backgroundColor == 'lightyellow'){
-        return div;
-     }
-  }
+      task.forEach((node, index ) => node.addEventListener( 'mouseenter', (e) => {
+        task[index].setAttribute( 'style', 'background-color: lightyellow');
+      }));
+      task.forEach((node, index ) => node.addEventListener( 'mouseleave', (e) => {
+        task[index].setAttribute( 'style', 'background-color: none');
+      }));
+  
   let indextsk; // index of child task
   let arrT; // arrey for children
   let indexP; // project index
-      node3.forEach((node, index ) => node.addEventListener('mouseenter', (e) => {
+      tsklist.forEach((node, index ) => node.addEventListener('mouseenter', (e) => {
         console.log(index);
         indexP = index;
-            arrT = Array.from(node3[index].children);
+            arrT = Array.from(tsklist[index].children);
             console.log(arrT);
       })); 
-      node2.forEach((node, index) => node.addEventListener('click', (e) => {
-        let abc = node3[indexP].children[indextsk];
+      btn.forEach((node, index) => node.addEventListener('click', (e) => {
+        let abc = tsklist[indexP].children[indextsk];
         indextsk = arrT.findIndex(checkIndex);
           console.log(indextsk + 'fefefe');
           console.log(indexP + '  www')
           console.log(abc);
-          if ( node2[index].style.backgroundColor == 'lightyellow'){
-          node2[index].remove();
+          if ( btn[index].style.backgroundColor == 'green'){
+          task[index].remove();
           arrT.splice(indextsk, 1);
           }
           projectsList[indexP].projectTasks.splice(indextsk, 1);
