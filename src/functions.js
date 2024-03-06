@@ -88,14 +88,40 @@ function domTask(){ //create dom task for each project
     };
 //task remove button
 
-function taskBackground(){     //change background for each task by mouse over
+
+function taskBackground(){     //change background for each current day task by mouse over
       let task = document.querySelectorAll('#task_list > div.task');
-        task = document.querySelectorAll('#task_list > div.task');
+      let checkbox = document.querySelectorAll('#task_list > div.task input.check');
+      let done  = document.querySelectorAll('#task_list > div.task div.done');
+      let activ = document.querySelectorAll('#task_list > div.task div.activ');
+
         task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+          let check = checkbox[index].checked;
+          if(check == false){
         task[index].setAttribute('style', 'background-color: lightyellow');
+          }
+         // checkbox[index] ==false)
       }));
       task.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+        let check = checkbox[index].checked;
+        if(check == false){
          task[index].setAttribute('style' , 'background-color: none');
+        }
+      
+      }));
+      checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
+          console.log(checkbox[index].checked);
+          if ( checkbox[index].checked == true){
+            task[index].setAttribute('style', 'background-color: darkgreen; color: white');
+            done[index].setAttribute('style', 'display: block');
+            activ[index].setAttribute('style', 'display: none');
+            console.log(tasksList);
+          } else if(checkbox[index].checked == false){
+            task[index].setAttribute('style', 'background-color: none');
+            done[index].setAttribute('style', 'display: none');
+            activ[index].setAttribute('style', 'display: block');
+
+          }
       }));
   }
  

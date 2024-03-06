@@ -253,7 +253,7 @@ div.task{
     display: block;
     padding: 3px;
     margin: 10px;
-    background-color: rgb(103, 242, 191);
+    background-color: rgba(194, 194, 194, 0.933);
     height: auto;
     text-align: left;
     font-family: font5;
@@ -261,4 +261,13 @@ div.task{
     min-width: 300px;
     max-width: 600px;
     flex: 1 1 0;
+}
+.status{
+    display: flex;
+    align-items: center; 
+    margin-right: 5px;
+    margin-left: 8px;
+}
+.done{
+    display: none;
 }

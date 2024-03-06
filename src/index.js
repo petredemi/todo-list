@@ -87,6 +87,10 @@ addTaskBtn.addEventListener('click', () =>{
     const div3 = document.createElement('div');
     const del = document.createElement('button');
     const checkbox = document.createElement('input');
+    const div4 = document.createElement('div');
+    const div5 = document.createElement('div');
+    const div6 = document.createElement('div');
+
     div0.classList.add('task');
     div1.classList.add('title');
     div2.classList.add('date', 'width');
@@ -95,7 +99,15 @@ addTaskBtn.addEventListener('click', () =>{
     checkbox.setAttribute('type', 'checkbox');
     checkbox.classList.add('check');
     checkbox.setAttribute('name', 'status');
+    
+    div4.classList.add('status');
+    div5.classList.add('done');
+    div6.classList.add('activ');
+    div5.textContent = 'completed';
+    div6.textContent = 'still active';
+    div4.append(div5, div6, checkbox);
 
+    
     addTasks(projindex); 
      if ( projindex == undefined){
          let ti = tasksList.findIndex(function(tsk){
@@ -106,7 +118,7 @@ addTaskBtn.addEventListener('click', () =>{
           div3.textContent = 'hour: ' + tasksList[ti].hour;
           del.textContent = 'delete';
           checkbox.checked = tasksList[ti].status;
-          div0.append(div2, div3, div1, del, checkbox);
+          div0.append(div2, div3, div1, del, div4);
           dayTask.insertBefore(div0, dayTask.children[ti]);
           projindex = undefined;
           div2.setAttribute('style', 'display: none');
@@ -120,7 +132,8 @@ addTaskBtn.addEventListener('click', () =>{
             div3.textContent = 'hour: ' + projectsList[projindex].projectTasks[ti].hour;
             del.textContent = 'delete';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
-            div0.append(div2, div3, div1, del, checkbox);
+
+            div0.append(div2, div3, div1, del, div4);
             tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
             projindex = undefined;
       }
@@ -134,6 +147,7 @@ addTaskBtn.addEventListener('click', () =>{
     daytaskDelete();
     deleteProjectTasks();
     projindex = undefined;
+    console.log(tasksList);
 });
 
 myFunction2();
