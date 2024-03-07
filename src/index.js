@@ -5,12 +5,12 @@ import { addProject, addTasks, hiYou, domTask, taskBackground, deleteProjectTask
         daytaskDelete} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
-import { showTask, dialogProject, dialogTask, callDialog} from './others.js';
+import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
 printMe();
 hiYou();
 
-let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
+let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
@@ -34,14 +34,24 @@ addProjectBtn.addEventListener('click', () =>{
              const div3 = document.createElement('div');
              const del = document.createElement('button');
              const checkbox = document.createElement('input');
-       
+             const div4 = document.createElement('div');
+             const div5 = document.createElement('div');
+             const div6 = document.createElement('div');
+             
              div00.classList.add('item1');
              div0.classList.add('project');
              div1.classList.add('name');
              div2.classList.add('start', 'width');
              div3.classList.add('end', 'width');
              del.classList.add('del');
-     
+
+             div4.classList.add('status');
+             div5.classList.add('done');
+             div6.classList.add('activ');
+             div5.textContent = 'completed';
+             div6.textContent = 'still active';
+             div4.append(div5, div6, checkbox); 
+
              checkbox.setAttribute('type', 'checkbox');
              checkbox.classList.add('check');
              checkbox.setAttribute('name', 'status');
@@ -56,7 +66,7 @@ addProjectBtn.addEventListener('click', () =>{
              div3.textContent = 'End: ' + projectsList[cd].end;
              del.textContent = 'delete';
              checkbox.checked = projectsList[cd].status;
-             div0.append(div1, div2, div3, del, checkbox);
+             div0.append(div1, div2, div3, del, div4);
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
              console.log(cd); 
@@ -68,7 +78,8 @@ addProjectBtn.addEventListener('click', () =>{
       tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
 
       myFunction2();
-      myFunction();
+      colorProjects();
+      colorProjectsTask()
       myFunction3();
       showTask();
       deleteProjectTasks();
@@ -144,6 +155,7 @@ addTaskBtn.addEventListener('click', () =>{
     tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
     myFunction3();
     taskBackground();
+    colorProjectsTask();
     daytaskDelete();
     deleteProjectTasks();
     projindex = undefined;
@@ -151,36 +163,27 @@ addTaskBtn.addEventListener('click', () =>{
 });
 
 myFunction2();
-myFunction();
+colorProjects();
+colorProjectsTask();
 myFunction3();
 taskBackground();
 deleteProjectTasks();
 daytaskDelete();
 
 function myFunction3(){ //call dialog modal  for each task for projects 
-  callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
-  
-  callTaskForm.forEach((node, index) => node.addEventListener('click', (e) => {
-    taskDate.setAttribute('style', 'display: flex')
-    dialogTask.showModal();   
-    projindex = index;  //where to add task for project
-  }));
+    callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
+    
+    callTaskForm.forEach((node, index) => node.addEventListener('click', (e) => {
+      taskDate.setAttribute('style', 'display: flex')
+      dialogTask.showModal();   
+      projindex = index;  //where to add task for project
+    }));
 }
 
 let indexproj;  //remove project index button;
       function remproject(projx){
            projx[indexproj].remove();
       }
-function myFunction(){     //change background for each project by mouse over
-    let node1 = document.querySelectorAll('#projects-list > div.item1 > div.project');
-
-    node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-    node1[index].setAttribute('style', 'background-color: grey');
-    }));
-    node1.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-      node1[index].setAttribute('style' , 'background-color: none');
-    }));
-}
 
 function myFunction2(){ //remove project button , change color 
   let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');

@@ -112,7 +112,7 @@ function taskBackground(){     //change background for each current day task by 
       checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
           if ( checkbox[index].checked == true){
-            task[index].setAttribute('style', 'background-color: darkgreen; color: white');
+            task[index].setAttribute('style', 'background-color: green; color: white');
             done[index].setAttribute('style', 'display: block');
             activ[index].setAttribute('style', 'display: none');
             console.log(tasksList);
@@ -120,7 +120,6 @@ function taskBackground(){     //change background for each current day task by 
             task[index].setAttribute('style', 'background-color: none');
             done[index].setAttribute('style', 'display: none');
             activ[index].setAttribute('style', 'display: block');
-
           }
       }));
   }
@@ -141,12 +140,6 @@ function taskBackground(){     //change background for each current day task by 
         btn[index].setAttribute( 'style', 'background-color: none');
       }));
   
-      task.forEach((node, index ) => node.addEventListener( 'mouseenter', (e) => {
-        task[index].setAttribute( 'style', 'background-color: lightyellow');
-      }));
-      task.forEach((node, index ) => node.addEventListener( 'mouseleave', (e) => {
-        task[index].setAttribute( 'style', 'background-color: none');
-      }));
   
   let indextsk; // index of child task
   let arrT; // arrey for children
