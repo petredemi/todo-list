@@ -36,8 +36,7 @@ body{
     align-items: center;
 }
 .screenleft{
-    border: 1px solid red;
-    display: flex;
+    box-sizing: content-box;
 }
 .todoprojects-lists{
     border: 1px solid red;
@@ -172,6 +171,7 @@ div.name{
 }
 .item1{
     margin-bottom: 20px;
+    color:
 
 }
 #projects-list > .item1 > div.project{
@@ -270,4 +270,9 @@ div.task{
 }
 .done{
     display: none;
+}
+footer{
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(207, 204, 204);
 }

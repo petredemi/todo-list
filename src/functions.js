@@ -1,12 +1,9 @@
 
-export  {hiYou, addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
+export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
-function hiYou(){
-    console.log('how are you');
-}
 //add projects
 const projectsList = ['item'];
 const tasksList = ['item'];
@@ -134,7 +131,7 @@ function taskBackground(){     //change background for each current day task by 
       }
    }
       btn.forEach((button, index) => button.addEventListener('mouseenter', (e) => {
-          btn[index].setAttribute( 'style', 'background-color: green');
+          btn[index].setAttribute( 'style', 'background-color: red');
       }));
       btn.forEach((button, index) => button.addEventListener('mouseleave', (e) => {
         btn[index].setAttribute( 'style', 'background-color: none');
@@ -151,12 +148,9 @@ function taskBackground(){     //change background for each current day task by 
             console.log(arrT);
       })); 
       btn.forEach((node, index) => node.addEventListener('click', (e) => {
-        let abc = tsklist[indexP].children[indextsk];
+     //   let abc = tsklist[indexP].children[indextsk];
         indextsk = arrT.findIndex(checkIndex);
-          console.log(indextsk + 'fefefe');
-          console.log(indexP + '  www')
-          console.log(abc);
-          if ( btn[index].style.backgroundColor == 'green'){
+          if ( btn[index].style.backgroundColor == 'red'){
           task[index].remove();
           arrT.splice(indextsk, 1);
           }

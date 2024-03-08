@@ -1,14 +1,12 @@
 import _, { sortedIndexOf } from 'lodash';
 import './style.css';
-import printMe from'./print.js';
+//import printMe from'./print.js';
 import { addProject, addTasks, hiYou, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
-printMe();
-hiYou();
 
 let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo');
