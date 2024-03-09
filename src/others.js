@@ -46,7 +46,7 @@ function showTask(){ //show and hide task for project
     const dialogTask = document.querySelector('#dialog-task');
     const taskDate = document.querySelector('#disply');
     
-  function callDialog(){
+  function callDialog(){  // for projects and dayly tasks only
         const callProjectForm = document.querySelector('#call-project-form'); //button
         const callDayTask = document.querySelector('#call-task-form');
 

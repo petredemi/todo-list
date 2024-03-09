@@ -8,7 +8,7 @@ import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
 
-let callTaskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
+let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
@@ -72,13 +72,13 @@ addProjectBtn.addEventListener('click', () =>{
              s.value = '';
              endDate.value = '';
              projectStatus.checked = false;
-      callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
+      taskForm = document.querySelectorAll('div.item1 button.project-task-form');
       tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
 
-      myFunction2();
+      removeProject();
       colorProjects();
       colorProjectsTask()
-      myFunction3();
+      callDialogTaskProjects();
       showTask();
       deleteProjectTasks();
 });
@@ -151,7 +151,7 @@ addTaskBtn.addEventListener('click', () =>{
         hourDue.value = '';
         taskStatus.checked = false;
     tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
-    myFunction3();
+    callDialogTaskProjects();
     taskBackground();
     colorProjectsTask();
     daytaskDelete();
@@ -160,30 +160,28 @@ addTaskBtn.addEventListener('click', () =>{
     console.log(tasksList);
 });
 
-myFunction2();
+removeProject();
 colorProjects();
 colorProjectsTask();
-myFunction3();
+callDialogTaskProjects();
 taskBackground();
 deleteProjectTasks();
 daytaskDelete();
 
-function myFunction3(){ //call dialog modal  for each task for projects 
-    callTaskForm = document.querySelectorAll('div.item1 button.project-task-form');
+function callDialogTaskProjects(){ //call dialog modal  for each task for projects 
+    taskForm = document.querySelectorAll('div.item1 button.project-task-form');
     
-    callTaskForm.forEach((node, index) => node.addEventListener('click', (e) => {
+    taskForm.forEach((node, index) => node.addEventListener('click', (e) => {
       taskDate.setAttribute('style', 'display: flex')
       dialogTask.showModal();   
       projindex = index;  //where to add task for project
     }));
 }
-
 let indexproj;  //remove project index button;
       function remproject(projx){
            projx[indexproj].remove();
       }
-
-function myFunction2(){ //remove project button , change color 
+function removeProject(){ //remove project button , change color 
   let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
   let node3 = document.querySelectorAll('#projects-list > div.item1');
 
