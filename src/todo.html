@@ -6,7 +6,9 @@
     <title>todo-list</title>
 </head>
 <body>
-<div class="screenleft"></div>
+<div class="screenleft">
+    <div class="calendar"></div>
+</div>
 <div class="todoprojects-lists">    
     <h1>To Do List</h1>
           <div class="content">
@@ -25,10 +27,9 @@
                               <label for="endDate">End</label>
                               <input type="date" id="endDate">
                           </li>
-      
-                          <div>
-                        <input type="checkbox" id ="projectStatus" class="check" name="status" >
-                          </div>
+                          <li style="display: flex;width: 100%; justify-content: end;">
+                            <input type="checkbox" id ="projectStatus" class="check" name="status" >
+                          </li>
                       </form>
                       <button type="submit" data-close-modal id="addProject" class="btn">+</button>
                   </dialog>
@@ -48,9 +49,9 @@
                                   <label for="title">to do:</label>
                                   <input type="text" id = 'title' >
                               </li>
-                              <div>
+                              <li style="display:flex; width: 100%; justify-content: end;">
                                   <input type="checkbox" id ="taskStatus" class="check" >
-                              </div>           
+                              </li>           
                     </form>
                           <button type="submit" data-close-modal id="addToDo" class="btn">+</button>
                   </dialog>
@@ -109,7 +110,7 @@
                   <div id ="task_list">
                      <div class="task">
                          <div class="date width" style="display: none;">03/03/2024</div>
-                         <div class="hour width">Start: 13:30</div>
+                         <div class="hour width">Start: 19:30</div>
                          <div class="title">dinner with Taylor Swift</div>
                          <button type="submit" class="del">delete</button>
                          <div class="status">

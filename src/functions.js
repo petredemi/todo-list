@@ -109,7 +109,7 @@ function taskBackground(){     //change background for each current day task by 
       checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
           if ( checkbox[index].checked == true){
-            task[index].setAttribute('style', 'background-color: green; color: white');
+            task[index].setAttribute('style', 'background-color: mediumseagreen; color: white');
             done[index].setAttribute('style', 'display: block');
             activ[index].setAttribute('style', 'display: none');
             console.log(tasksList);
