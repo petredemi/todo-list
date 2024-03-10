@@ -1,12 +1,12 @@
-
 export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete};
+        daytaskDelete, getData};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
 //add projects
 const projectsList = ['item'];
-const tasksList = ['item'];
+const tasksList = [];
+localStorage.setItem('tsk1', JSON.stringify('item'));
 
 const n = document.querySelector('#projectTitle');
 const s = document.querySelector('#startDate');
@@ -20,7 +20,6 @@ function addProject(){ //add projects items
       const end = endDate.value;
       const status = projectStatus.checked;
       const projectTasks = [];
-
       return { name, start, end, status, projectTasks};
     }
 
@@ -38,6 +37,7 @@ const d = document.querySelector('#date');
 const hourDue = document.querySelector('#hourDue');
 const taskStatus = document.querySelector('#taskStatus');
 function addTasks(x){ //add to do items
+
     function createTask(title){ //create task object with factory function
       title = t.value;
       const date = d.value;
@@ -45,22 +45,26 @@ function addTasks(x){ //add to do items
       const status = taskStatus.checked;
     return { title, date, hour, status};
   }
-      const item = createTask();
+  const item = createTask();
       if ( x == undefined){ 
+      function populateStorage(item, index){
+         localStorage.setItem(`tsk${index}`, JSON.stringify(item));
+       }
           tasksList.push(item);
           tasksList.sort((hour1, hour2) => {
              if ( hour1.hour < hour2.hour) return -1;
             if (  hour1.hour > hour2.hour) return 1;
           return 0;
-       }); 
-        }
+       });   
+       tasksList.forEach(populateStorage);
+    }
       if ( x !== undefined ){ 
         projectsList[x].projectTasks.push(item);
         projectsList[x].projectTasks.sort((date1, date2) => {
           if ( date1.date < date2.date) return -1;
           if (  date1.date > date2.date) return 1;
           return 0;
-    });
+      });
       };
   };
 
@@ -178,8 +182,50 @@ function taskBackground(){     //change background for each current day task by 
          node1.forEach((node, index) => node.addEventListener('click', (e) => {
              node2[removeindex].remove();
              tasksList.splice(removeindex, 1);
+             localStorage.removeItem(`tsk${removeindex}`)
              return node2;
       
           }));
       };
-      
+
+      let dayTask = document.querySelector('#task_list');
+  function getData(item, index){
+        if ( typeof tasksList[index] == 'object'){
+        const div0 = document.createElement('div');
+        const div1 = document.createElement('div');
+        const div2 = document.createElement('div');
+        const div3 = document.createElement('div');
+        const del = document.createElement('button');
+        const checkbox = document.createElement('input');
+        const div4 = document.createElement('div');
+        const div5 = document.createElement('div');
+        const div6 = document.createElement('div');
+  
+        div0.classList.add('task');
+        div1.classList.add('title');
+        div2.classList.add('date', 'width');
+        div3.classList.add('hour', 'width');
+        del.classList.add('del');
+        checkbox.setAttribute('type', 'checkbox');
+        checkbox.classList.add('check');
+        checkbox.setAttribute('name', 'status');
+  
+        div4.classList.add('status');
+        div5.classList.add('done');
+        div6.classList.add('activ');
+        div5.textContent = 'completed';
+        div6.textContent = 'still active';
+        div4.append(div5, div6, checkbox);
+              div1.textContent = tasksList[index].title;
+              div2.textContent = 'day: ' + tasksList[index].date;
+              div3.textContent = 'hour: ' + tasksList[index].hour;
+              del.textContent = 'delete';
+              checkbox.checked = tasksList[index].status;
+              if ( tasksList[index].status == true){
+                  div0.setAttribute('style', 'background-color: mediumseagreen');
+              }
+              div0.append(div2, div3, div1, del, div4);
+              dayTask.insertBefore(div0, dayTask.children[index]);
+              div2.setAttribute('style', 'display: none');
+        }
+      }

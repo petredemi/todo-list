@@ -1,13 +1,18 @@
 import _, { sortedIndexOf } from 'lodash';
 import './style.css';
-//import printMe from'./print.js';
-import { addProject, addTasks, hiYou, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete} from './functions.js';
+//import {getData} from'./functions.js';
+import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
+        daytaskDelete, getData} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
 
+for( let i =1 ; i <= localStorage.length; i++){
+    tasksList.push(JSON.parse(localStorage.getItem(`tsk${i}`)));
+}
+tasksList.forEach(getData);
+console.log(tasksList);
 let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo');
 const addProjectBtn = document.querySelector('#addProject');
@@ -15,16 +20,15 @@ let projects_list = document.querySelector('#projects-list');
 let dayTask = document.querySelector('#task_list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 
-callDialog();
+//abc();
 
+callDialog();
 let projindex = undefined; // add task to a project
 
 //projects
 addProjectBtn.addEventListener('click', () =>{
-
       dialogProject.close();
       if(n.value == '' && s.value == '') return;
-
              const div00 = document.createElement('div');
              const div0 = document.createElement('div');
              const div1 = document.createElement('div');
@@ -127,11 +131,13 @@ addTaskBtn.addEventListener('click', () =>{
           div3.textContent = 'hour: ' + tasksList[ti].hour;
           del.textContent = 'delete';
           checkbox.checked = tasksList[ti].status;
+          if( tasksList[ti].status == true){
+            div0.setAttribute('style', 'background-color: mediumseagreen');
+          }
           div0.append(div2, div3, div1, del, div4);
           dayTask.insertBefore(div0, dayTask.children[ti]);
           projindex = undefined;
           div2.setAttribute('style', 'display: none');
-
       }else if (projindex != undefined){
          let ti = projectsList[projindex].projectTasks.findIndex(function(tsk){
           return tsk.title === t.value;
@@ -158,6 +164,9 @@ addTaskBtn.addEventListener('click', () =>{
     deleteProjectTasks();
     projindex = undefined;
     console.log(tasksList);
+    console.log(tasksList.length);
+
+
 });
 
 removeProject();
@@ -182,21 +191,21 @@ let indexproj;  //remove project index button;
            projx[indexproj].remove();
       }
 function removeProject(){ //remove project button , change color 
-  let node2 = document.querySelectorAll('#projects-list > div.item1 > div.project button');
-  let node3 = document.querySelectorAll('#projects-list > div.item1');
+  let deleteButton = document.querySelectorAll('#projects-list > div.item1 > div.project button');
+  let projects = document.querySelectorAll('#projects-list > div.item1');
 
-  node2.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+  deleteButton.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     indexproj = index;
-    node2[index].setAttribute('style' , 'background-color: yellow');
+    deleteButton[index].setAttribute('style' , 'background-color: yellow');
   }));
 
-  node2.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-    node2[index].setAttribute('style' , 'background-color: none');
+  deleteButton.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+    deleteButton[index].setAttribute('style' , 'background-color: none');
     
   }));
 
-  node2.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
-    remproject(node3);
+  deleteButton.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
+    remproject(projects);
     projectsList.splice(indexproj, 1);
   }));
 }

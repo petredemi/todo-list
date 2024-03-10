@@ -1,6 +1,6 @@
 export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask};
 
-function showTask(){ //show and hide task for project
+function showTask(){ //show and hide tasks for each project
   let click = true;
   let indexproj;
   let project = document.querySelectorAll('div.item1 > div.project');
