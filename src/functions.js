@@ -47,7 +47,8 @@ function addTasks(x){ //add to do items
   }
   const item = createTask();
       if ( x == undefined){ 
-      function populateStorage(item, index){
+      function populateStorage(index){
+        index = tasksList.length ;
          localStorage.setItem(`tsk${index}`, JSON.stringify(item));
        }
           tasksList.push(item);
@@ -56,7 +57,7 @@ function addTasks(x){ //add to do items
             if (  hour1.hour > hour2.hour) return 1;
           return 0;
        });   
-       tasksList.forEach(populateStorage);
+       populateStorage();
     }
       if ( x !== undefined ){ 
         projectsList[x].projectTasks.push(item);
@@ -182,12 +183,10 @@ function taskBackground(){     //change background for each current day task by 
          node1.forEach((node, index) => node.addEventListener('click', (e) => {
              node2[removeindex].remove();
              tasksList.splice(removeindex, 1);
-             localStorage.removeItem(`tsk${removeindex}`)
+         //    localStorage.removeItem(`tsk${removeindex}`)
              return node2;
-      
           }));
       };
-
       let dayTask = document.querySelector('#task_list');
   function getData(item, index){
         if ( typeof tasksList[index] == 'object'){
@@ -228,4 +227,4 @@ function taskBackground(){     //change background for each current day task by 
               dayTask.insertBefore(div0, dayTask.children[index]);
               div2.setAttribute('style', 'display: none');
         }
-      }
+  }

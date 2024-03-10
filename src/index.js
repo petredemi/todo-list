@@ -147,7 +147,6 @@ addTaskBtn.addEventListener('click', () =>{
             div3.textContent = 'hour: ' + projectsList[projindex].projectTasks[ti].hour;
             del.textContent = 'delete';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
-
             div0.append(div2, div3, div1, del, div4);
             tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
             projindex = undefined;
