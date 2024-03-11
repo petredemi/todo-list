@@ -7,11 +7,12 @@ import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
-
-for( let i =1 ; i <= localStorage.length; i++){
+//localStorage.setItem('tsk0', JSON.stringify('item'));
+for( let i = 0 ; i < localStorage.length; i++){
     tasksList.push(JSON.parse(localStorage.getItem(`tsk${i}`)));
+    getData(i);
 }
-tasksList.forEach(getData);
+//tasksList.forEach(getData);
 console.log(tasksList);
 let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo');

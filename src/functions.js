@@ -1,3 +1,5 @@
+import { indexOf } from "lodash";
+
 export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete, getData};
 export  {n, s, endDate, projectStatus, projectsList};
@@ -6,7 +8,7 @@ export  {t, d, hourDue, taskStatus, tasksList};
 //add projects
 const projectsList = ['item'];
 const tasksList = [];
-localStorage.setItem('tsk1', JSON.stringify('item'));
+//localStorage.setItem('tsk0', JSON.stringify('item'));
 
 const n = document.querySelector('#projectTitle');
 const s = document.querySelector('#startDate');
@@ -32,12 +34,12 @@ function addProject(){ //add projects items
       });
 }
 //add todo tasks
-const t = document.querySelector('#title');
-const d = document.querySelector('#date');
-const hourDue = document.querySelector('#hourDue');
-const taskStatus = document.querySelector('#taskStatus');
-function addTasks(x){ //add to do items
+    const t = document.querySelector('#title');
+    const d = document.querySelector('#date');
+    const hourDue = document.querySelector('#hourDue');
+    const taskStatus = document.querySelector('#taskStatus');
 
+function addTasks(x){ //add to do items
     function createTask(title){ //create task object with factory function
       title = t.value;
       const date = d.value;
@@ -45,20 +47,23 @@ function addTasks(x){ //add to do items
       const status = taskStatus.checked;
     return { title, date, hour, status};
   }
-  const item = createTask();
-      if ( x == undefined){ 
-      function populateStorage(index){
-        index = tasksList.length ;
-         localStorage.setItem(`tsk${index}`, JSON.stringify(item));
-       }
+    const item = createTask();
+      if ( x == undefined){
           tasksList.push(item);
+        //  function populateStorage(){
+          //  let xx = tasksList.indexOf(item);
+          //  localStorage.setItem(`tsk${xx}`, JSON.stringify(item));
+         // }
           tasksList.sort((hour1, hour2) => {
              if ( hour1.hour < hour2.hour) return -1;
             if (  hour1.hour > hour2.hour) return 1;
           return 0;
-       });   
-       populateStorage();
-    }
+       });
+        tasksList.forEach((item, index) =>{
+                localStorage.setItem(`tsk${index}`, JSON.stringify(item))
+          });
+      }
+
       if ( x !== undefined ){ 
         projectsList[x].projectTasks.push(item);
         projectsList[x].projectTasks.sort((date1, date2) => {
@@ -183,13 +188,12 @@ function taskBackground(){     //change background for each current day task by 
          node1.forEach((node, index) => node.addEventListener('click', (e) => {
              node2[removeindex].remove();
              tasksList.splice(removeindex, 1);
-         //    localStorage.removeItem(`tsk${removeindex}`)
+             localStorage.removeItem(`tsk${removeindex}`)
              return node2;
           }));
       };
       let dayTask = document.querySelector('#task_list');
-  function getData(item, index){
-        if ( typeof tasksList[index] == 'object'){
+  function getData(index){
         const div0 = document.createElement('div');
         const div1 = document.createElement('div');
         const div2 = document.createElement('div');
@@ -226,5 +230,4 @@ function taskBackground(){     //change background for each current day task by 
               div0.append(div2, div3, div1, del, div4);
               dayTask.insertBefore(div0, dayTask.children[index]);
               div2.setAttribute('style', 'display: none');
-        }
   }
