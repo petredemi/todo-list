@@ -1,12 +1,12 @@
 import { indexOf } from "lodash";
 
 export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getData};
+        daytaskDelete, getProject, getData};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
 //add projects
-const projectsList = ['item'];
+const projectsList = [];
 const tasksList = [];
 //localStorage.setItem('tsk0', JSON.stringify('item'));
 
@@ -32,6 +32,10 @@ function addProject(){ //add projects items
       if (start1.start > start2.start) return 1;
         return 0;
       });
+      projectsList.forEach((item, index) =>{
+        localStorage.setItem(`prj${index}`, JSON.stringify(item))
+  });
+
 }
 //add todo tasks
     const t = document.querySelector('#title');
@@ -50,10 +54,6 @@ function addTasks(x){ //add to do items
     const item = createTask();
       if ( x == undefined){
           tasksList.push(item);
-        //  function populateStorage(){
-          //  let xx = tasksList.indexOf(item);
-          //  localStorage.setItem(`tsk${xx}`, JSON.stringify(item));
-         // }
           tasksList.sort((hour1, hour2) => {
              if ( hour1.hour < hour2.hour) return -1;
             if (  hour1.hour > hour2.hour) return 1;
@@ -118,6 +118,8 @@ function taskBackground(){     //change background for each current day task by 
       }));
       checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
+          tasksList[index].status = checkbox[index].checked;
+          localStorage.setItem(`tsk${index}`, JSON.stringify(tasksList[index]));
           if ( checkbox[index].checked == true){
             task[index].setAttribute('style', 'background-color: mediumseagreen; color: white');
             done[index].setAttribute('style', 'display: block');
@@ -188,46 +190,91 @@ function taskBackground(){     //change background for each current day task by 
          node1.forEach((node, index) => node.addEventListener('click', (e) => {
              node2[removeindex].remove();
              tasksList.splice(removeindex, 1);
-             localStorage.removeItem(`tsk${removeindex}`)
+             localStorage.removeItem(`tsk${removeindex}`);
              return node2;
           }));
       };
+
       let dayTask = document.querySelector('#task_list');
-  function getData(index){
-        const div0 = document.createElement('div');
-        const div1 = document.createElement('div');
-        const div2 = document.createElement('div');
-        const div3 = document.createElement('div');
-        const del = document.createElement('button');
-        const checkbox = document.createElement('input');
-        const div4 = document.createElement('div');
-        const div5 = document.createElement('div');
-        const div6 = document.createElement('div');
-  
-        div0.classList.add('task');
-        div1.classList.add('title');
-        div2.classList.add('date', 'width');
-        div3.classList.add('hour', 'width');
-        del.classList.add('del');
-        checkbox.setAttribute('type', 'checkbox');
-        checkbox.classList.add('check');
-        checkbox.setAttribute('name', 'status');
-  
-        div4.classList.add('status');
-        div5.classList.add('done');
-        div6.classList.add('activ');
-        div5.textContent = 'completed';
-        div6.textContent = 'still active';
-        div4.append(div5, div6, checkbox);
-              div1.textContent = tasksList[index].title;
-              div2.textContent = 'day: ' + tasksList[index].date;
-              div3.textContent = 'hour: ' + tasksList[index].hour;
-              del.textContent = 'delete';
-              checkbox.checked = tasksList[index].status;
-              if ( tasksList[index].status == true){
-                  div0.setAttribute('style', 'background-color: mediumseagreen');
-              }
-              div0.append(div2, div3, div1, del, div4);
-              dayTask.insertBefore(div0, dayTask.children[index]);
-              div2.setAttribute('style', 'display: none');
-  }
+      function getData(index){
+            const div0 = document.createElement('div');
+            const div1 = document.createElement('div');
+            const div2 = document.createElement('div');
+            const div3 = document.createElement('div');
+            const del = document.createElement('button');
+            const checkbox = document.createElement('input');
+            const div4 = document.createElement('div');
+            const div5 = document.createElement('div');
+            const div6 = document.createElement('div');
+      
+            div0.classList.add('task');
+            div1.classList.add('title');
+            div2.classList.add('date', 'width');
+            div3.classList.add('hour', 'width');
+            del.classList.add('del');
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.classList.add('check');
+            checkbox.setAttribute('name', 'status');
+      
+            div4.classList.add('status');
+            div5.classList.add('done');
+            div6.classList.add('activ');
+            div5.textContent = 'completed';
+            div6.textContent = 'still active';
+            div4.append(div5, div6, checkbox);
+                  div1.textContent = tasksList[index].title;
+                  div2.textContent = 'day: ' + tasksList[index].date;
+                  div3.textContent = 'hour: ' + tasksList[index].hour;
+                  del.textContent = 'delete';
+                  checkbox.checked = tasksList[index].status;
+                  if ( tasksList[index].status == true){
+                      div0.setAttribute('style', 'background-color: mediumseagreen');
+                  }
+                  div0.append(div2, div3, div1, del, div4);
+                  dayTask.insertBefore(div0, dayTask.children[index]);
+                  div2.setAttribute('style', 'display: none');
+      }
+      
+
+
+
+  let projects_list = document.querySelector('#projects-list');
+  function getProject(index){
+           const div00 = document.createElement('div');
+           const div0 = document.createElement('div');
+           const div1 = document.createElement('div');
+           const div2 = document.createElement('div');
+           const div3 = document.createElement('div');
+           const del = document.createElement('button');
+           const checkbox = document.createElement('input');
+           const div4 = document.createElement('div');
+           const div5 = document.createElement('div');
+           const div6 = document.createElement('div');
+           
+           div00.classList.add('item1');
+           div0.classList.add('project');
+           div1.classList.add('name');
+           div2.classList.add('start', 'width');
+           div3.classList.add('end', 'width');
+           del.classList.add('del');
+
+           div4.classList.add('status');
+           div5.classList.add('done');
+           div6.classList.add('activ');
+           div5.textContent = 'completed';
+           div6.textContent = 'still active';
+           div4.append(div5, div6, checkbox); 
+
+           checkbox.setAttribute('type', 'checkbox');
+           checkbox.classList.add('check');
+           checkbox.setAttribute('name', 'status');
+           del.setAttribute('type', 'submit');
+           div1.textContent = projectsList[index].name;
+           div2.textContent = 'Start: ' + projectsList[index].start;
+           div3.textContent = 'End: ' + projectsList[index].end;
+           del.textContent = 'delete';
+           checkbox.checked = projectsList[index].status;
+           div0.append(div1, div2, div3, del, div4);
+           div00.append(div0, domTask());
+           projects_list.insertBefore(div00, projects_list.children[index]);
+    };

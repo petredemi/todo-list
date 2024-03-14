@@ -1,27 +1,43 @@
-import _, { sortedIndexOf } from 'lodash';
+import _, { forEach, sortedIndexOf } from 'lodash';
 import './style.css';
-//import {getData} from'./functions.js';
+//import {getData} from'./print.js';
 import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getData} from './functions.js';
+        daytaskDelete, getData, getProject} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
-//localStorage.setItem('tsk0', JSON.stringify('item'));
-for( let i = 0 ; i < localStorage.length; i++){
-    tasksList.push(JSON.parse(localStorage.getItem(`tsk${i}`)));
-    getData(i);
+
+for(let i = 0; i < localStorage.length; i++){
+  let x = JSON.parse(localStorage.getItem(`prj${i}`));
+  if ( x != null){
+    projectsList.push(x);
+      }
+  }
+
+for (let j = 0; j < projectsList.length; j++){
+      getProject(j);
 }
-//tasksList.forEach(getData);
+for(let i = 0; i < localStorage.length; i++){
+      let x = JSON.parse(localStorage.getItem(`tsk${i}`));
+      console.log(localStorage.key(i));
+      if( x != null){
+          tasksList.push(x);
+          }        
+  }
+for (let j = 0; j < tasksList.length; j++){
+      getData(j);
+  }
+
+
+console.log(projectsList);
 console.log(tasksList);
 let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
-const addTaskBtn = document.querySelector('#addToDo');
+const addTaskBtn = document.querySelector('#addToDo'); 
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
 let dayTask = document.querySelector('#task_list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
-
-//abc();
 
 callDialog();
 let projindex = undefined; // add task to a project
@@ -148,6 +164,9 @@ addTaskBtn.addEventListener('click', () =>{
             div3.textContent = 'hour: ' + projectsList[projindex].projectTasks[ti].hour;
             del.textContent = 'delete';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
+            if( projectsList[projindex].projectTasks[ti].status == true){
+              div0.setAttribute('style', 'background-color: mediumseagreen');
+            }
             div0.append(div2, div3, div1, del, div4);
             tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
             projindex = undefined;
@@ -206,6 +225,7 @@ function removeProject(){ //remove project button , change color
 
   deleteButton.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
     remproject(projects);
+    localStorage.removeItem(`prj${indexproj}`);
     projectsList.splice(indexproj, 1);
   }));
 }
