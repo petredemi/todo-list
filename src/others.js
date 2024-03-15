@@ -64,7 +64,7 @@ function showTask(){ //show and hide tasks for each project
         let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
         let done  = document.querySelectorAll('#projects-list > div.item1 > div.project div.done');
         let activ = document.querySelectorAll('#projects-list > div.item1 > div.project div.activ');
-
+       
         project.forEach((node, index) => node.addEventListener('mouseover', (e) => {
           let check = checkbox[index].checked;
           if(check == false){
@@ -79,14 +79,15 @@ function showTask(){ //show and hide tasks for each project
         }));
         checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
+//          localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
           if ( checkbox[index].checked == true){
-            project[index].setAttribute('style', 'background-color: darkcyan; color: white');
-            done[index].setAttribute('style', 'display: block');
-            activ[index].setAttribute('style', 'display: none');
+              project[index].setAttribute('style', 'background-color: darkcyan; color: white');
+              done[index].setAttribute('style', 'display: block');
+              activ[index].setAttribute('style', 'display: none');
           } else if(checkbox[index].checked == false){
-            project[index].setAttribute('style', 'background-color: none');
-            done[index].setAttribute('style', 'display: none');
-            activ[index].setAttribute('style', 'display: block');
+              project[index].setAttribute('style', 'background-color: none');
+              done[index].setAttribute('style', 'display: none');
+              activ[index].setAttribute('style', 'display: block');
           }
       }));
     }

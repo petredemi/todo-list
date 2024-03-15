@@ -1,34 +1,37 @@
 import _, { forEach, sortedIndexOf } from 'lodash';
 import './style.css';
-//import {getData} from'./print.js';
 import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getData, getProject} from './functions.js';
+        daytaskDelete, getTask, getProject} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
 
+function storedProjects(){
 for(let i = 0; i < localStorage.length; i++){
-  let x = JSON.parse(localStorage.getItem(`prj${i}`));
-  if ( x != null){
-    projectsList.push(x);
+      let x = JSON.parse(localStorage.getItem(`prj${i}`));
+      if ( x != null){
+        projectsList.push(x);
+          }
       }
-  }
-
-for (let j = 0; j < projectsList.length; j++){
-      getProject(j);
-}
-for(let i = 0; i < localStorage.length; i++){
-      let x = JSON.parse(localStorage.getItem(`tsk${i}`));
-      console.log(localStorage.key(i));
-      if( x != null){
-          tasksList.push(x);
-          }        
-  }
-for (let j = 0; j < tasksList.length; j++){
-      getData(j);
-  }
-
+    for (let j = 0; j < projectsList.length; j++){
+          getProject(j);    
+        }
+  };
+storedProjects();
+function storedDayTasks(){
+      for(let i = 0; i < localStorage.length; i++){
+            let x = JSON.parse(localStorage.getItem(`tsk${i}`));
+            console.log(localStorage.key(i));
+            if( x != null){
+                tasksList.push(x);
+                }        
+        }
+      for (let j = 0; j < tasksList.length; j++){
+            getTask(j);
+        }     
+    }
+  storedDayTasks();
 
 console.log(projectsList);
 console.log(tasksList);
@@ -88,6 +91,11 @@ addProjectBtn.addEventListener('click', () =>{
              div0.append(div1, div2, div3, del, div4);
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
+             if( projectsList[cd].status == true){
+              div0.setAttribute('style', 'background-color: mediumseagreen; color: white');
+              div5.setAttribute('style', 'display: block');
+              div6.setAttribute('style', 'display: none');
+            }
              console.log(cd); 
              n.value = '';
              s.value = '';
@@ -137,7 +145,6 @@ addTaskBtn.addEventListener('click', () =>{
     div6.textContent = 'still active';
     div4.append(div5, div6, checkbox);
 
-    
     addTasks(projindex); 
      if ( projindex == undefined){
          let ti = tasksList.findIndex(function(tsk){
@@ -149,7 +156,9 @@ addTaskBtn.addEventListener('click', () =>{
           del.textContent = 'delete';
           checkbox.checked = tasksList[ti].status;
           if( tasksList[ti].status == true){
-            div0.setAttribute('style', 'background-color: mediumseagreen');
+            div0.setAttribute('style', 'background-color: mediumseagreen; color: white;');
+            div5.setAttribute('style', 'display: block');
+            div6.setAttribute('style', 'display: none');
           }
           div0.append(div2, div3, div1, del, div4);
           dayTask.insertBefore(div0, dayTask.children[ti]);
@@ -182,10 +191,6 @@ addTaskBtn.addEventListener('click', () =>{
     daytaskDelete();
     deleteProjectTasks();
     projindex = undefined;
-    console.log(tasksList);
-    console.log(tasksList.length);
-
-
 });
 
 removeProject();
@@ -229,3 +234,12 @@ function removeProject(){ //remove project button , change color
     projectsList.splice(indexproj, 1);
   }));
 }
+function checkboxProject(){
+    let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
+    checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
+        console.log(checkbox[index].checked);
+        projectsList[index].status = checkbox[index].checked;
+        localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
+    }));
+  }
+  checkboxProject();
