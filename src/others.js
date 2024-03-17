@@ -79,7 +79,6 @@ function showTask(){ //show and hide tasks for each project
         }));
         checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
-//          localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
           if ( checkbox[index].checked == true){
               project[index].setAttribute('style', 'background-color: darkcyan; color: white');
               done[index].setAttribute('style', 'display: block');

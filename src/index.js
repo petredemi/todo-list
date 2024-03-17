@@ -1,24 +1,45 @@
 import _, { forEach, sortedIndexOf } from 'lodash';
 import './style.css';
 import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getTask, getProject} from './functions.js';
+        daytaskDelete, getTask, getProject, getProjectTasks} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
+let keys = [];
+for (let i = 0; i < localStorage.length; i++){
+   let x = localStorage.key(i);
+  keys.push(x);
+}
+console.log(keys);
+console.log(localStorage.key(2));
 
 function storedProjects(){
-for(let i = 0; i < localStorage.length; i++){
-      let x = JSON.parse(localStorage.getItem(`prj${i}`));
-      if ( x != null){
-        projectsList.push(x);
-          }
-      }
-    for (let j = 0; j < projectsList.length; j++){
-          getProject(j);    
+    for(let i = 0; i < localStorage.length; i++){
+        let x = JSON.parse(localStorage.getItem(`prj${i}`));
+        if ( x != null){
+          projectsList.push(x);
         }
+      }
+    for (let i = 0; i < projectsList.length; i++){
+          getProject(i);
+      }
   };
 storedProjects();
+function storedProjectTask(){
+     for (let i = 0; i < localStorage.length; i++){
+       for( let j = 0; j < localStorage.length; j++){
+           let y = JSON.parse(localStorage. getItem((`tskprj${i}/${j}`)));
+           if ( y != null) {
+           projectsList[i].projectTasks.push(y);
+           console.log(y);
+           getProjectTasks( i, j);
+       }
+     }
+  }
+}
+storedProjectTask();
+
 function storedDayTasks(){
       for(let i = 0; i < localStorage.length; i++){
             let x = JSON.parse(localStorage.getItem(`tsk${i}`));
@@ -31,8 +52,7 @@ function storedDayTasks(){
             getTask(j);
         }     
     }
-  storedDayTasks();
-
+storedDayTasks();
 console.log(projectsList);
 console.log(tasksList);
 let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
@@ -41,11 +61,13 @@ const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
 let dayTask = document.querySelector('#task_list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
+let indexproj;  //remove project index button;
+
 
 callDialog();
 let projindex = undefined; // add task to a project
-
 //projects
+
 addProjectBtn.addEventListener('click', () =>{
       dialogProject.close();
       if(n.value == '' && s.value == '') return;
@@ -81,7 +103,7 @@ addProjectBtn.addEventListener('click', () =>{
              addProject();
              let cd = projectsList.findIndex(function(proj){    // project index
               return proj.name === n.value;
-            });
+          });
             console.log(cd);
              div1.textContent = projectsList[cd].name;
              div2.textContent = 'Start: ' + projectsList[cd].start;
@@ -92,15 +114,16 @@ addProjectBtn.addEventListener('click', () =>{
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
              if( projectsList[cd].status == true){
-              div0.setAttribute('style', 'background-color: mediumseagreen; color: white');
+              div0.setAttribute('style', 'background-color: darkcyan; color: white');
               div5.setAttribute('style', 'display: block');
               div6.setAttribute('style', 'display: none');
-            }
-             console.log(cd); 
-             n.value = '';
-             s.value = '';
-             endDate.value = '';
-             projectStatus.checked = false;
+          };
+
+            console.log(cd); 
+            n.value = '';
+            s.value = '';
+            endDate.value = '';
+            projectStatus.checked = false;
       taskForm = document.querySelectorAll('div.item1 button.project-task-form');
       tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
 
@@ -110,6 +133,8 @@ addProjectBtn.addEventListener('click', () =>{
       callDialogTaskProjects();
       showTask();
       deleteProjectTasks();
+      console.log(projectsList.length + 'lenght')
+
 });
 showTask();
 //tasks
@@ -175,16 +200,18 @@ addTaskBtn.addEventListener('click', () =>{
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
             if( projectsList[projindex].projectTasks[ti].status == true){
               div0.setAttribute('style', 'background-color: mediumseagreen');
+                  }
+              div0.append(div2, div3, div1, del, div4);
+              tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
+               console.log(projectsList[projindex].projectTasks.length + '  354345345');
+              projindex = undefined;
+            
             }
-            div0.append(div2, div3, div1, del, div4);
-            tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
-            projindex = undefined;
-      }
         t.value = '';
         d.value = '';
         hourDue.value = '';
         taskStatus.checked = false;
-    tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
+   // tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
     callDialogTaskProjects();
     taskBackground();
     colorProjectsTask();
@@ -210,10 +237,10 @@ function callDialogTaskProjects(){ //call dialog modal  for each task for projec
       projindex = index;  //where to add task for project
     }));
 }
-let indexproj;  //remove project index button;
-      function remproject(projx){
+function remproject(projx){
            projx[indexproj].remove();
-      }
+    }
+
 function removeProject(){ //remove project button , change color 
   let deleteButton = document.querySelectorAll('#projects-list > div.item1 > div.project button');
   let projects = document.querySelectorAll('#projects-list > div.item1');
@@ -221,6 +248,7 @@ function removeProject(){ //remove project button , change color
   deleteButton.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     indexproj = index;
     deleteButton[index].setAttribute('style' , 'background-color: yellow');
+
   }));
 
   deleteButton.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
@@ -229,17 +257,24 @@ function removeProject(){ //remove project button , change color
   }));
 
   deleteButton.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
+      
+    for (let i = 0; i <= 10; i++){
+      localStorage.removeItem(`tskprj${indexproj}/${i}`);
+    //  localStorage.removeItem(`tskprj${indexproj}/1`);
+      //localStorage.removeItem(`tskprj${indexproj}/2`);
+      //localStorage.removeItem(`tskprj${indexproj}/3`);
+    }
     remproject(projects);
-    localStorage.removeItem(`prj${indexproj}`);
-    projectsList.splice(indexproj, 1);
-  }));
-}
-function checkboxProject(){
-    let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
-    checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
-        console.log(checkbox[index].checked);
-        projectsList[index].status = checkbox[index].checked;
-        localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
-    }));
-  }
+      localStorage.removeItem(`prj${indexproj}`);
+      projectsList.splice(indexproj, 1);
+      }));
+} 
+  function checkboxProject(){
+            let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
+            checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
+                console.log(checkbox[index].checked);
+                projectsList[index].status = checkbox[index].checked;
+                localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
+            }));
+        }
   checkboxProject();

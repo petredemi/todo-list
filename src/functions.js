@@ -1,14 +1,16 @@
 import { indexOf } from "lodash";
 
 export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getProject, getTask};
+        daytaskDelete, getProject, getTask, getProjectTasks};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
 //add projects
 const projectsList = [];
 const tasksList = [];
-//localStorage.setItem('tsk0', JSON.stringify('item'));
+function stringifyProjects(x, y){
+    return localStorage.setItem(`prj${y}`, JSON.stringify(x));
+};
 
 const n = document.querySelector('#projectTitle');
 const s = document.querySelector('#startDate');
@@ -32,9 +34,7 @@ function addProject(){ //add projects items
       if (start1.start > start2.start) return 1;
         return 0;
       });
-      projectsList.forEach((item, index) =>{
-        localStorage.setItem(`prj${index}`, JSON.stringify(item))
-  });
+      projectsList.forEach(stringifyProjects);
 
 }
 //add todo tasks
@@ -149,30 +149,25 @@ function taskBackground(){     //change background for each current day task by 
         btn[index].setAttribute( 'style', 'background-color: none');
       }));
   
-  
   let indextsk; // index of child task
   let arrT; // arrey for children
   let indexP; // project index
-      tsklist.forEach((node, index ) => node.addEventListener('mouseenter', (e) => {
-        console.log(index);
+      tsklist.forEach((node, index ) => node.addEventListener('mouseover', (e) => {
         indexP = index;
             arrT = Array.from(tsklist[index].children);
-            console.log(arrT);
       })); 
       btn.forEach((node, index) => node.addEventListener('click', (e) => {
-     //   let abc = tsklist[indexP].children[indextsk];
         indextsk = arrT.findIndex(checkIndex);
           if ( btn[index].style.backgroundColor == 'red'){
           task[index].remove();
           arrT.splice(indextsk, 1);
+          localStorage.removeItem(`tskprj${indexP}/${indextsk}`);
           }
           projectsList[indexP].projectTasks.splice(indextsk, 1);
-          console.log(arrT);
-          console.log(projectsList[indexP]);
-        }));
-      }
+      }));
+}
   function daytaskDelete(){ //remove button , change color 
-        let removeindex;  //remove index;
+        let removeindex;  //remove index; v
         let node1 = document.querySelectorAll('#task_list button');
         let node2 = document.querySelectorAll('#task_list > div.task');
       
@@ -189,14 +184,17 @@ function taskBackground(){     //change background for each current day task by 
              node2[removeindex].remove();
              tasksList.splice(removeindex, 1);
              localStorage.removeItem(`tsk${removeindex}`);
-             return node2;
+             //return node2;
+             node2 = document.querySelectorAll('#task_list > div.task');
+
           }));
       };
 
 
 
-      let dayTask = document.querySelector('#task_list');
-      function getTask(index){
+  function getTask(index){
+        let dayTask = document.querySelector('#task_list');
+
             const div0 = document.createElement('div');
             const div1 = document.createElement('div');
             const div2 = document.createElement('div');
@@ -235,8 +233,8 @@ function taskBackground(){     //change background for each current day task by 
                   div2.setAttribute('style', 'display: none');
       }
       
-  let projects_list = document.querySelector('#projects-list');
   function getProject(index){
+        let projects_list = document.querySelector('#projects-list');
            const div00 = document.createElement('div');
            const div0 = document.createElement('div');
            const div1 = document.createElement('div');
@@ -280,8 +278,8 @@ function taskBackground(){     //change background for each current day task by 
            div00.append(div0, domTask());
            projects_list.insertBefore(div00, projects_list.children[index]);
     };
-let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
 function getProjectTasks( x, y){
+  let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');  
          const div0 = document.createElement('div');
          const div1 = document.createElement('div');
          const div2 = document.createElement('div');
@@ -319,4 +317,5 @@ function getProjectTasks( x, y){
           }
           div0.append(div2, div3, div1, del, div4);
           tasklistProject[x].insertBefore(div0, tasklistProject[x].children[y]);
+
       }
