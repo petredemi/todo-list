@@ -15,6 +15,7 @@ function getKey(){
       }}
 getKey();
 console.log(keys);
+
 function storedProjects(){
    for(let i = 0; i < localStorage.length; i++){
         let x = JSON.parse(localStorage.getItem(`prj${i}`));
@@ -273,14 +274,14 @@ function removeStoredItems(){ // remove stored tasks from projectss
   }));
 }
 removeStoredItems();
-function removeStoredTasks(){
-      let node2 = document.querySelectorAll('#task_list > div.task');
-      node2.forEach((node, index) => node.addEventListener('click', () => {
-          tasksList.forEach((item, index) =>{
-            localStorage.setItem(`tsk${index}`, JSON.stringify(item))
-          });
-          node2 = document.querySelectorAll('#task_list > div.task');
-      }));
-}
+//function removeStoredTasks(){
+  //    let node2 = document.querySelectorAll('#task_list > div.task');
+     // node2.forEach((node, index) => node.addEventListener('click', () => {
+     //     tasksList.forEach((item, index) =>{
+       //     localStorage.setItem(`tsk${index}`, JSON.stringify(item))
+    //      });
+    //      node2 = document.querySelectorAll('#task_list > div.task');
+    //  }));
+//}
 //removeStoredTasks();
 
