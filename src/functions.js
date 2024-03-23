@@ -169,20 +169,16 @@ function taskBackground(){     //change background for each current day task by 
          }));
       
          node1.forEach((node, index) => node.addEventListener('click', (e) => {
-             node2[index].remove();
-             tasksList.splice(index, 1);
-             localStorage.removeItem(`tsk${index}`);
+             node2[removeindex].remove();
+             tasksList.splice(removeindex, 1);
+             localStorage.removeItem(`tsk${removeindex}`);
              return node2;
-          //   node2 = document.querySelectorAll('#task_list > div.task');
+         //   node2 = document.querySelectorAll('#task_list > div.task');
           }));
-          tasksList.forEach((item, index) =>{
-            localStorage.setItem(`tsk${index}`, JSON.stringify(item))
-          });
-
       };
-  function getTask(index){
-        let dayTask = document.querySelector('#task_list');
-
+  function getTask(){
+        let dayTaskList = document.querySelector('#task_list');
+          for (let x = 0; x < tasksList.length; x++ ){
             const div0 = document.createElement('div');
             const div1 = document.createElement('div');
             const div2 = document.createElement('div');
@@ -208,17 +204,20 @@ function taskBackground(){     //change background for each current day task by 
             div5.textContent = 'completed';
             div6.textContent = 'still active';
             div4.append(div5, div6, checkbox);
-                  div1.textContent = tasksList[index].title;
-                  div2.textContent = 'day: ' + tasksList[index].date;
-                  div3.textContent = 'hour: ' + tasksList[index].hour;
+                  div1.textContent = tasksList[x].title;
+                  div2.textContent = 'day: ' + tasksList[x].date;
+                  div3.textContent = 'hour: ' + tasksList[x].hour;
                   del.textContent = 'delete';
-                  checkbox.checked = tasksList[index].status;
-                  if ( tasksList[index].status == true){
+                  checkbox.checked = tasksList[x].status;
+                  if ( tasksList[x].status == true){
                       div0.setAttribute('style', 'background-color: mediumseagreen');
                   }
                   div0.append(div2, div3, div1, del, div4);
-                  dayTask.insertBefore(div0, dayTask.children[index]);
+                  dayTaskList.appendChild(div0);
+                  dayTaskList.insertBefore(div0, dayTaskList.children[x]);
+
                   div2.setAttribute('style', 'display: none');
+          };
       }
       
   function getProject(index){

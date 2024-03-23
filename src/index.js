@@ -37,27 +37,28 @@ getProjectTasks(); // get project tasks from local storage
 function storedDayTasks(){
       for(let i = 0; i < localStorage.length; i++){
             let x = JSON.parse(localStorage.getItem(`tsk${i}`));
-            console.log(localStorage.key(i));
             if( x != null){
                 tasksList.push(x);
                 }        
         }
-      for (let j = 0; j < tasksList.length; j++){
-            getTask(j);
-        }     
+   //  for (let j = 0; j < tasksList.length; j++){
+    getTask();
+
+      //  }     
     }
 storedDayTasks();
+
 let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo'); 
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
-let dayTask = document.querySelector('#task_list');
+//let dayTask = document.querySelector('#task_list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 let indexproj;  //remove project index button;
 
 callDialog();
 //projects
-let projindex = undefined; // add task to a project
+let projindex = undefined; // index for add task to a project
 
 addProjectBtn.addEventListener('click', () =>{ // button to add projects 
       dialogProject.close();
@@ -125,6 +126,8 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
       callDialogTaskProjects();
       showTask();
       deleteProjectTasks();
+      removeStoredItems();
+
       console.log(projectsList)
 });
 showTask();
@@ -132,7 +135,8 @@ showTask();
 const taskDate = document.querySelector('#disply');
 taskDate.setAttribute('style', 'display: none');
 
-addTaskBtn.addEventListener('click', () =>{  //add tasks on th list
+addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
+  let dayTask = document.querySelector('#task_list');
     dialogTask.close();
     if(t.value == '' && d.value == '') return;
     const div0 = document.createElement('div');
@@ -178,10 +182,11 @@ addTaskBtn.addEventListener('click', () =>{  //add tasks on th list
           }
           div0.append(div2, div3, div1, del, div4);
           dayTask.insertBefore(div0, dayTask.children[ti]);
+
           projindex = undefined;
           div2.setAttribute('style', 'display: none');
         tasksList.forEach((item, index) =>{
-            localStorage.setItem(`tsk${index}`, JSON.stringify(tasksList));
+            localStorage.setItem(`tsk${index}`, JSON.stringify(item));
           });
           
       }else if (projindex != undefined){
@@ -273,12 +278,24 @@ function removeProject(){ //remove project button , change color
             }));
         }
   checkboxProject();
-function removeStoredItems(){
+function removeStoredItems(){ // remove stored tasks from projects
   let allProjectsTasks = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
   allProjectsTasks.forEach((node, index) => node.addEventListener('click', (e) => {
     projectsList.forEach((item, index)  => {
       localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
     })
+    console.log(projectsList);
   }));
 }
 removeStoredItems();
+function removeStoredTasks(){
+      let node2 = document.querySelectorAll('#task_list > div.task');
+      node2.forEach((node, index) => node.addEventListener('click', () => {
+          tasksList.forEach((item, index) =>{
+            localStorage.setItem(`tsk${index}`, JSON.stringify(item))
+          });
+          node2 = document.querySelectorAll('#task_list > div.task');
+      }));
+}
+//removeStoredTasks();
+
