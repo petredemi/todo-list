@@ -1,4 +1,3 @@
-import { indexOf } from "lodash";
 export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete, getProject, getTask, getProjectTasks};
 export  {n, s, endDate, projectStatus, projectsList};
@@ -151,7 +150,6 @@ function taskBackground(){     //change background for each current day task by 
             arrT.splice(indextsk, 1);
           }
           projectsList[indexP].projectTasks.splice(indextsk, 1);
-   //       localStorage.setItem(`prj${indexP}`, JSON.stringify(projectsList[indexP]));
       }));
 }
   function daytaskDelete(){ //remove button , change color 
@@ -173,7 +171,6 @@ function taskBackground(){     //change background for each current day task by 
              tasksList.splice(removeindex, 1);
              localStorage.removeItem(`tsk${removeindex}`);
              return node2;
-         //   node2 = document.querySelectorAll('#task_list > div.task');
           }));
       };
   function getTask(){
@@ -220,8 +217,9 @@ function taskBackground(){     //change background for each current day task by 
           };
       }
       
-  function getProject(index){
+  function getProject(){
         let projects_list = document.querySelector('#projects-list');
+        for ( let i = 0; i < projectsList.length; i++){
            const div00 = document.createElement('div');
            const div0 = document.createElement('div');
            const div1 = document.createElement('div');
@@ -251,19 +249,20 @@ function taskBackground(){     //change background for each current day task by 
            checkbox.classList.add('check');
            checkbox.setAttribute('name', 'status');
            del.setAttribute('type', 'submit');
-           div1.textContent = projectsList[index].name;
-           div2.textContent = 'Start: ' + projectsList[index].start;
-           div3.textContent = 'End: ' + projectsList[index].end;
+           div1.textContent = projectsList[i].name;
+           div2.textContent = 'Start: ' + projectsList[i].start;
+           div3.textContent = 'End: ' + projectsList[i].end;
            del.textContent = 'delete';
-           checkbox.checked = projectsList[index].status;
-           if ( projectsList[index].status == true){
+           checkbox.checked = projectsList[i].status;
+           if ( projectsList[i].status == true){
             div0.setAttribute('style', 'background-color: darkcyan; color: white');
             div5.setAttribute('style', 'display: block');
             div6.setAttribute('style', 'display: none');
           }
            div0.append(div1, div2, div3, del, div4);
            div00.append(div0, domTask());
-           projects_list.insertBefore(div00, projects_list.children[index]);
+           projects_list.insertBefore(div00, projects_list.children[i]);
+        }
     };
 
   function getProjectTasks(){

@@ -1,5 +1,3 @@
-import { projectsList } from "./functions";
-
 export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask};
 
 function showTask(){ //show and hide tasks for each project

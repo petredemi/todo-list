@@ -7,7 +7,6 @@ import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
 
-
 let keys = [];
 function getKey(){
       for (let i = 0; i < localStorage.length; i++){
@@ -15,12 +14,7 @@ function getKey(){
        keys.push(x);
       }}
 getKey();
-//function mmm(x){
-    //projectsList[x].projectTasks.forEach((item, index) =>{
-   //   localStorage.setItem(`tskprj${x}/${index}`, JSON.stringify(projectsList[x].projectTasks))
- // });
 console.log(keys);
-//}
 function storedProjects(){
    for(let i = 0; i < localStorage.length; i++){
         let x = JSON.parse(localStorage.getItem(`prj${i}`));
@@ -28,9 +22,7 @@ function storedProjects(){
           projectsList.push(x);
         }
       }
-    for (let j = 0; j < projectsList.length; j++){
-          getProject(j);
-      }
+          getProject();
   };
 storedProjects();
 getProjectTasks(); // get project tasks from local storage
@@ -41,25 +33,19 @@ function storedDayTasks(){
                 tasksList.push(x);
                 }        
         }
-   //  for (let j = 0; j < tasksList.length; j++){
     getTask();
-
-      //  }     
     }
 storedDayTasks();
-
-let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo'); 
 const addProjectBtn = document.querySelector('#addProject');
 let projects_list = document.querySelector('#projects-list');
-//let dayTask = document.querySelector('#task_list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 let indexproj;  //remove project index button;
 
-callDialog();
+callDialog(); // for projects and day tasks only 
+
 //projects
 let projindex = undefined; // index for add task to a project
-
 addProjectBtn.addEventListener('click', () =>{ // button to add projects 
       dialogProject.close();
       if(n.value == '' && s.value == '') return;
@@ -118,7 +104,6 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
             s.value = '';
             endDate.value = '';
             projectStatus.checked = false;
-      taskForm = document.querySelectorAll('div.item1 button.project-task-form');
       tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
       removeProject();
       colorProjects();
@@ -128,11 +113,11 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
       deleteProjectTasks();
       removeStoredItems();
 
-      console.log(projectsList)
 });
-showTask();
+showTask(); // for each project
+
 //tasks
-const taskDate = document.querySelector('#disply');
+const taskDate = document.querySelector('#disply'); // hide date for daytasks 
 taskDate.setAttribute('style', 'display: none');
 
 addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
@@ -232,9 +217,8 @@ taskBackground();
 deleteProjectTasks();
 daytaskDelete();
 
-
 function callDialogTaskProjects(){ //call dialog modal  for each task for projects 
-    taskForm = document.querySelectorAll('div.item1 button.project-task-form');
+  let taskForm = document.querySelectorAll('div.item1 button.project-task-form');
     taskForm.forEach((node, index) => node.addEventListener('click', (e) => {
       taskDate.setAttribute('style', 'display: flex')
       dialogTask.showModal();   
@@ -275,10 +259,11 @@ function removeProject(){ //remove project button , change color
             checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
                 console.log(checkbox[index].checked);
                 projectsList[index].status = checkbox[index].checked;
+                localStorage.setItem( `prj${index}`, JSON.stringify(projectsList[index]));
             }));
         }
   checkboxProject();
-function removeStoredItems(){ // remove stored tasks from projects
+function removeStoredItems(){ // remove stored tasks from projectss
   let allProjectsTasks = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
   allProjectsTasks.forEach((node, index) => node.addEventListener('click', (e) => {
     projectsList.forEach((item, index)  => {
