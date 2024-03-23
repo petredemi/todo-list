@@ -6,40 +6,34 @@ import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
 
-let keys = [];
-for (let i = 0; i < localStorage.length; i++){
-   let x = localStorage.key(i);
-  keys.push(x);
-}
-console.log(keys);
-console.log(localStorage.key(2));
 
+
+let keys = [];
+function getKey(){
+      for (let i = 0; i < localStorage.length; i++){
+        let x = localStorage.key(i);
+       keys.push(x);
+      }}
+getKey();
+//function mmm(x){
+    //projectsList[x].projectTasks.forEach((item, index) =>{
+   //   localStorage.setItem(`tskprj${x}/${index}`, JSON.stringify(projectsList[x].projectTasks))
+ // });
+console.log(keys);
+//}
 function storedProjects(){
-    for(let i = 0; i < localStorage.length; i++){
+   for(let i = 0; i < localStorage.length; i++){
         let x = JSON.parse(localStorage.getItem(`prj${i}`));
         if ( x != null){
           projectsList.push(x);
         }
       }
-    for (let i = 0; i < projectsList.length; i++){
-          getProject(i);
+    for (let j = 0; j < projectsList.length; j++){
+          getProject(j);
       }
   };
 storedProjects();
-function storedProjectTask(){
-     for (let i = 0; i < localStorage.length; i++){
-       for( let j = 0; j < localStorage.length; j++){
-           let y = JSON.parse(localStorage. getItem((`tskprj${i}/${j}`)));
-           if ( y != null) {
-           projectsList[i].projectTasks.push(y);
-           console.log(y);
-           getProjectTasks( i, j);
-       }
-     }
-  }
-}
-storedProjectTask();
-
+getProjectTasks(); // get project tasks from local storage
 function storedDayTasks(){
       for(let i = 0; i < localStorage.length; i++){
             let x = JSON.parse(localStorage.getItem(`tsk${i}`));
@@ -53,8 +47,6 @@ function storedDayTasks(){
         }     
     }
 storedDayTasks();
-console.log(projectsList);
-console.log(tasksList);
 let taskForm = document.querySelectorAll('div.item1 button.project-task-form'); // for project tasks
 const addTaskBtn = document.querySelector('#addToDo'); 
 const addProjectBtn = document.querySelector('#addProject');
@@ -63,12 +55,11 @@ let dayTask = document.querySelector('#task_list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 let indexproj;  //remove project index button;
 
-
 callDialog();
-let projindex = undefined; // add task to a project
 //projects
+let projindex = undefined; // add task to a project
 
-addProjectBtn.addEventListener('click', () =>{
+addProjectBtn.addEventListener('click', () =>{ // button to add projects 
       dialogProject.close();
       if(n.value == '' && s.value == '') return;
              const div00 = document.createElement('div');
@@ -100,11 +91,12 @@ addProjectBtn.addEventListener('click', () =>{
              checkbox.classList.add('check');
              checkbox.setAttribute('name', 'status');
              del.setAttribute('type', 'submit');
-             addProject();
+             addProject(projindex);
+
              let cd = projectsList.findIndex(function(proj){    // project index
               return proj.name === n.value;
-          });
-            console.log(cd);
+              });
+              console.log(cd);
              div1.textContent = projectsList[cd].name;
              div2.textContent = 'Start: ' + projectsList[cd].start;
              div3.textContent = 'End: ' + projectsList[cd].end;
@@ -113,35 +105,34 @@ addProjectBtn.addEventListener('click', () =>{
              div0.append(div1, div2, div3, del, div4);
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
+             projectsList.forEach((item, index) =>{
+                  localStorage.setItem( `prj${index}`, JSON.stringify(item));
+             });
              if( projectsList[cd].status == true){
               div0.setAttribute('style', 'background-color: darkcyan; color: white');
               div5.setAttribute('style', 'display: block');
               div6.setAttribute('style', 'display: none');
-          };
-
-            console.log(cd); 
+            };
             n.value = '';
             s.value = '';
             endDate.value = '';
             projectStatus.checked = false;
       taskForm = document.querySelectorAll('div.item1 button.project-task-form');
       tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
-
       removeProject();
       colorProjects();
       colorProjectsTask()
       callDialogTaskProjects();
       showTask();
       deleteProjectTasks();
-      console.log(projectsList.length + 'lenght')
-
+      console.log(projectsList)
 });
 showTask();
 //tasks
 const taskDate = document.querySelector('#disply');
 taskDate.setAttribute('style', 'display: none');
 
-addTaskBtn.addEventListener('click', () =>{ 
+addTaskBtn.addEventListener('click', () =>{  //add tasks on th list
     dialogTask.close();
     if(t.value == '' && d.value == '') return;
     const div0 = document.createElement('div');
@@ -189,6 +180,10 @@ addTaskBtn.addEventListener('click', () =>{
           dayTask.insertBefore(div0, dayTask.children[ti]);
           projindex = undefined;
           div2.setAttribute('style', 'display: none');
+        tasksList.forEach((item, index) =>{
+            localStorage.setItem(`tsk${index}`, JSON.stringify(tasksList));
+          });
+          
       }else if (projindex != undefined){
          let ti = projectsList[projindex].projectTasks.findIndex(function(tsk){
           return tsk.title === t.value;
@@ -203,15 +198,19 @@ addTaskBtn.addEventListener('click', () =>{
                   }
               div0.append(div2, div3, div1, del, div4);
               tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
-               console.log(projectsList[projindex].projectTasks.length + '  354345345');
               projindex = undefined;
-            
-            }
+       projectsList.forEach((item, index) =>{
+        localStorage.setItem( `prj${index}`, JSON.stringify(item));
+   });
+
+
+        console.log(keys);
+  }
         t.value = '';
         d.value = '';
         hourDue.value = '';
         taskStatus.checked = false;
-   // tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
+    tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
     callDialogTaskProjects();
     taskBackground();
     colorProjectsTask();
@@ -228,15 +227,16 @@ taskBackground();
 deleteProjectTasks();
 daytaskDelete();
 
+
 function callDialogTaskProjects(){ //call dialog modal  for each task for projects 
     taskForm = document.querySelectorAll('div.item1 button.project-task-form');
-    
     taskForm.forEach((node, index) => node.addEventListener('click', (e) => {
       taskDate.setAttribute('style', 'display: flex')
       dialogTask.showModal();   
       projindex = index;  //where to add task for project
     }));
 }
+
 function remproject(projx){
            projx[indexproj].remove();
     }
@@ -244,11 +244,10 @@ function remproject(projx){
 function removeProject(){ //remove project button , change color 
   let deleteButton = document.querySelectorAll('#projects-list > div.item1 > div.project button');
   let projects = document.querySelectorAll('#projects-list > div.item1');
-
+  
   deleteButton.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     indexproj = index;
     deleteButton[index].setAttribute('style' , 'background-color: yellow');
-
   }));
 
   deleteButton.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
@@ -258,23 +257,28 @@ function removeProject(){ //remove project button , change color
 
   deleteButton.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
       
-    for (let i = 0; i <= 10; i++){
-      localStorage.removeItem(`tskprj${indexproj}/${i}`);
-    //  localStorage.removeItem(`tskprj${indexproj}/1`);
-      //localStorage.removeItem(`tskprj${indexproj}/2`);
-      //localStorage.removeItem(`tskprj${indexproj}/3`);
-    }
     remproject(projects);
       localStorage.removeItem(`prj${indexproj}`);
       projectsList.splice(indexproj, 1);
       }));
+    projectsList.forEach((item, index) =>{
+        localStorage.setItem( `prj${index}`, JSON.stringify(item));
+    });
 } 
   function checkboxProject(){
             let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
             checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
                 console.log(checkbox[index].checked);
                 projectsList[index].status = checkbox[index].checked;
-                localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
             }));
         }
   checkboxProject();
+function removeStoredItems(){
+  let allProjectsTasks = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
+  allProjectsTasks.forEach((node, index) => node.addEventListener('click', (e) => {
+    projectsList.forEach((item, index)  => {
+      localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
+    })
+  }));
+}
+removeStoredItems();

@@ -1,3 +1,5 @@
+import { projectsList } from "./functions";
+
 export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask};
 
 function showTask(){ //show and hide tasks for each project
@@ -83,6 +85,7 @@ function showTask(){ //show and hide tasks for each project
               project[index].setAttribute('style', 'background-color: darkcyan; color: white');
               done[index].setAttribute('style', 'display: block');
               activ[index].setAttribute('style', 'display: none');
+
           } else if(checkbox[index].checked == false){
               project[index].setAttribute('style', 'background-color: none');
               done[index].setAttribute('style', 'display: none');
@@ -110,15 +113,19 @@ function colorProjectsTask(){     //change background for each project by mouse 
   }));
   checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
     console.log(checkbox[index].checked);
+
     if ( checkbox[index].checked == true){
         task[index].setAttribute('style', 'background-color: mediumseagreen; color: white');
         done[index].setAttribute('style', 'display: block');
         activ[index].setAttribute('style', 'display: none');
+
     } else if(checkbox[index].checked == false){
         task[index].setAttribute('style', 'background-color: none');
         done[index].setAttribute('style', 'display: none');
         activ[index].setAttribute('style', 'display: block');
       }
+     // localStorage.setItem(`prj${index}`, JSON.stringify(projectsList[index]));
+
 }));
 }
 

@@ -135,7 +135,7 @@ li{
     margin: 10px;
     list-style: none;
     align-items: center;
-    color:;
+    color: black;
 }
 label{
     margin-right: 10px;
@@ -168,12 +168,11 @@ div.name{
     font-weight: 400;
     font-family: font2;
 }
-.item1{
+.item1, .item1x{
     margin-bottom: 20px;
-    color:
-
 }
-#projects-list > .item1 > div.project{
+
+div.project, div.projectx{
     display: flex;
     flex-wrap: wrap;
     padding: 6px;
@@ -187,7 +186,6 @@ div.name{
     background-color:steelblue;
     border-left: 1.2rem solid darkorange;
     border-radius: 10px;
-
 }
 .todo{
     display: none;
@@ -231,7 +229,7 @@ div.name{
     margin: 10px;
 }
 
-div.task{
+div.task, div.taskx{
     display: flex;
     flex-wrap: wrap;
     height: auto;

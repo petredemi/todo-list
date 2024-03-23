@@ -1,4 +1,4 @@
-const person = { name: "Alex" };
+//const person = { name: "Alex" };
 //localStorage.setItem("user", person);
 //console.log(localStorage.getItem("user")); // "[object Object]"; not useful!
 //localStorage.setItem("user", JSON.stringify(person));
