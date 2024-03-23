@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("const person = { name: \"Alex\" };\n//localStorage.setItem(\"user\", person);\n//console.log(localStorage.getItem(\"user\")); // \"[object Object]\"; not useful!\n//localStorage.setItem(\"user\", JSON.stringify(person));\n//console.log(JSON.parse(localStorage.getItem(\"user\"))); // { name: \"Alex\" }\n\n\n\n//# sourceURL=webpack://todo-list/./src/print.js?");
+eval("//const person = { name: \"Alex\" };\n//localStorage.setItem(\"user\", person);\n//console.log(localStorage.getItem(\"user\")); // \"[object Object]\"; not useful!\n//localStorage.setItem(\"user\", JSON.stringify(person));\n//console.log(JSON.parse(localStorage.getItem(\"user\"))); // { name: \"Alex\" }\n\n\n\n//# sourceURL=webpack://todo-list/./src/print.js?");
 
 /***/ })
 
