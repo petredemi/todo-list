@@ -212,8 +212,13 @@ function taskBackground(){     //change background for each current day task by 
                   div0.append(div2, div3, div1, del, div4);
                   dayTaskList.appendChild(div0);
                   dayTaskList.insertBefore(div0, dayTaskList.children[x]);
-
                   div2.setAttribute('style', 'display: none');
+                  if( tasksList[x].status == true){
+                    div0.setAttribute('style', 'background-color: mediumseagreen; color: white;');
+                    div5.setAttribute('style', 'display: block');
+                    div6.setAttribute('style', 'display: none');
+                  }
+        
           };
       }
       
@@ -302,7 +307,10 @@ function taskBackground(){     //change background for each current day task by 
                 del.textContent = 'delete';
                 checkbox.checked = projectsList[x].projectTasks[y].status;
                 if( projectsList[x].projectTasks[y].status == true){
-                  div0.setAttribute('style', 'background-color: mediumseagreen');
+                  div0.setAttribute('style', 'background-color: mediumseagreen; color: floralwhite;');
+                  div5.setAttribute('style', 'display: block');
+                  div6.setAttribute('style', 'display: none');
+      
                 }
                 div0.append(div2, div3, div1, del, div4);
                 tasklistProject[x].insertBefore(div0, tasklistProject[x].children[y]);

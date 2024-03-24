@@ -185,7 +185,7 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
             del.textContent = 'delete';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
             if( projectsList[projindex].projectTasks[ti].status == true){
-              div0.setAttribute('style', 'background-color: mediumseagreen');
+              div0.setAttribute('style', 'background-color: mediumseagreen; color: floralwhite');
                   }
               div0.append(div2, div3, div1, del, div4);
               tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
