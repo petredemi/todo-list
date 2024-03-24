@@ -3,9 +3,9 @@ export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorPr
 function showTask(){ //show and hide tasks for each project
   let click = true;
   let indexproj;
-  let project = document.querySelectorAll('div.item1 > div.project');
+  let project = document.querySelectorAll('div.item1 > div.project, div.item1x > div.projectx');
   let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
-  let todo = document.querySelectorAll('div.item1 > div.todo');
+  let todo = document.querySelectorAll('div.item1 > div.todo, div.item1x > div.todo');
 
       checkbox.forEach((node, index) => node.addEventListener('mouseenter', (e) => {
             indexproj = true;
@@ -99,12 +99,14 @@ function colorProjectsTask(){     //change background for each project by mouse 
 
   task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
     let check = checkbox[index].checked;
+    task[index].setAttribute('value', '1'); // to find index of project task in index.js
     if(check == false){
           task[index].setAttribute('style', 'background-color: lightyellow');
     }
   }));
   task.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
     let check = checkbox[index].checked;
+    task[index].removeAttribute('value', '1');
     if(check == false){
         task[index].setAttribute('style' , 'background-color: none');
     }

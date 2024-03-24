@@ -91,10 +91,10 @@ function taskBackground(){     //change background for each current day task by 
       let done  = document.querySelectorAll('#task_list > div.task div.done');
       let activ = document.querySelectorAll('#task_list > div.task div.activ');
 
-        task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+      task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
           let check = checkbox[index].checked;
           if(check == false){
-        task[index].setAttribute('style', 'background-color: lightyellow');
+      task[index].setAttribute('style', 'background-color: lightyellow');
           }
       }));
       task.forEach((node, index) => node.addEventListener('mouseleave', (e) => {

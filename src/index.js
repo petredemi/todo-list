@@ -113,7 +113,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
       showTask();
       deleteProjectTasks();
       removeStoredItems();
-
+   //   checkboxProjectTasks();
 });
 showTask(); // for each project
 
@@ -207,6 +207,7 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     colorProjectsTask();
     daytaskDelete();
     deleteProjectTasks();
+    checkboxProjectTasks();
     projindex = undefined;
 });
 
@@ -274,14 +275,33 @@ function removeStoredItems(){ // remove stored tasks from projectss
   }));
 }
 removeStoredItems();
-//function removeStoredTasks(){
-  //    let node2 = document.querySelectorAll('#task_list > div.task');
-     // node2.forEach((node, index) => node.addEventListener('click', () => {
-     //     tasksList.forEach((item, index) =>{
-       //     localStorage.setItem(`tsk${index}`, JSON.stringify(item))
-    //      });
-    //      node2 = document.querySelectorAll('#task_list > div.task');
-    //  }));
-//}
-//removeStoredTasks();
+
+function checkboxProjectTasks(){  // store checkbox status
+ // let task = document.querySelectorAll('#projects-list > div.item1 > div.todo div.task');
+  let tsklist = document.querySelectorAll('div.task_list');// get index for each project task list
+  let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.todo input.check');
+  let indextsk; // index of child task
+  let indexP; // project index
+  
+  function checkIndex(div){
+    let x = div.hasAttribute('value', '1');
+      if ( x == true){
+          return div;
+      }
+    }
+    tsklist.forEach((node, index ) => node.addEventListener('mouseover', (e) => {
+      indexP = index;
+      let arrT = Array.from(tsklist[index].children);
+      indextsk = arrT.findIndex(checkIndex);
+          console.log(arrT);
+          console.log(indextsk);
+      })); 
+    checkbox.forEach((input, index) => input.addEventListener('change', (e) => {
+         console.log(checkbox[index].checked);
+         console.log(indextsk);
+         projectsList[indexP].projectTasks[indextsk].status = checkbox[index].checked;
+         localStorage.setItem( `prj${indexP}`, JSON.stringify(projectsList[indexP]));
+  }));
+}
+checkboxProjectTasks();
 
