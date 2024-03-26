@@ -32,14 +32,41 @@
 }
 body{
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+}
+.allpage{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    max-width: 1100px;
 }
 .screenleft{
     box-sizing: content-box;
+    border: 1px solid black;
+    display: grid;
+    grid-template-rows: 3fr 5fr;
+    overflow: auto;
+
+}
+.calendar{
+    box-sizing: content-box;
+    background-color: burlywood;
+}
+.others{
+    box-sizing:border-box;
+    background-color:darkseagreen;
 }
 .todoprojects-lists{
     border: 1px solid red;
+    background-color: linen;
+}
+p{
+    font-size: 1.2rem;
+    padding: 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 h1{
@@ -159,14 +186,23 @@ label{
 }
 
 div.name{
-    padding: 6px;
+    padding: 2px;
     margin-right: 5px;
     margin: 10px;
     background-color:rgb(200, 198, 198);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     min-width: 300px;
-    font-weight: 400;
-    font-family: font2;
+    font-family:Arial, Helvetica, sans-serif;
+}
+div.name::first-letter{
+    color: red;
+    font-size: 2rem;
+    font-weight: 700;
+}
+div.name::first-line{
+    margin-right: 50px;
+    text-wrap: wrap;
+    
 }
 .item1, .item1x{
     margin-bottom: 20px;

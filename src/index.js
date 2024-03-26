@@ -193,8 +193,6 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
        projectsList.forEach((item, index) =>{
         localStorage.setItem( `prj${index}`, JSON.stringify(item));
    });
-
-
         console.log(keys);
   }
         t.value = '';
@@ -228,7 +226,7 @@ function callDialogTaskProjects(){ //call dialog modal  for each task for projec
     }));
 }
 
-function remproject(projx){
+function remproject(projx){ // used in removedProject() to remove node
            projx[indexproj].remove();
     }
 
@@ -264,7 +262,8 @@ function removeProject(){ //remove project button , change color
                 localStorage.setItem( `prj${index}`, JSON.stringify(projectsList[index]));
             }));
         }
-  checkboxProject();
+checkboxProject();
+
 function removeStoredItems(){ // remove stored tasks from projectss
   let allProjectsTasks = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
   allProjectsTasks.forEach((node, index) => node.addEventListener('click', (e) => {

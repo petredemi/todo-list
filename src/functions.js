@@ -173,7 +173,7 @@ function taskBackground(){     //change background for each current day task by 
              return node2;
           }));
       };
-  function getTask(){
+  function getTask(){ // from local store
         let dayTaskList = document.querySelector('#task_list');
           for (let x = 0; x < tasksList.length; x++ ){
             const div0 = document.createElement('div');
@@ -222,7 +222,7 @@ function taskBackground(){     //change background for each current day task by 
           };
       }
       
-  function getProject(){
+  function getProject(){ // from local store
         let projects_list = document.querySelector('#projects-list');
         for ( let i = 0; i < projectsList.length; i++){
            const div00 = document.createElement('div');
@@ -270,7 +270,7 @@ function taskBackground(){     //change background for each current day task by 
         }
     };
 
-  function getProjectTasks(){
+  function getProjectTasks(){ // from local store
         let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');  
         tasklistProject.forEach((item, x) => {
           for ( let y = 0; y < projectsList[x].projectTasks.length; y++){
