@@ -42,15 +42,14 @@ body{
 }
 .screenleft{
     box-sizing: content-box;
-    border: 1px solid black;
     display: grid;
-    grid-template-rows: 400px;
+    grid-template-rows: 390px;
     overflow: auto;
 
 }
 .calendar{
     box-sizing: content-box;
-    background-color: burlywood;
+    background-color:khaki;
     max-height: fit-content;
 }
 .others{
@@ -58,7 +57,6 @@ body{
     background-color:darkseagreen;
 }
 .todoprojects-lists{
-    border: 1px solid red;
     background-color: linen;
     min-width: 410px;
 }
@@ -80,11 +78,11 @@ h1{
     font-size: 4rem;
 }
 h2{
-    font-family: font2, 'Times New Roman', Times, serif;
+    font-family:'Times New Roman', Times, serif;
     font-size: 3rem;
     margin-left: 40px;
     margin: 30px;
-    color: darkblue;
+    color: navy;
 }
 h3{
     font-family: font3, 'Courier New', Courier, monospace;
@@ -232,8 +230,8 @@ div.project, div.projectx{
     margin-top: 1px;
     background:linear-gradient( 30deg, grey, white, rgb(169, 164, 164), white);
     min-height: 200px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .todo1{
     display: flex;
@@ -273,7 +271,8 @@ div.task, div.taskx{
     height: auto;
     margin: 10px;
     margin-top: 20px;
-    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     align-items: center;
     justify-content: space-around;
     background-color: mediumturquoise;
@@ -294,8 +293,9 @@ div.task, div.taskx{
     font-family: font5;
     font-size: 1.5rem;
     min-width: 300px;
-    max-width: 600px;
+    max-width: 450px;
     flex: 1 1 0;
+    margin-bottom: 15px;
 }
 .status{
     display: flex;
