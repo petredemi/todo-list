@@ -4,18 +4,19 @@ import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         daytaskDelete, getTask, getProject, getProjectTasks} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
-import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask} from './others.js';
+import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask,
+        removeProject} from './others.js';
+import {removeDayTask} from './print.js';
 
-
-let keys = [];
+let keys = []; // it is not used in program
+let arrBtn = []; // project delete button;
+let delTsk = []; // day task delete buttons;
 function getKey(){
       for (let i = 0; i < localStorage.length; i++){
         let x = localStorage.key(i);
        keys.push(x);
       }}
 getKey();
-console.log(keys);
-
 function storedProjects(){
    for(let i = 0; i < localStorage.length; i++){
         let x = JSON.parse(localStorage.getItem(`prj${i}`));
@@ -23,7 +24,7 @@ function storedProjects(){
           projectsList.push(x);
         }
       }
-          getProject();
+          getProject(arrBtn);
   };
 storedProjects();
 getProjectTasks(); // get project tasks from local storage
@@ -34,20 +35,19 @@ function storedDayTasks(){
                 tasksList.push(x);
                 }        
         }
-    getTask();
+    getTask(delTsk);
     }
 storedDayTasks();
 const addTaskBtn = document.querySelector('#addToDo'); 
 const addProjectBtn = document.querySelector('#addProject');
-let projects_list = document.querySelector('#projects-list');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
-let indexproj;  //remove project index button;
-
+console.log(projectsList)
 callDialog(); // for projects and day tasks only 
 
 //projects
 let projindex = undefined; // index for add task to a project
 addProjectBtn.addEventListener('click', () =>{ // button to add projects 
+      let projects_list = document.querySelector('#projects-list');
       dialogProject.close();
       if(n.value == '' && s.value == '') return;
              const div00 = document.createElement('div');
@@ -60,7 +60,6 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              const div4 = document.createElement('div');
              const div5 = document.createElement('div');
              const div6 = document.createElement('div');
-             
              div00.classList.add('item1');
              div0.classList.add('project');
              div1.classList.add('name');
@@ -79,7 +78,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              checkbox.classList.add('check');
              checkbox.setAttribute('name', 'status');
              del.setAttribute('type', 'submit');
-             addProject(projindex);
+             addProject();
 
              let cd = projectsList.findIndex(function(proj){    // project index
               return proj.name === n.value;
@@ -93,28 +92,33 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              div0.append(div1, div2, div3, del, div4);
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
-             projectsList.forEach((item, index) =>{
-                  localStorage.setItem( `prj${index}`, JSON.stringify(item));
-             });
+             for ( let i = 0; i < projectsList.length; i++){
+              localStorage.setItem( `prj${i}`, JSON.stringify(projectsList[i]));
+             }
              if( projectsList[cd].status == true){
-              div0.setAttribute('style', 'background-color: darkcyan; color: white');
-              div5.setAttribute('style', 'display: block');
-              div6.setAttribute('style', 'display: none');
+                div0.setAttribute('style', 'background-color: darkcyan; color: white');
+                div5.setAttribute('style', 'display: block');
+                div6.setAttribute('style', 'display: none');
             };
+
+            arrBtn.push(del);
             n.value = '';
             s.value = '';
             endDate.value = '';
             projectStatus.checked = false;
       tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
-      removeProject();
-      colorProjects();
-      colorProjectsTask()
+  
+      colorProjectsTask();
       callDialogTaskProjects();
       showTask();
       deleteProjectTasks();
       removeStoredItems();
+      colorProjects();
+      removeProject(projectsList, arrBtn);
    //   checkboxProjectTasks();
-});
+      console.log(projectsList);
+      console.log(del);
+  });
 showTask(); // for each project
 
 //tasks
@@ -143,7 +147,6 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     checkbox.setAttribute('type', 'checkbox');
     checkbox.classList.add('check');
     checkbox.setAttribute('name', 'status');
-    
     div4.classList.add('status');
     div5.classList.add('done');
     div6.classList.add('activ');
@@ -168,12 +171,17 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
           }
           div0.append(div2, div3, div1, del, div4);
           dayTask.insertBefore(div0, dayTask.children[ti]);
-
+        //  daytaskDelete();
           projindex = undefined;
           div2.setAttribute('style', 'display: none');
-        tasksList.forEach((item, index) =>{
-            localStorage.setItem(`tsk${index}`, JSON.stringify(item));
-          });
+          for ( let i = 0; i < tasksList.length; i++){
+            localStorage.setItem( `tsk${i}`, JSON.stringify(tasksList[i]));
+           }
+    //      tasksList.forEach((item, index) =>{
+    //      localStorage.setItem(`tsk${index}`, JSON.stringify(item));
+    //    });
+        delTsk.push(del); // insert delete button
+
           
       }else if (projindex != undefined){
          let ti = projectsList[projindex].projectTasks.findIndex(function(tsk){
@@ -191,31 +199,36 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
               tasklistProject[projindex].insertBefore(div0, tasklistProject[projindex].children[ti]);
               projindex = undefined;
        projectsList.forEach((item, index) =>{
-        localStorage.setItem( `prj${index}`, JSON.stringify(item));
-   });
+          localStorage.setItem( `prj${index}`, JSON.stringify(item));
+          });
         console.log(keys);
-  }
+      }
         t.value = '';
         d.value = '';
         hourDue.value = '';
         taskStatus.checked = false;
     tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list');
+
     callDialogTaskProjects();
     taskBackground();
     colorProjectsTask();
-    daytaskDelete();
     deleteProjectTasks();
     checkboxProjectTasks();
     projindex = undefined;
-});
+   // daytaskDelete();
+    removeDayTask(tasksList, delTsk);
+    removeDayTask(tasksList, delTsk);
 
-removeProject();
+
+});
 colorProjects();
 colorProjectsTask();
 callDialogTaskProjects();
 taskBackground();
 deleteProjectTasks();
-daytaskDelete();
+//daytaskDelete();
+removeProject(projectsList, arrBtn);
+removeDayTask(tasksList, delTsk);
 
 function callDialogTaskProjects(){ //call dialog modal  for each task for projects 
   let taskForm = document.querySelectorAll('div.item1 button.project-task-form');
@@ -226,34 +239,6 @@ function callDialogTaskProjects(){ //call dialog modal  for each task for projec
     }));
 }
 
-function remproject(projx){ // used in removedProject() to remove node
-           projx[indexproj].remove();
-    }
-
-function removeProject(){ //remove project button , change color 
-  let deleteButton = document.querySelectorAll('#projects-list > div.item1 > div.project button');
-  let projects = document.querySelectorAll('#projects-list > div.item1');
-  
-  deleteButton.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-    indexproj = index;
-    deleteButton[index].setAttribute('style' , 'background-color: yellow');
-  }));
-
-  deleteButton.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-    deleteButton[index].setAttribute('style' , 'background-color: none');
-    
-  }));
-
-  deleteButton.forEach((node, index) => node.addEventListener('click', (e) => { //remove project
-      
-    remproject(projects);
-      localStorage.removeItem(`prj${indexproj}`);
-      projectsList.splice(indexproj, 1);
-      }));
-    projectsList.forEach((item, index) =>{
-        localStorage.setItem( `prj${index}`, JSON.stringify(item));
-    });
-} 
   function checkboxProject(){
             let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
             checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
@@ -276,7 +261,6 @@ function removeStoredItems(){ // remove stored tasks from projectss
 removeStoredItems();
 
 function checkboxProjectTasks(){  // store checkbox status
- // let task = document.querySelectorAll('#projects-list > div.item1 > div.todo div.task');
   let tsklist = document.querySelectorAll('div.task_list');// get index for each project task list
   let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.todo input.check');
   let indextsk; // index of child task

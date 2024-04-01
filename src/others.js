@@ -1,4 +1,4 @@
-export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask};
+export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask, removeProject};
 
 function showTask(){ //show and hide tasks for each project
   let click = true;
@@ -59,12 +59,14 @@ function showTask(){ //show and hide tasks for each project
           });
   }
 
+
   function colorProjects(){     //change background for each project by mouse over
         let project = document.querySelectorAll('#projects-list > div.item1 > div.project');
         let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
         let done  = document.querySelectorAll('#projects-list > div.item1 > div.project div.done');
         let activ = document.querySelectorAll('#projects-list > div.item1 > div.project div.activ');
-       
+        let deleteButton = document.querySelectorAll('#projects-list > div.item1 > div.project > button');
+
         project.forEach((node, index) => node.addEventListener('mouseover', (e) => {
           let check = checkbox[index].checked;
           if(check == false){
@@ -77,6 +79,13 @@ function showTask(){ //show and hide tasks for each project
               project[index].setAttribute('style' , 'background-color: none');
           }
         }));
+        deleteButton.forEach((node, index) => node.addEventListener('mouseover', () => {
+              node.setAttribute('style', 'background-color: yellow');
+        }));
+        deleteButton.forEach((node, index) => node.addEventListener('mouseleave', () => {
+          node.setAttribute('style', 'background-color: none');
+        }));
+
         checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
           if ( checkbox[index].checked == true){
@@ -129,3 +138,40 @@ function colorProjectsTask(){     //change background for each project by mouse 
 }));
 }
 
+// pl = projectsList
+
+function removeProject(pl, y){ //remove project button , change color 
+  let item1 = document.querySelectorAll('#projects-list > div.item1');
+  let j; // find index of project
+  let l; //project list length
+      function lookIndexButton(button){
+          if( button.style.backgroundColor == 'yellow'){
+          return button;
+          }
+      }
+   y.forEach(button => button.addEventListener('mouseover', (e) => {
+         j = y.findIndex(lookIndexButton);
+         l = pl.length - 1;
+
+         console.log(y);
+         console.log(pl);
+         console.log(j);
+   }));
+   y.forEach(item => item.addEventListener('click', (e) => { //remove project
+        if (y[j].style.backgroundColor == 'yellow'){
+          pl.splice(j, 1);
+          y.splice(j, 1);
+          console.log(pl);
+          console.log(y); 
+        for ( let i = 0; i <= l; i++){
+              localStorage.setItem( `prj${i}`, JSON.stringify(pl[i]));
+                }
+            localStorage.removeItem(`prj${l}`);
+          }
+      item1[j].remove();
+      item1 = document.querySelectorAll('#projects-list > div.item1');
+
+      console.log(item1);
+
+    }));
+  } 

@@ -7,26 +7,60 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/print.js":
 /*!**********************!*\
   !*** ./src/print.js ***!
   \**********************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("//const person = { name: \"Alex\" };\n//localStorage.setItem(\"user\", person);\n//console.log(localStorage.getItem(\"user\")); // \"[object Object]\"; not useful!\n//localStorage.setItem(\"user\", JSON.stringify(person));\n//console.log(JSON.parse(localStorage.getItem(\"user\"))); // { name: \"Alex\" }\n\n\n\n//# sourceURL=webpack://todo-list/./src/print.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   removeDayTask: () => (/* binding */ removeDayTask)\n/* harmony export */ });\n\n\n\nfunction removeDayTask(tl, y){ //remove project button , change color \n    let task = document.querySelectorAll('#task_list > div.task');\n    let j; // find index of task\n    let l; //task list lengt\n    //tl task list\n    // y arrey from delete buttons\n    function lookIndexButton(button){\n            if( button.style.backgroundColor == 'yellow'){\n            return button;\n            }\n        }\n    y.forEach(button => button.addEventListener('mouseover', (e) => {\n           j = y.findIndex(lookIndexButton);\n           l = tl.length - 1;\n           console.log(y);\n           console.log(tl);\n           console.log(j);\n     }));\n     y.forEach(item => item.addEventListener('click', (e) => { //remove task\n          if (y[j].style.backgroundColor == 'yellow'){\n            tl.splice(j, 1);\n            y.splice(j, 1);\n            console.log(tl);\n            console.log(y); \n          for ( let i = 0; i <= l; i++){\n                localStorage.setItem( `tsk${i}`, JSON.stringify(tl[i]));\n                  }\n            localStorage.removeItem(`tsk${l}`);\n            }\n        task[j].remove();\n        task = document.querySelectorAll('#task_list > div.task');\n        console.log(task);\n  \n      }));\n    } \n  \n\n//# sourceURL=webpack://todo-list/./src/print.js?");
 
 /***/ })
 
 /******/ 	});
+/************************************************************************/
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/print.js"]();
+/******/ 	__webpack_modules__["./src/print.js"](0, __webpack_exports__, __webpack_require__);
 /******/ 	
 /******/ })()
 ;

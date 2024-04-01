@@ -1,5 +1,5 @@
 export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getProject, getTask, getProjectTasks};
+        getProject, getTask, getProjectTasks};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
 
@@ -29,7 +29,6 @@ function addProject(){ //add projects items
       if (start1.start > start2.start) return 1;
         return 0;
       });
-      console.log(projectsList);
 }
 //add todo tasks
     const t = document.querySelector('#title');
@@ -87,6 +86,8 @@ function domTask(){ //create dom task for each project
 //task remove button
 function taskBackground(){     //change background for each current day task by mouse over
       let task = document.querySelectorAll('#task_list > div.task');
+      let delbtn = document.querySelectorAll('#task_list > div.task > button.del');
+
       let checkbox = document.querySelectorAll('#task_list > div.task input.check');
       let done  = document.querySelectorAll('#task_list > div.task div.done');
       let activ = document.querySelectorAll('#task_list > div.task div.activ');
@@ -104,6 +105,13 @@ function taskBackground(){     //change background for each current day task by 
         }
       
       }));
+      delbtn.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+         node.style.backgroundColor = 'yellow';
+        }));   
+      delbtn.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
+            node.setAttribute('style', 'background-color: none');
+       }));
+
       checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
           console.log(checkbox[index].checked);
           tasksList[index].status = checkbox[index].checked;
@@ -152,28 +160,56 @@ function taskBackground(){     //change background for each current day task by 
           projectsList[indexP].projectTasks.splice(indextsk, 1);
       }));
 }
+
+let task;
+let i;
+//let removeindex;  //remove index; v
   function daytaskDelete(){ //remove button , change color 
-        let removeindex;  //remove index; v
-        let node1 = document.querySelectorAll('#task_list button');
-        let node2 = document.querySelectorAll('#task_list > div.task');
-      
-         node1.forEach((node, index) => node.addEventListener('mouseover', (e) => {
-             removeindex = index;
-             node1[index].setAttribute('style' , 'background-color: yellow');
-          }));
-      
-         node1.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
-              node1[index].setAttribute('style' , 'background-color: none');
+    let node1 = document.querySelectorAll('#task_list > div.task > button.del');
+    let node2 = document.querySelectorAll('#task_list > div.task');
+        task = Array.from(node2);
+        function checkIndex(div){
+          if(div.style.backgroundColor == 'lightyellow'){
+             return div;
+            }
+          }
+        node2.forEach((node, index) => node.addEventListener('mouseenter', () => {
+          node1 = document.querySelectorAll('#task_list > div.task > button.del');
+          node2 = document.querySelectorAll('#task_list > div.task');
+          i = task.findIndex(checkIndex);
+          console.log( i);
+
+        }));
+        node1.forEach((button, index) => button.addEventListener('mouseover', (e) => {
+          node1[index].style.backgroundColor = 'yellow';
+      //    console.log( i + 'index');
+          }));   
+         node1.forEach((button, index) => button.addEventListener('mouseleave', (e) => {
+              node1[index].setAttribute('style', 'background-color: none');
          }));
-      
-         node1.forEach((node, index) => node.addEventListener('click', (e) => {
-             node2[removeindex].remove();
-             tasksList.splice(removeindex, 1);
-             localStorage.removeItem(`tsk${removeindex}`);
-             return node2;
+         node1.forEach((node, index) => node.addEventListener('click', () => {
+              tasksList.splice(i, 1);
+              task.splice(i, 1);      
+              localStorage.removeItem(`tsk${index}`);
+              console.log(index + 'indextsk')
+              console.log(tasksList);
+              node1[i].remove();
+              node2[i].remove();
+              task = Array.from(node2);
+              node1 = document.querySelectorAll('#task_list > div.task > button.del');
+              node2 = document.querySelectorAll('#task_list > div.task');
+
+            //  console.log(node2);
+            //  console.log(task);
+           //   console.log(node1);
+              
           }));
+     //    tasksList.forEach((item, index) =>{
+        //    localStorage.setItem(`tsk${index}`, JSON.stringify(item))
+      //    });
+  
       };
-  function getTask(){ // from local store
+  function getTask(y){ // from local store
         let dayTaskList = document.querySelector('#task_list');
           for (let x = 0; x < tasksList.length; x++ ){
             const div0 = document.createElement('div');
@@ -218,11 +254,12 @@ function taskBackground(){     //change background for each current day task by 
                     div5.setAttribute('style', 'display: block');
                     div6.setAttribute('style', 'display: none');
                   }
+                  y.push(del); // arrey from delete buttons 
         
           };
       }
       
-  function getProject(){ // from local store
+  function getProject(x){ // from local store
         let projects_list = document.querySelector('#projects-list');
         for ( let i = 0; i < projectsList.length; i++){
            const div00 = document.createElement('div');
@@ -267,6 +304,7 @@ function taskBackground(){     //change background for each current day task by 
            div0.append(div1, div2, div3, del, div4);
            div00.append(div0, domTask());
            projects_list.insertBefore(div00, projects_list.children[i]);
+           x.push(del);
         }
     };
 
@@ -299,8 +337,7 @@ function taskBackground(){     //change background for each current day task by 
                div5.textContent = 'completed';
                div6.textContent = 'still active';
                div4.append(div5, div6, checkbox);
-      
-      
+    
                 div1.textContent = projectsList[x].projectTasks[y].title;
                 div2.textContent = 'day: ' + projectsList[x].projectTasks[y].date;
                 div3.textContent = 'hour: ' + projectsList[x].projectTasks[y].hour;
@@ -315,7 +352,5 @@ function taskBackground(){     //change background for each current day task by 
                 div0.append(div2, div3, div1, del, div4);
                 tasklistProject[x].insertBefore(div0, tasklistProject[x].children[y]);
               }
-
       })  
 }
-      
