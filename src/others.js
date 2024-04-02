@@ -141,6 +141,8 @@ function colorProjectsTask(){     //change background for each project by mouse 
 // pl = projectsList
 
 function removeProject(pl, y){ //remove project button , change color 
+  // pl - project list
+  // y - arrey from delete buttons for projects
   let item1 = document.querySelectorAll('#projects-list > div.item1');
   let j; // find index of project
   let l; //project list length

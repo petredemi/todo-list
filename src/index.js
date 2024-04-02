@@ -1,7 +1,6 @@
 import _, { forEach, sortedIndexOf } from 'lodash';
 import './style.css';
-import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
-        daytaskDelete, getTask, getProject, getProjectTasks} from './functions.js';
+import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks, getTask, getProject, getProjectTasks} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask,
@@ -9,7 +8,7 @@ import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorPr
 import {removeDayTask} from './print.js';
 
 let keys = []; // it is not used in program
-let arrBtn = []; // project delete button;
+let arrBtn = []; // project delete buttons;
 let delTsk = []; // day task delete buttons;
 function getKey(){
       for (let i = 0; i < localStorage.length; i++){
@@ -215,8 +214,6 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     deleteProjectTasks();
     checkboxProjectTasks();
     projindex = undefined;
-   // daytaskDelete();
-    removeDayTask(tasksList, delTsk);
     removeDayTask(tasksList, delTsk);
 
 
