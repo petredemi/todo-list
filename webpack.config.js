@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = {
   mode: 'development',
   entry: {
@@ -13,15 +12,18 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'todo-list',
-      template: './src/todo.html'
+      template: './src/todo.html',
+
     }),
   ],
 
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[hash][ext][query]',
     clean: true,
   },
+
   module: {
     rules: [
       {

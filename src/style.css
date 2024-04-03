@@ -44,13 +44,14 @@ body{
     box-sizing: content-box;
     display: grid;
     grid-template-rows: 390px;
-    overflow: auto;
+    overflow-x: auto;
 
 }
 .calendar{
     box-sizing: content-box;
     background-color:khaki;
     max-height: fit-content;
+    overflow: hidden;
 }
 .others{
     box-sizing:border-box;

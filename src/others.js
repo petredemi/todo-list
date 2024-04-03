@@ -172,7 +172,6 @@ function removeProject(pl, y){ //remove project button , change color
           }
       item1[j].remove();
       item1 = document.querySelectorAll('#projects-list > div.item1');
-
       console.log(item1);
 
     }));

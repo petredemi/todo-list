@@ -7,13 +7,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "todolist": "git subtree push --prefix dist origin gh-pages",
     "watch": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "eslint": "eslint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.9.1",
+    "eslint": "^8.57.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
     "html-webpack-plugin": "^5.6.0",
     "style-loader": "^3.3.4",
     "webpack": "^5.90.0",
