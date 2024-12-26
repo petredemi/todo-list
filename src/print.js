@@ -35,5 +35,44 @@ function removeDayTask(tl, y){ //remove project button , change color
         console.log(task);
   
       }));
-    } 
-  
+    }
+
+    let weathericon = document.querySelector('#weathericon');
+    let nodata = document.querySelector('#nodata');
+    let temp = document.querySelector('div.temp');
+    const motto = document.querySelector('div.motto')
+ async function dayWeather(){
+  try{
+      const response = await fetch('https://api.weatherapi.com/v1/current.json?key=69b808bac1c14633a67231851242404&q=Paris',{mode: "cors",})
+      const weatherdata = await response.json()
+      if(!response.ok){
+        throw 'no data'
+      }
+      console.log('https:' + weatherdata.current.condition.icon)
+      weathericon.src = 'https:' + weatherdata.current.condition.icon;
+      temp.textContent = weatherdata.current.temp_c + '  ºC';
+  }catch(error){
+    nodata.textContent = error;
+    console.log(error)};
+}
+dayWeather()
+let wondername = document.querySelector('div.wondername');
+let wonderlocation = document.querySelector('p.wonderlocation')
+let wonderimg = document.querySelector('#wonderimg')
+async function dayMotto(){
+  try{
+      const response = await fetch('https://www.world-wonders-api.org/v0/wonders/random',{mode: "cors",})
+      const mottoData = await response.json()
+      if(!response.ok){
+        throw 'no data'
+      }
+      console.log(mottoData)
+      wonderimg.src = mottoData.links.images[1];
+      wondername.textContent = mottoData.name
+      motto.textContent = mottoData.summary;
+      wonderlocation.textContent = 'location:' + mottoData.location
+  }catch(error){
+  //  nodata.textContent = error;
+    console.log(error)};
+}
+dayMotto()

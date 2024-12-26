@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "todolist": "git subtree push --prefix dist origin gh-pages",
     "watch": "webpack --watch",
-    "build": "webpack",
-    "eslint": "eslint"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
