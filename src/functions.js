@@ -86,7 +86,7 @@ function domTask(){ //create dom task for each project
 //task remove button
 function taskBackground(){     //change background for each current day task by mouse over
       let task = document.querySelectorAll('#task_list > div.task');
-      let delbtn = document.querySelectorAll('#task_list > div.task > button.del');
+      let delbtn = document.querySelectorAll('#task_list > div.task > div.controlbtn > button.del');
 
       let checkbox = document.querySelectorAll('#task_list > div.task input.check');
       let done  = document.querySelectorAll('#task_list > div.task div.done');
@@ -221,6 +221,8 @@ let i;
             const div4 = document.createElement('div');
             const div5 = document.createElement('div');
             const div6 = document.createElement('div');
+            const div7 = document.createElement('div')
+
       
             div0.classList.add('task');
             div1.classList.add('title');
@@ -236,6 +238,8 @@ let i;
             div6.classList.add('activ');
             div5.textContent = 'completed';
             div6.textContent = 'still active';
+            div7.classList.add('controlbtn')
+
             div4.append(div5, div6, checkbox);
                   div1.textContent = tasksList[x].title;
                   div2.textContent = 'day: ' + tasksList[x].date;
@@ -245,7 +249,10 @@ let i;
                   if ( tasksList[x].status == true){
                       div0.setAttribute('style', 'background-color: mediumseagreen');
                   }
-                  div0.append(div2, div3, div1, del, div4);
+                  div7.append(div3, del, div4)
+                  div0.append(div2, div1,div7);
+
+
                   dayTaskList.appendChild(div0);
                   dayTaskList.insertBefore(div0, dayTaskList.children[x]);
                   div2.setAttribute('style', 'display: none');

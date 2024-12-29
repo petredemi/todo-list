@@ -28,8 +28,11 @@ function showTask(){ //show and hide tasks for each project
     }
 
     function time(){
+      const currentDateP = document.querySelector('.currentDateP');
+      const currentHourP = document.querySelector('.currentHourP');
       const currentDate = document.querySelector('.currentDate');
-      const currentHour = document.querySelector('.currentHour');
+      const currentHour = document.querySelector('.currentHour')
+
       const d = new Date();
       const day = d.getDate();
       const month = d.getMonth() + 1;
@@ -39,6 +42,9 @@ function showTask(){ //show and hide tasks for each project
       const sec = d.getSeconds();
       currentDate.textContent = 'Date: ' + day +'.' + month + '.' + year ;
       currentHour.textContent = 'Time: ' + hour + ':' + min + ':' + sec;
+      currentDateP.textContent = 'Date: ' + day +'.' + month + '.' + year ;
+      currentHourP.textContent = 'Time: ' + hour + ':' + min + ':' + sec;
+
     }
     setInterval(time, 1000);
 

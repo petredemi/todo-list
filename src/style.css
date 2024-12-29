@@ -39,6 +39,7 @@ body{
     display: grid;
     grid-template-columns: 2fr 4fr;
     max-width: 1100px;
+    margin-top: 20px;
 }
 .screenleft{
     box-sizing: content-box;
@@ -86,8 +87,8 @@ p{
 .header{
     margin: 3px;
     display:flex;
-    justify-content: space-between;
-    flex-direction:row;
+    justify-content:end;
+    align-items: end;
 }
 h4{
     margin: 5px;
@@ -104,7 +105,6 @@ h4{
 #weathericon{
     border: 2px solid darkblue;
     border-radius: 50%;
-    background-color: mediumspringgreen;
 }
 .temp{
     text-align: center;
@@ -114,12 +114,16 @@ h4{
     color: darkorange;
     text-shadow: 1px 1px 1px black;
 }
+.weatherLocation{
+    width: auto;
+    margin-bottom: 5px;
+}
 h1{
     font-family: font5, 'Times New Roman', Times, serif;
     width: fit-content;
     color: red;
     text-shadow: 1px 1px 1px #000000;
-    font-size: 2.4rem;
+    font-size: 3rem;
     margin: auto;
 }
 h2{
@@ -193,11 +197,12 @@ form{
     width: 30px;
     height: 30px;
     font-size: 1.2rem;
+    color: white;
     top: 50%;
     right: 50%;
     border-radius: 50% 50% 50% 50%;
     margin: 1px;
-    background-color: rgb(93, 223, 152);
+    background-color: rgb(22, 107, 211);
 }
 
 li{
@@ -222,11 +227,12 @@ label{
 .projects > div:first-child{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-between;
     padding: 5px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 2px;
+    background-color: red;
 }
 #projects-list{
     margin-top: 10px;
@@ -246,7 +252,7 @@ div.name::first-letter{
     font-weight: 700;
 }
 div.name::first-line{
-    margin-right: 50px;
+    margin-right: 40px;
     text-wrap: wrap;
     
 }
@@ -258,19 +264,19 @@ div.project, div.projectx{
     display: flex;
     flex-wrap: wrap;
     padding: 6px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 1px;
     border: 1px solid darkorange;
     box-shadow: 3px -3px 5px black;
     align-items: center;
     justify-content: space-between;
-    border-left: 1.2rem solid darkorange;
+    border-left: 10px solid darkorange;
     border-radius: 10px;
 }
 .todo{
     display: none;
-    border: 0.5rem solid darkcyan;
+    border: 5px solid darkcyan;
     border-top: none;
     margin-top: 1px;
     background:linear-gradient( 30deg, grey, white, rgb(169, 164, 164), white);
@@ -300,7 +306,9 @@ div.project, div.projectx{
 .currentTime{
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    width: 82%;
+    margin: auto;
+    margin-top: 10px;
 }
 .to_do > .headertask{
     display: flex;
@@ -311,12 +319,12 @@ div.project, div.projectx{
 }
 
 div.task, div.taskx{
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     height: auto;
     margin: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -326,20 +334,28 @@ div.task, div.taskx{
     border: 1px solid darkgreen;
     border-left: 10px solid black;
     box-shadow: 3px -3px 5px black;
+    background-color: white;
 
+}
+.controlbtn{
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 2px;
+    margin-right: 2px;
+    border: 1px solid black;
+    width: 80%;
+    margin: auto;
 }
 
 .title{
     display: block;
     padding: 3px;
-    margin: 10px;
-    background-color: rgba(194, 194, 194, 0.933);
+    margin: auto;
     height: auto;
     text-align: left;
     font-family: font5;
     font-size: 1.5rem;
-    min-width: 300px;
-    max-width: 450px;
+    width: 95%;
     flex: 1 1 0;
     margin-bottom: 15px;
 }

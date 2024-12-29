@@ -28,8 +28,9 @@
                         <img  height="50px" width="50px" alt="weather icon"  id="weathericon">
                         <div class="temp"></div>
                         <div id="nodata"></div>
-                    </div>    
-                    <h1>To Do List</h1>
+                    </div>
+                        <div class="weatherLocation">location: London</div>
+                        <h1>To Do List</h1>
             </div>
                   <div class="content">
                       <div class="addProject">
@@ -82,9 +83,14 @@
                               <h2>Projects</h2>
                               <button type="submit" data-open-modal id="call-project-form" class="btn">+</button>
                           </div>
+                          <div class="currentTime">
+                            <div class="currentDateP"  style = "background-color: aliceblue;"></div>
+                            <div class="currentHourP" style="background-color: gold;"></div>
+                        </div>
                           <div id="projects-list">
                                   <div class="item1x">
-                                    <div class="projectx">
+                                    <div class="projectx"> 
+                                        <div class="exemple">an exemple</div>
                                          <div class="name">visit america</div>
                                          <div class="start width">Start: 17/06/2024</div>
                                          <div class="end width">End: 31/12/2024</div>
@@ -119,7 +125,7 @@
                       </div>
                   
                       <div class="to_do">
-                    <div class="currentTime">
+                          <div class="currentTime">
                                   <div class="currentDate"  style = "background-color: aliceblue;"></div>
                                   <div class="currentHour" style="background-color: gold;"></div>
                           </div>
@@ -129,14 +135,16 @@
                           </div>
                           <div id ="task_list">
                              <div class="taskx">
-                                 <div class="date width" style="display: none;">03/03/2024</div>
-                                 <div class="hour width">Start: 19:30</div>
+                                 <div class="date width" style="display: block;"></div>
                                  <div class="title">dinner with Taylor Swift</div>
-                                 <button type="submit" class="del">delete</button>
-                                 <div class="status">
-                                    <div class="done">completed</div>
-                                    <div class="activ">still active</div>
-                                    <input type="checkbox" class="check" name="status" disabled>
+                                 <div class="controlbtn">
+                                    <div class="hour width">Start: 19:30</div>
+                                    <button type="submit" class="del">delete</button>
+                                    <div class="status">
+                                        <div class="done">completed</div>
+                                        <div class="activ">still active</div>
+                                        <input type="checkbox" class="check" name="status" disabled>
+                                    </div>
                                  </div>
                              </div>
 

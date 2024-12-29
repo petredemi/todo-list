@@ -137,6 +137,7 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     const div4 = document.createElement('div');
     const div5 = document.createElement('div');
     const div6 = document.createElement('div');
+    const div7 = document.createElement('div')
 
     div0.classList.add('task');
     div1.classList.add('title');
@@ -149,12 +150,13 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     div4.classList.add('status');
     div5.classList.add('done');
     div6.classList.add('activ');
+    div7.classList.add('controlbtn')
     div5.textContent = 'completed';
     div6.textContent = 'still active';
     div4.append(div5, div6, checkbox);
 
     addTasks(projindex); 
-     if ( projindex == undefined){
+     if ( projindex == undefined){ //daily task
          let ti = tasksList.findIndex(function(tsk){
           return tsk.title === t.value;
         });
@@ -168,7 +170,8 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
             div5.setAttribute('style', 'display: block');
             div6.setAttribute('style', 'display: none');
           }
-          div0.append(div2, div3, div1, del, div4);
+          div7.append(div3, del, div4)
+          div0.append(div2, div1,div7);
           dayTask.insertBefore(div0, dayTask.children[ti]);
         //  daytaskDelete();
           projindex = undefined;
