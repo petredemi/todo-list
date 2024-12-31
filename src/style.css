@@ -87,7 +87,7 @@ p{
 .header{
     margin: 3px;
     display:flex;
-    justify-content:end;
+    justify-content:space-around;
     align-items: end;
 }
 h4{
@@ -100,7 +100,7 @@ h4{
     justify-content: center;
     align-items: center;
     margin: 5px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 #weathericon{
     border: 2px solid darkblue;
@@ -118,10 +118,73 @@ h4{
     width: auto;
     margin-bottom: 5px;
 }
+.todo-location{
+    margin: auto;
+}
+.clocknr-vertical{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    margin: auto;
+}
+.clock-numbers{
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+.clock-box{
+    margin: auto;
+    width: 100px;
+    height: 100px;
+}
+.clock {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    border: 10px solid rgb(189, 174, 174);
+    border-radius: 50%;
+    padding: 1px;
+    border: 2px solid rgb(0, 123, 255);
+    box-shadow:
+      0 0 0 4px rgba(0,0,0,0.1),
+      inset 0 0 0 3px #EFEFEF,
+      inset 0 0 10px black,
+      0 0 10px rgba(0,0,0,0.2);
+  }
+  .clock-face {
+    margin: auto;
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+    transform: translateY(-10px); /* account for the height of the clock hands */
+    transform: translateX(0px);
+}
+  .hand {
+    width: 45%;
+    height: 2px;
+    background:red;
+    margin-right: 5px;
+    position: absolute;
+    top: 50%;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+  }
+  .hour-hand{
+    background-color: darkblue;
+    height: 4px;
+  }
+  .min-hand{
+    background-color: darkgreen;
+    height: 3px;
+  }
+
 h1{
     font-family: font5, 'Times New Roman', Times, serif;
     width: fit-content;
-    color: red;
+    color: rgb(239, 40, 40);
     text-shadow: 1px 1px 1px #000000;
     font-size: 3rem;
     margin: auto;
