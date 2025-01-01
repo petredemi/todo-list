@@ -137,6 +137,7 @@ h4{
     margin: auto;
     width: 100px;
     height: 100px;
+    border: 1px solid red;
 }
 .clock {
     width: 90px;
@@ -157,8 +158,8 @@ h4{
     border-radius: 50%;
     width: 85px;
     height: 85px;
-    transform: translateY(-10px); /* account for the height of the clock hands */
-    transform: translateX(0px);
+    transform: translateY(-4px); /* account for the height of the clock hands */
+    transform: translateX(5px);
 }
   .hand {
     width: 45%;
