@@ -48,12 +48,13 @@ function removeDayTask(tl, y){ //remove project button , change color
       if(!response.ok){
         throw 'no data'
       }
-      console.log('https:' + weatherdata.current.condition.icon)
+   //   console.log('https:' + weatherdata.current.condition.icon)
       weathericon.src = 'https:' + weatherdata.current.condition.icon;
       temp.textContent = weatherdata.current.temp_c + '  ºC';
   }catch(error){
     nodata.textContent = error;
-    console.log(error)};
+    //console.log(error)
+    };
 }
 dayWeather()
 let wondername = document.querySelector('div.wondername');
@@ -66,13 +67,14 @@ async function dayMotto(){
       if(!response.ok){
         throw 'no data'
       }
-      console.log(mottoData)
+   //   console.log(mottoData)
       wonderimg.src = mottoData.links.images[1];
       wondername.textContent = mottoData.name
       motto.textContent = mottoData.summary;
       wonderlocation.textContent = 'location:' + mottoData.location
   }catch(error){
   //  nodata.textContent = error;
-    console.log(error)};
+   // console.log(error)
+  };
 }
 dayMotto()

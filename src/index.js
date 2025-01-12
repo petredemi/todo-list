@@ -1,3 +1,4 @@
+//export default dueDate
 import _, { forEach, sortedIndexOf } from 'lodash';
 import './style.css';
 import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks, getTask, getProject, getProjectTasks} from './functions.js';
@@ -6,6 +7,7 @@ import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask,
         removeProject} from './others.js';
 import {removeDayTask} from './print.js';
+
 
 let keys = []; // it is not used in program
 let arrBtn = []; // project delete buttons;
@@ -42,7 +44,7 @@ const addProjectBtn = document.querySelector('#addProject');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 console.log(projectsList)
 callDialog(); // for projects and day tasks only 
-
+let week = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
 //projects
 let projindex = undefined; // index for add task to a project
 addProjectBtn.addEventListener('click', () =>{ // button to add projects 
@@ -59,12 +61,16 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              const div4 = document.createElement('div');
              const div5 = document.createElement('div');
              const div6 = document.createElement('div');
+             const div22 = document.createElement('div')
+             const p1 = document.createElement('p')
              div00.classList.add('item1');
              div0.classList.add('project');
              div1.classList.add('name');
              div2.classList.add('start', 'width');
              div3.classList.add('end', 'width');
              del.classList.add('del');
+             div22.classList.add('dateDue')
+             p1.classList.add('startDayField')
 
              div4.classList.add('status');
              div5.classList.add('done');
@@ -72,6 +78,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              div5.textContent = 'completed';
              div6.textContent = 'still active';
              div4.append(div5, div6, checkbox); 
+
 
              checkbox.setAttribute('type', 'checkbox');
              checkbox.classList.add('check');
@@ -84,7 +91,11 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
               });
               console.log(cd);
              div1.textContent = projectsList[cd].name;
-             div2.textContent = 'Start: ' + projectsList[cd].start;
+             div22.textContent = projectsList[cd].start;
+             p1.textContent = 'Start'
+             //div2.textContent = 'Start: ' + projectsList[cd].start;
+             div2.append(p1, div22)
+
              div3.textContent = 'End: ' + projectsList[cd].end;
              del.textContent = 'delete';
              checkbox.checked = projectsList[cd].status;
@@ -115,8 +126,8 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
       colorProjects();
       removeProject(projectsList, arrBtn);
    //   checkboxProjectTasks();
-      console.log(projectsList);
-      console.log(del);
+   //   console.log(projectsList);
+    //  console.log(del);
   });
 showTask(); // for each project
 
@@ -229,6 +240,22 @@ deleteProjectTasks();
 //daytaskDelete();
 removeProject(projectsList, arrBtn);
 removeDayTask(tasksList, delTsk);
+function dueDate(){
+      let currentDay = new Date()
+      let day = currentDay.getDate()
+      let project = document.querySelectorAll('#projects-list > div.item1 > div.project');
+      let dateDue = document.querySelectorAll('#projects-list >div.item1 > div.project div.dateDue')
+      dateDue.forEach((node, index) => {
+        let d = new Date(node.textContent) // date of project
+        let prjDay = d.getDate() //day of the project
+        if( currentDay > d && project[index].style.backgroundColor != 'darkcyan'){
+            project[index].setAttribute('style', 'background-color: lightpink');
+        }
+        console.log(d, index)
+      })
+   //   console.log(dateDue)
+}
+dueDate()
 
 function callDialogTaskProjects(){ //call dialog modal  for each task for projects 
   let taskForm = document.querySelectorAll('div.item1 button.project-task-form');
@@ -242,7 +269,8 @@ function callDialogTaskProjects(){ //call dialog modal  for each task for projec
   function checkboxProject(){
             let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
             checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
-                console.log(checkbox[index].checked);
+              //  console.log(checkbox[index].checked);
+              console.log(checkbox)
                 projectsList[index].status = checkbox[index].checked;
                 localStorage.setItem( `prj${index}`, JSON.stringify(projectsList[index]));
             }));

@@ -279,13 +279,17 @@ let i;
            const div4 = document.createElement('div');
            const div5 = document.createElement('div');
            const div6 = document.createElement('div');
-           
+           const div22 = document.createElement('div')
+           const p1 = document.createElement('p')
+
            div00.classList.add('item1');
            div0.classList.add('project');
            div1.classList.add('name');
            div2.classList.add('start', 'width');
            div3.classList.add('end', 'width');
            del.classList.add('del');
+           div22.classList.add('dateDue')
+           p1.classList.add('startDayField')
 
            div4.classList.add('status');
            div5.classList.add('done');
@@ -299,7 +303,10 @@ let i;
            checkbox.setAttribute('name', 'status');
            del.setAttribute('type', 'submit');
            div1.textContent = projectsList[i].name;
-           div2.textContent = 'Start: ' + projectsList[i].start;
+           div22.textContent = projectsList[i].start;
+           p1.textContent = 'Start'
+           div2.append(p1, div22)
+          // div2.textContent = 'Start: ' + projectsList[i].start;
            div3.textContent = 'End: ' + projectsList[i].end;
            del.textContent = 'delete';
            checkbox.checked = projectsList[i].status;

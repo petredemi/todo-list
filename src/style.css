@@ -137,7 +137,6 @@ h4{
     margin: auto;
     width: 100px;
     height: 100px;
-    border: 1px solid red;
 }
 .clock {
     width: 90px;
@@ -287,6 +286,9 @@ label{
     border: 1px solid darkorange;
     box-shadow: 1px 1px 10px black;
     min-height: 320px;
+}
+.startDayField{
+    font-size: 15px;
 }
 .projects > div:first-child{
     display: flex;

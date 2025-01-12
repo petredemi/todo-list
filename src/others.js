@@ -1,5 +1,4 @@
 export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask, removeProject};
-
 function showTask(){ //show and hide tasks for each project
   let click = true;
   let indexproj;
@@ -75,13 +74,18 @@ function showTask(){ //show and hide tasks for each project
 
         project.forEach((node, index) => node.addEventListener('mouseover', (e) => {
           let check = checkbox[index].checked;
-          if(check == false){
+          let colorred = project[index].style.backgroundColor
+          console.log(colorred)
+
+          if(check === false && project[index].style.backgroundColor != 'lightpink'){
                 project[index].setAttribute('style', 'background-color: grey');
           }
+        //  if( button.style.backgroundColor == 'yellow'){
+
         }));
         project.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
           let check = checkbox[index].checked;
-          if(check == false){
+          if(check == false && project[index].style.backgroundColor != 'lightpink'){
               project[index].setAttribute('style' , 'background-color: none');
           }
         }));
@@ -101,8 +105,9 @@ function showTask(){ //show and hide tasks for each project
 
           } else if(checkbox[index].checked == false){
               project[index].setAttribute('style', 'background-color: none');
-              done[index].setAttribute('style', 'display: none');
+            //  done[index].setAttribute('style', 'display: none');
               activ[index].setAttribute('style', 'display: block');
+              dueDate()
           }
       }));
     }
@@ -127,7 +132,6 @@ function colorProjectsTask(){     //change background for each project by mouse 
     }
   }));
   checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
-    console.log(checkbox[index].checked);
 
     if ( checkbox[index].checked == true){
         task[index].setAttribute('style', 'background-color: mediumseagreen; color: white');
@@ -161,16 +165,11 @@ function removeProject(pl, y){ //remove project button , change color
          j = y.findIndex(lookIndexButton);
          l = pl.length - 1;
 
-         console.log(y);
-         console.log(pl);
-         console.log(j);
    }));
    y.forEach(item => item.addEventListener('click', (e) => { //remove project
         if (y[j].style.backgroundColor == 'yellow'){
           pl.splice(j, 1);
           y.splice(j, 1);
-          console.log(pl);
-          console.log(y); 
         for ( let i = 0; i <= l; i++){
               localStorage.setItem( `prj${i}`, JSON.stringify(pl[i]));
                 }
@@ -178,7 +177,6 @@ function removeProject(pl, y){ //remove project button , change color
           }
       item1[j].remove();
       item1 = document.querySelectorAll('#projects-list > div.item1');
-      console.log(item1);
 
     }));
   } 
