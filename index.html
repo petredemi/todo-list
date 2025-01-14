@@ -31,7 +31,6 @@
                 </div>
                 <div class="todo-location">
                         <h1>To Do List</h1>
-                        <div class="weatherLocation">location: London</div>
                 </div>
                 <div class="clocknr-vertical">
                     <p style="margin: auto; font-size: 0.8rem; padding: 1px;">12</p>
@@ -51,6 +50,14 @@
                     <p style="margin: auto; font-size: 0.8rem; padding: 1px;">6</p>
                 </div>
             </div>
+            <div class="weatherLocation">
+                <label for="location" style="font-size: 15px;">Weather Location</label>
+                <input type="text" id="location" value="London">
+                <button type="submit" id="lookfor" style="border: none">
+                    🔍
+                </button>
+            </div>
+
             <div class="content">
                       <div class="addProject">
                           <dialog data-modal id ='dialog-project'>
@@ -109,7 +116,7 @@
                           <div id="projects-list">
                                   <div class="item1x">
                                     <div class="projectx"> 
-                                        <div class="exemple">an exemple</div>
+                                        <div class="exemple">for exemple</div>
                                          <div class="name">visit america</div>
                                          <div class="start width">Start: 17/06/2024</div>
                                          <div class="end width">End: 31/12/2024</div>
@@ -154,16 +161,17 @@
                           </div>
                           <div id ="task_list">
                              <div class="taskx">
+                                <div class="exemple">for exemple</div>
                                  <div class="date width" style="display: block;"></div>
                                  <div class="title">dinner with Taylor Swift</div>
                                  <div class="controlbtn">
                                     <div class="hour width">Start: 19:30</div>
-                                    <button type="submit" class="del">delete</button>
                                     <div class="status">
                                         <div class="done">completed</div>
                                         <div class="activ">still active</div>
                                         <input type="checkbox" class="check" name="status" disabled>
                                     </div>
+                                <button type="submit" class="del">delete</button>
                                  </div>
                              </div>
 
