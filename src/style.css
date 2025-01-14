@@ -121,6 +121,9 @@ h4{
 .weatherLocation{
     text-align: center;
 }
+.weatherLocation > input{
+    max-width: 100px;
+}
 .todo-location{
     margin: auto;
 }
