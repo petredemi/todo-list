@@ -249,7 +249,7 @@ let i;
                   if ( tasksList[x].status == true){
                       div0.setAttribute('style', 'background-color: mediumseagreen');
                   }
-                  div7.append(div3, del, div4)
+                  div7.append(div3, div4, del)
                   div0.append(div2, div1,div7);
 
 
@@ -281,6 +281,8 @@ let i;
            const div6 = document.createElement('div');
            const div22 = document.createElement('div')
            const p1 = document.createElement('p')
+           const div33 = document.createElement('div')
+           const p3 = document.createElement('p')
 
            div00.classList.add('item1');
            div0.classList.add('project');
@@ -290,6 +292,8 @@ let i;
            del.classList.add('del');
            div22.classList.add('dateDue')
            p1.classList.add('startDayField')
+           p3.classList.add('endDayField')
+           div33.classList.add('projEndDay')
 
            div4.classList.add('status');
            div5.classList.add('done');
@@ -307,7 +311,13 @@ let i;
            p1.textContent = 'Start'
            div2.append(p1, div22)
           // div2.textContent = 'Start: ' + projectsList[i].start;
-           div3.textContent = 'End: ' + projectsList[i].end;
+        //   div3.textContent = 'End: ' + projectsList[i].end;
+           div33.textContent = projectsList[i].end
+           p3.textContent = 'End: ';
+           div3.append(p3, div33);
+
+
+
            del.textContent = 'delete';
            checkbox.checked = projectsList[i].status;
            if ( projectsList[i].status == true){
@@ -315,7 +325,7 @@ let i;
             div5.setAttribute('style', 'display: block');
             div6.setAttribute('style', 'display: none');
           }
-           div0.append(div1, div2, div3, del, div4);
+           div0.append(div1, div2, div3, div4, del);
            div00.append(div0, domTask());
            projects_list.insertBefore(div00, projects_list.children[i]);
            x.push(del);
@@ -363,7 +373,7 @@ let i;
                   div6.setAttribute('style', 'display: none');
       
                 }
-                div0.append(div2, div3, div1, del, div4);
+                div0.append(div2, div3, div1, div4, del);
                 tasklistProject[x].insertBefore(div0, tasklistProject[x].children[y]);
               }
       })  

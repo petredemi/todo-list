@@ -106,6 +106,10 @@ h4{
     border: 2px solid darkblue;
     border-radius: 50%;
 }
+#lookfor{
+    height: 20px;
+    width: 20px;
+}
 .temp{
     text-align: center;
     font-size: 1.2rem;
@@ -115,8 +119,7 @@ h4{
     text-shadow: 1px 1px 1px black;
 }
 .weatherLocation{
-    width: auto;
-    margin-bottom: 5px;
+    text-align: center;
 }
 .todo-location{
     margin: auto;
@@ -256,6 +259,7 @@ form{
 #addProject, #addToDo{
     margin-top: 2px;
 }
+
 .btn{
     width: 30px;
     height: 30px;
@@ -287,8 +291,15 @@ label{
     box-shadow: 1px 1px 10px black;
     min-height: 320px;
 }
-.startDayField{
+.start, .end{
+    height: fit-content;
+}
+.startDayField, .endDayField{
     font-size: 15px;
+    text-align: left;
+    height: fit-content;
+    padding: 0px;
+    margin-right: 8px;
 }
 .projects > div:first-child{
     display: flex;
@@ -340,6 +351,13 @@ div.project, div.projectx{
     border-left: 10px solid darkorange;
     border-radius: 10px;
 }
+.exemple{
+    position: absolute;
+    font-size: 60px;
+    width: 60%;
+    color: #00000028;
+    text-align: center;
+}
 .todo{
     display: none;
     border: 5px solid darkcyan;
@@ -359,8 +377,10 @@ div.project, div.projectx{
 }
 
 .width{
-    width: 120px;
-    margin-left: 5px;
+    width: fit-content;
+    margin-left: 0px;
+    margin: 5px;
+    display: flex;
 }
 
 .to_do{

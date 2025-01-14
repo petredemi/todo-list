@@ -41,9 +41,12 @@ function removeDayTask(tl, y){ //remove project button , change color
     let nodata = document.querySelector('#nodata');
     let temp = document.querySelector('div.temp');
     const motto = document.querySelector('div.motto')
+    let lookfor = document.querySelector('#lookfor')
+    let location = document.querySelector('#location')
+    let loc = 'London'
  async function dayWeather(){
   try{
-      const response = await fetch('https://api.weatherapi.com/v1/current.json?key=69b808bac1c14633a67231851242404&q=Paris',{mode: "cors",})
+      const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=69b808bac1c14633a67231851242404&q=${loc}`,{mode: "cors",})
       const weatherdata = await response.json()
       if(!response.ok){
         throw 'no data'
@@ -57,6 +60,15 @@ function removeDayTask(tl, y){ //remove project button , change color
     };
 }
 dayWeather()
+lookfor.addEventListener('click', (e) => {
+  if( location.value === '')return
+  loc = location.value
+  dayWeather()
+})
+location.addEventListener('click', (e) => {
+   location.value = ''
+})
+
 let wondername = document.querySelector('div.wondername');
 let wonderlocation = document.querySelector('p.wonderlocation')
 let wonderimg = document.querySelector('#wonderimg')

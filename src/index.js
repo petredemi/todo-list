@@ -63,6 +63,10 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              const div6 = document.createElement('div');
              const div22 = document.createElement('div')
              const p1 = document.createElement('p')
+             const div33 = document.createElement('div')
+             const p3 = document.createElement('p')
+
+
              div00.classList.add('item1');
              div0.classList.add('project');
              div1.classList.add('name');
@@ -71,6 +75,8 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              del.classList.add('del');
              div22.classList.add('dateDue')
              p1.classList.add('startDayField')
+             p3.classList.add('endDayField')
+             div33.classList.add('projEndDay')
 
              div4.classList.add('status');
              div5.classList.add('done');
@@ -96,10 +102,13 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              //div2.textContent = 'Start: ' + projectsList[cd].start;
              div2.append(p1, div22)
 
-             div3.textContent = 'End: ' + projectsList[cd].end;
+        //     div3.textContent = 'End: ' + projectsList[cd].end;
+             div33.textContent = projectsList[cd].end
+             p3.textContent = 'End: ';
+             div3.append(p3, div33);
              del.textContent = 'delete';
              checkbox.checked = projectsList[cd].status;
-             div0.append(div1, div2, div3, del, div4);
+             div0.append(div1, div2, div3, div4, del);
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
              for ( let i = 0; i < projectsList.length; i++){

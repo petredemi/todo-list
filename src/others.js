@@ -97,7 +97,7 @@ function showTask(){ //show and hide tasks for each project
         }));
 
         checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
-          console.log(checkbox[index].checked);
+      //    console.log(checkbox[index].checked);
           if ( checkbox[index].checked == true){
               project[index].setAttribute('style', 'background-color: darkcyan; color: white');
               done[index].setAttribute('style', 'display: block');
@@ -105,9 +105,9 @@ function showTask(){ //show and hide tasks for each project
 
           } else if(checkbox[index].checked == false){
               project[index].setAttribute('style', 'background-color: none');
-            //  done[index].setAttribute('style', 'display: none');
+              done[index].setAttribute('style', 'display: none');
               activ[index].setAttribute('style', 'display: block');
-              dueDate()
+        //      dueDate()
           }
       }));
     }
