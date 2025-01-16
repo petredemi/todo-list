@@ -216,7 +216,9 @@ h3{
     max-width: 1200px;
 }
 .del{
-    font-size: 1.1rem;
+    font-size: 1rem;
+    padding: 1px;
+    height: 25px;
 }
 .addTask, .addProject{
     display: flex;
@@ -378,6 +380,23 @@ div.project, div.projectx{
     padding: 5px;
     margin: 2px;
 }
+#projects-list .task{
+    border: 1px solid red;
+    margin: 10px;
+}
+.day_hour{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.check_del{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;    
+    margin-bottom: 10px;
+}
 
 .width{
     width: fit-content;
@@ -407,7 +426,7 @@ div.project, div.projectx{
     margin-right: 40px;
 }
 
-div.task, div.taskx{
+#task_list > div.task, div.taskx{
     display: block;
     flex-wrap: wrap;
     height: auto;
@@ -432,8 +451,20 @@ div.task, div.taskx{
     margin-left: 2px;
     margin-right: 2px;
     border: 1px solid black;
-    width: 80%;
+    width: 70%;
+    max-width: 500px;
     margin: auto;
+    align-items: center;
+    height: fit-content;
+}
+.hour{
+    height: fit-content;
+    display: flex;
+    align-items: baseline;
+}
+.startDayTsk{
+    font-size: 15px;
+    padding: 1px;
 }
 
 .title{
@@ -443,10 +474,11 @@ div.task, div.taskx{
     height: auto;
     text-align: left;
     font-family: font5;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     width: 95%;
     flex: 1 1 0;
     margin-bottom: 15px;
+    padding-left: 12px;
 }
 .status{
     display: flex;

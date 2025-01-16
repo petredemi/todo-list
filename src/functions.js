@@ -2,7 +2,6 @@ export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         getProject, getTask, getProjectTasks};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
-
 //add projects
 const projectsList = [];
 const tasksList = [];
@@ -62,7 +61,6 @@ function addTasks(x){ //add to do items
           return 0;
       });
       };
-      console.log(tasksList);
   };
 function domTask(){ //create dom task for each project
       const todo = document.createElement('div');
@@ -87,20 +85,19 @@ function domTask(){ //create dom task for each project
 function taskBackground(){     //change background for each current day task by mouse over
       let task = document.querySelectorAll('#task_list > div.task');
       let delbtn = document.querySelectorAll('#task_list > div.task > div.controlbtn > button.del');
-
       let checkbox = document.querySelectorAll('#task_list > div.task input.check');
       let done  = document.querySelectorAll('#task_list > div.task div.done');
       let activ = document.querySelectorAll('#task_list > div.task div.activ');
 
       task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
           let check = checkbox[index].checked;
-          if(check == false){
+          if(check == false && task[index].style.backgroundColor != 'lightpink'){
       task[index].setAttribute('style', 'background-color: lightyellow');
           }
       }));
       task.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
         let check = checkbox[index].checked;
-        if(check == false){
+        if(check == false && task[index].style.backgroundColor != 'lightpink'){
          task[index].setAttribute('style' , 'background-color: none');
         }
       
@@ -177,7 +174,6 @@ let i;
           node1 = document.querySelectorAll('#task_list > div.task > button.del');
           node2 = document.querySelectorAll('#task_list > div.task');
           i = task.findIndex(checkIndex);
-          console.log( i);
 
         }));
         node1.forEach((button, index) => button.addEventListener('mouseover', (e) => {
@@ -199,16 +195,14 @@ let i;
               node1 = document.querySelectorAll('#task_list > div.task > button.del');
               node2 = document.querySelectorAll('#task_list > div.task');
 
-            //  console.log(node2);
-            //  console.log(task);
-           //   console.log(node1);
-              
           }));
      //    tasksList.forEach((item, index) =>{
         //    localStorage.setItem(`tsk${index}`, JSON.stringify(item))
       //    });
   
       };
+
+      
   function getTask(y){ // from local store
         let dayTaskList = document.querySelector('#task_list');
           for (let x = 0; x < tasksList.length; x++ ){
@@ -222,13 +216,18 @@ let i;
             const div5 = document.createElement('div');
             const div6 = document.createElement('div');
             const div7 = document.createElement('div')
-
-      
+            const div33 = document.createElement('div')
+            const p1 = document.createElement('p')
+        
             div0.classList.add('task');
             div1.classList.add('title');
             div2.classList.add('date', 'width');
             div3.classList.add('hour', 'width');
             del.classList.add('del');
+            div33.classList.add('dateDueTsk')
+            p1.classList.add('startDayTsk')
+        
+
             checkbox.setAttribute('type', 'checkbox');
             checkbox.classList.add('check');
             checkbox.setAttribute('name', 'status');
@@ -243,8 +242,13 @@ let i;
             div4.append(div5, div6, checkbox);
                   div1.textContent = tasksList[x].title;
                   div2.textContent = 'day: ' + tasksList[x].date;
-                  div3.textContent = 'hour: ' + tasksList[x].hour;
-                  del.textContent = 'delete';
+               //   div3.textContent = 'hour: ' + tasksList[x].hour;
+                  div3.append(p1, div33)
+                  div33.textContent = tasksList[x].hour;
+                  p1.textContent = 'Start:'
+        
+
+                  del.textContent = 'del';
                   checkbox.checked = tasksList[x].status;
                   if ( tasksList[x].status == true){
                       div0.setAttribute('style', 'background-color: mediumseagreen');
@@ -315,10 +319,7 @@ let i;
            div33.textContent = projectsList[i].end
            p3.textContent = 'End: ';
            div3.append(p3, div33);
-
-
-
-           del.textContent = 'delete';
+           del.textContent = 'del'
            checkbox.checked = projectsList[i].status;
            if ( projectsList[i].status == true){
             div0.setAttribute('style', 'background-color: darkcyan; color: white');
@@ -360,12 +361,19 @@ let i;
                div6.classList.add('activ');
                div5.textContent = 'completed';
                div6.textContent = 'still active';
+               const div8 = document.createElement('div')
+               div8.classList.add('day_hour')
+               const div9 = document.createElement('div')
+               div9.classList.add('check_del')   
                div4.append(div5, div6, checkbox);
     
                 div1.textContent = projectsList[x].projectTasks[y].title;
                 div2.textContent = 'day: ' + projectsList[x].projectTasks[y].date;
                 div3.textContent = 'hour: ' + projectsList[x].projectTasks[y].hour;
-                del.textContent = 'delete';
+                div8.append(div2, div3)
+                div9.append(div4, del)
+
+                del.textContent = 'del';
                 checkbox.checked = projectsList[x].projectTasks[y].status;
                 if( projectsList[x].projectTasks[y].status == true){
                   div0.setAttribute('style', 'background-color: mediumseagreen; color: floralwhite;');
@@ -373,7 +381,7 @@ let i;
                   div6.setAttribute('style', 'display: none');
       
                 }
-                div0.append(div2, div3, div1, div4, del);
+                div0.append(div8, div1, div9);
                 tasklistProject[x].insertBefore(div0, tasklistProject[x].children[y]);
               }
       })  

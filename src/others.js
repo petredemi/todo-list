@@ -34,14 +34,17 @@ function showTask(){ //show and hide tasks for each project
 
       const d = new Date();
       const day = d.getDate();
-      const month = d.getMonth() + 1;
+      const month = d.getMonth();
       const year = d.getUTCFullYear();
       const hour = d.getHours();
       const min = d.getMinutes();
       const sec = d.getSeconds();
-      currentDate.textContent = 'Date: ' + day +'.' + month + '.' + year ;
+      const  dayName = d.getDay()
+      let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      let weekday = ['Saunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      currentDate.textContent =  weekday[dayName] + ': ' + day +' ' + months[month] + ' ' + year ;
       currentHour.textContent = 'Time: ' + hour + ':' + min + ':' + sec;
-      currentDateP.textContent = 'Date: ' + day +'.' + month + '.' + year ;
+      currentDateP.textContent =  weekday[dayName] + ': '  + day +' ' + months[month] + ' ' + year ;
       currentHourP.textContent = 'Time: ' + hour + ':' + min + ':' + sec;
 
     }
@@ -74,13 +77,9 @@ function showTask(){ //show and hide tasks for each project
 
         project.forEach((node, index) => node.addEventListener('mouseover', (e) => {
           let check = checkbox[index].checked;
-          let colorred = project[index].style.backgroundColor
-          console.log(colorred)
-
           if(check === false && project[index].style.backgroundColor != 'lightpink'){
                 project[index].setAttribute('style', 'background-color: grey');
           }
-        //  if( button.style.backgroundColor == 'yellow'){
 
         }));
         project.forEach((node, index) => node.addEventListener('mouseleave', (e) => {
@@ -97,7 +96,6 @@ function showTask(){ //show and hide tasks for each project
         }));
 
         checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
-      //    console.log(checkbox[index].checked);
           if ( checkbox[index].checked == true){
               project[index].setAttribute('style', 'background-color: darkcyan; color: white');
               done[index].setAttribute('style', 'display: block');
