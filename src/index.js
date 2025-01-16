@@ -284,9 +284,9 @@ function dueDate(){
 dueDate()
 function dueDateDayTask(){
   let currentHour = new Date()
-  let h = currentHour.getHours() + 5
+  let h = currentHour.getHours()
   let m = currentHour.getMinutes()
-  let c = h * 60 + m
+  let c = h * 60 + m + 5
   let task = document.querySelectorAll('#task_list > div.task');
   let dateDue = document.querySelectorAll('#task_list > div.task > div.controlbtn > div.hour > div.dateDueTsk');
   dateDue.forEach((node, index) => {
