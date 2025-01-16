@@ -68,7 +68,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              const div33 = document.createElement('div')
              const p3 = document.createElement('p')
 
-
+             const div23 = document.createElement('div')
              div00.classList.add('item1');
              div0.classList.add('project');
              div1.classList.add('name');
@@ -79,6 +79,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              p1.classList.add('startDayField')
              p3.classList.add('endDayField')
              div33.classList.add('projEndDay')
+             div23.classList.add('startendprj')
 
              div4.classList.add('status');
              div5.classList.add('done');
@@ -86,8 +87,6 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              div5.textContent = 'completed';
              div6.textContent = 'still active';
              div4.append(div5, div6, checkbox); 
-
-
              checkbox.setAttribute('type', 'checkbox');
              checkbox.classList.add('check');
              checkbox.setAttribute('name', 'status');
@@ -108,9 +107,10 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              div33.textContent = projectsList[cd].end
              p3.textContent = 'End: ';
              div3.append(p3, div33);
+             div23.append(div2, div3)
              del.textContent = 'del';
              checkbox.checked = projectsList[cd].status;
-             div0.append(div1, div2, div3, div4, del);
+             div0.append(div23, div1, div4, del);
              div00.append(div0, domTask());
              projects_list.insertBefore(div00, projects_list.children[cd]);
              for ( let i = 0; i < projectsList.length; i++){
@@ -136,6 +136,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
       removeStoredItems();
       colorProjects();
       removeProject(projectsList, arrBtn);
+      dueDate()
    //   checkboxProjectTasks();
    //   console.log(projectsList);
     //  console.log(del);
@@ -230,7 +231,7 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
             const div9 = document.createElement('div')
             div9.classList.add('check_del')
 
-            del.textContent = 'delete';
+            del.textContent = 'del';
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
             if( projectsList[projindex].projectTasks[ti].status == true){
               div0.setAttribute('style', 'background-color: mediumseagreen; color: floralwhite');

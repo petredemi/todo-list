@@ -287,6 +287,7 @@ let i;
            const p1 = document.createElement('p')
            const div33 = document.createElement('div')
            const p3 = document.createElement('p')
+           const div23 = document.createElement('div')
 
            div00.classList.add('item1');
            div0.classList.add('project');
@@ -298,6 +299,7 @@ let i;
            p1.classList.add('startDayField')
            p3.classList.add('endDayField')
            div33.classList.add('projEndDay')
+           div23.classList.add('startendprj')
 
            div4.classList.add('status');
            div5.classList.add('done');
@@ -319,6 +321,7 @@ let i;
            div33.textContent = projectsList[i].end
            p3.textContent = 'End: ';
            div3.append(p3, div33);
+           div23.append(div2, div3)
            del.textContent = 'del'
            checkbox.checked = projectsList[i].status;
            if ( projectsList[i].status == true){
@@ -326,7 +329,9 @@ let i;
             div5.setAttribute('style', 'display: block');
             div6.setAttribute('style', 'display: none');
           }
-           div0.append(div1, div2, div3, div4, del);
+        //   div0.append(div1, div2, div3, div4, del);
+          div0.append(div23, div1, div4, del);
+
            div00.append(div0, domTask());
            projects_list.insertBefore(div00, projects_list.children[i]);
            x.push(del);

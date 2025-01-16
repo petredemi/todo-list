@@ -37,7 +37,10 @@ function removeDayTask(tl, y){ //remove project button , change color
     const motto = document.querySelector('div.motto')
     let lookfor = document.querySelector('#lookfor')
     let location = document.querySelector('#location')
-    let loc = 'London'
+    //let loc = 'London'
+    let loc = JSON.parse(localStorage.getItem('weather'));
+    location.value = loc
+
  async function dayWeather(){
   try{
       const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=69b808bac1c14633a67231851242404&q=${loc}`,{mode: "cors",})
@@ -48,6 +51,7 @@ function removeDayTask(tl, y){ //remove project button , change color
    //   console.log('https:' + weatherdata.current.condition.icon)
       weathericon.src = 'https:' + weatherdata.current.condition.icon;
       temp.textContent = weatherdata.current.temp_c + '  ºC';
+      localStorage.setItem('weather', JSON.stringify(location.value));
   }catch(error){
     nodata.textContent = error;
     //console.log(error)
@@ -73,8 +77,8 @@ async function dayMotto(){
       if(!response.ok){
         throw 'no data'
       }
-   //   console.log(mottoData)
-      wonderimg.src = mottoData.links.images[1];
+      console.log(mottoData)
+      wonderimg.src = mottoData.links.images[0];
       wondername.textContent = mottoData.name
       motto.textContent = mottoData.summary;
       wonderlocation.textContent = 'location:' + mottoData.location
