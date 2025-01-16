@@ -127,7 +127,7 @@ function taskBackground(){     //change background for each current day task by 
   }
  
   function deleteProjectTasks(){
-    let  btn = document.querySelectorAll('div.todo > div.task_list > div.task > button') // list del btn for task project
+    let  btn = document.querySelectorAll('div.todo > div.task_list > div.task  button') // list del btn for task project
     let  task = document.querySelectorAll('div.item1 > div.todo > div.task_list > div.task'); 
     let  tsklist = document.querySelectorAll('div.task_list');// get index for each project task list
     function checkIndex(div){
