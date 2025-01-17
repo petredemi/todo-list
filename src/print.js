@@ -77,7 +77,6 @@ async function dayMotto(){
       if(!response.ok){
         throw 'no data'
       }
-      console.log(mottoData)
       wonderimg.src = mottoData.links.images[0];
       wondername.textContent = mottoData.name
       motto.textContent = mottoData.summary;

@@ -44,9 +44,8 @@ storedDayTasks();
 const addTaskBtn = document.querySelector('#addToDo'); 
 const addProjectBtn = document.querySelector('#addProject');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
-console.log(projectsList)
 callDialog(); // for projects and day tasks only 
-let week = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
 //projects
 let projindex = undefined; // index for add task to a project
 addProjectBtn.addEventListener('click', () =>{ // button to add projects 
@@ -96,16 +95,21 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              let cd = projectsList.findIndex(function(proj){    // project index
               return proj.name === n.value;
               });
-              console.log(cd);
+             let dmy = projectsList[cd].start.split('-')
+             dmy[1] = Number(dmy[1])
              div1.textContent = projectsList[cd].name;
-             div22.textContent = projectsList[cd].start;
-             p1.textContent = 'Start'
+            // div22.textContent = projectsList[cd].start;
+             div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+             p1.textContent = 'Start:'
              //div2.textContent = 'Start: ' + projectsList[cd].start;
              div2.append(p1, div22)
 
         //     div3.textContent = 'End: ' + projectsList[cd].end;
-             div33.textContent = projectsList[cd].end
+            // div33.textContent = projectsList[cd].end
              p3.textContent = 'End: ';
+             let dmyend = projectsList[cd].end.split('-')
+             dmyend[1] = Number(dmyend[1])
+             div33.textContent = dmyend[2] + ' ' + month[dmyend[1] - 1] + ' ' + dmyend[0] 
              div3.append(p3, div33);
              div23.append(div2, div3)
              del.textContent = 'del';
@@ -224,7 +228,11 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
           return tsk.title === t.value;
           });
             div1.textContent = projectsList[projindex].projectTasks[ti].title;
-            div2.textContent = 'day: ' + projectsList[projindex].projectTasks[ti].date;
+           // div2.textContent = 'day: ' + projectsList[projindex].projectTasks[ti].date;
+            let dmytsk = projectsList[projindex].projectTasks[ti].date.split('-')
+            dmytsk[1] = Number(dmytsk[1])
+            div2.textContent =  'day: ' + dmytsk[2] + ' ' + month[dmytsk[1] - 1] + ' ' + dmytsk[0] 
+
             div3.textContent = 'hour: ' + projectsList[projindex].projectTasks[ti].hour;
             const div8 = document.createElement('div')
             div8.classList.add('day_hour')
@@ -244,7 +252,6 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
        projectsList.forEach((item, index) =>{
           localStorage.setItem( `prj${index}`, JSON.stringify(item));
           });
-        console.log(keys);
       }
         t.value = '';
         d.value = '';

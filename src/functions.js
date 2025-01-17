@@ -5,12 +5,13 @@ export  {t, d, hourDue, taskStatus, tasksList};
 //add projects
 const projectsList = [];
 const tasksList = [];
+let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+
 
 const n = document.querySelector('#projectTitle');
 const s = document.querySelector('#startDate');
 const endDate = document.querySelector('#startDate');
 const projectStatus = document.querySelector('#projectStatus');
-
 
 function addProject(){ //add projects items
     function createProject(name){ //create  project object with factory function
@@ -24,9 +25,9 @@ function addProject(){ //add projects items
     const item = createProject(n.value);
     projectsList.push(item);
     projectsList.sort((start1, start2) => {
-      if (start1.start < start2.start) return -1;
-      if (start1.start > start2.start) return 1;
-        return 0;
+          if (start1.start < start2.start) return -1;
+          if (start1.start > start2.start) return 1;
+            return 0;
       });
 }
 //add todo tasks
@@ -313,12 +314,18 @@ let i;
            checkbox.setAttribute('name', 'status');
            del.setAttribute('type', 'submit');
            div1.textContent = projectsList[i].name;
-           div22.textContent = projectsList[i].start;
-           p1.textContent = 'Start'
+          // div22.textContent = projectsList[i].start;
+           let dmy = projectsList[i].start.split('-')
+           dmy[1] = Number(dmy[1])
+           div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+           p1.textContent = 'Start:'
            div2.append(p1, div22)
           // div2.textContent = 'Start: ' + projectsList[i].start;
         //   div3.textContent = 'End: ' + projectsList[i].end;
-           div33.textContent = projectsList[i].end
+         //  div33.textContent = projectsList[i].end
+           let dmyend = projectsList[i].end.split('-')
+           dmyend[1] = Number(dmyend[1])
+           div33.textContent = dmyend[2] + ' ' + month[dmyend[1] - 1] + ' ' + dmyend[0] 
            p3.textContent = 'End: ';
            div3.append(p3, div33);
            div23.append(div2, div3)
@@ -373,7 +380,10 @@ let i;
                div4.append(div5, div6, checkbox);
     
                 div1.textContent = projectsList[x].projectTasks[y].title;
-                div2.textContent = 'day: ' + projectsList[x].projectTasks[y].date;
+          //      div2.textContent = 'day: ' + projectsList[x].projectTasks[y].date;
+                let dmytsk = projectsList[x].projectTasks[y].date.split('-')
+                dmytsk[1] = Number(dmytsk[1])
+                div2.textContent =  'day: ' + dmytsk[2] + ' ' + month[dmytsk[1] - 1] + ' ' + dmytsk[0] 
                 div3.textContent = 'hour: ' + projectsList[x].projectTasks[y].hour;
                 div8.append(div2, div3)
                 div9.append(div4, del)
