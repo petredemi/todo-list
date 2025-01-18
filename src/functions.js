@@ -391,9 +391,13 @@ let i;
     
                 div1.textContent = projectsList[x].projectTasks[y].title;
           //      div2.textContent = 'day: ' + projectsList[x].projectTasks[y].date;
-                let dmytsk = projectsList[x].projectTasks[y].date.split('-')
-                dmytsk[1] = Number(dmytsk[1])
-                div2.textContent =  'day: ' + dmytsk[2] + ' ' + month[dmytsk[1] - 1] + ' ' + dmytsk[0] 
+              if(projectsList[x].projectTasks[y].date === ''){
+                div2.textContent === ''
+              }else{
+                  let dmytsk = projectsList[x].projectTasks[y].date.split('-')
+                  dmytsk[1] = Number(dmytsk[1])
+                  div2.textContent =  'day: ' + dmytsk[2] + ' ' + month[dmytsk[1] - 1] + ' ' + dmytsk[0] 
+              }
                 div3.textContent = 'hour: ' + projectsList[x].projectTasks[y].hour;
                 div8.append(div2, div3)
                 div9.append(div4, del)

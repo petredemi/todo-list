@@ -237,10 +237,13 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
           });
             div1.textContent = projectsList[projindex].projectTasks[ti].title;
            // div2.textContent = 'day: ' + projectsList[projindex].projectTasks[ti].date;
+           if(projectsList[projindex].projectTasks[ti].date === ''){
+            div2.textContent === ''
+         }else{
             let dmytsk = projectsList[projindex].projectTasks[ti].date.split('-')
             dmytsk[1] = Number(dmytsk[1])
             div2.textContent =  'day: ' + dmytsk[2] + ' ' + month[dmytsk[1] - 1] + ' ' + dmytsk[0] 
-
+          }
             div3.textContent = 'hour: ' + projectsList[projindex].projectTasks[ti].hour;
             const div8 = document.createElement('div')
             div8.classList.add('day_hour')
