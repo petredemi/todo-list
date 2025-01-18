@@ -10,7 +10,7 @@ let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct
 
 const n = document.querySelector('#projectTitle');
 const s = document.querySelector('#startDate');
-const endDate = document.querySelector('#startDate');
+const endDate = document.querySelector('#endDate');
 const projectStatus = document.querySelector('#projectStatus');
 
 function addProject(){ //add projects items
