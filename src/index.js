@@ -95,11 +95,16 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              let cd = projectsList.findIndex(function(proj){    // project index
               return proj.name === n.value;
               });
-             let dmy = projectsList[cd].start.split('-')
-             dmy[1] = Number(dmy[1])
-             div1.textContent = projectsList[cd].name;
+
+              if(projectsList[cd].start === ''){
+                div22.textContent = ''
+              }else{
+                let dmy = projectsList[cd].start.split('-')
+                dmy[1] = Number(dmy[1])
+                div1.textContent = projectsList[cd].name;
             // div22.textContent = projectsList[cd].start;
-             div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+                div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+              }
              p1.textContent = 'Start:'
              //div2.textContent = 'Start: ' + projectsList[cd].start;
              div2.append(p1, div22)
@@ -107,9 +112,13 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
         //     div3.textContent = 'End: ' + projectsList[cd].end;
             // div33.textContent = projectsList[cd].end
              p3.textContent = 'End: ';
-             let dmyend = projectsList[cd].end.split('-')
-             dmyend[1] = Number(dmyend[1])
-             div33.textContent = dmyend[2] + ' ' + month[dmyend[1] - 1] + ' ' + dmyend[0] 
+             if(projectsList[cd].end === ''){
+               div33.textContent = ''
+              }else{
+                let dmyend = projectsList[cd].end.split('-')
+                dmyend[1] = Number(dmyend[1])
+                div33.textContent = dmyend[2] + ' ' + month[dmyend[1] - 1] + ' ' + dmyend[0] 
+              }
              div3.append(p3, div33);
              div23.append(div2, div3)
              del.textContent = 'del';

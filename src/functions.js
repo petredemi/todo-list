@@ -315,17 +315,27 @@ let i;
            del.setAttribute('type', 'submit');
            div1.textContent = projectsList[i].name;
           // div22.textContent = projectsList[i].start;
-           let dmy = projectsList[i].start.split('-')
-           dmy[1] = Number(dmy[1])
-           div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+
+          if(projectsList[i].start === ''){
+            div22.textContent = ''
+          }else{
+              let dmy = projectsList[i].start.split('-')
+              dmy[1] = Number(dmy[1])
+              div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+          }
            p1.textContent = 'Start:'
            div2.append(p1, div22)
           // div2.textContent = 'Start: ' + projectsList[i].start;
         //   div3.textContent = 'End: ' + projectsList[i].end;
          //  div33.textContent = projectsList[i].end
+
+         if(projectsList[i].end === ''){
+              div33.textContent = ''
+         }else{
            let dmyend = projectsList[i].end.split('-')
            dmyend[1] = Number(dmyend[1])
            div33.textContent = dmyend[2] + ' ' + month[dmyend[1] - 1] + ' ' + dmyend[0] 
+         } 
            p3.textContent = 'End: ';
            div3.append(p3, div33);
            div23.append(div2, div3)
