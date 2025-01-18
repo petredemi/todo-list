@@ -95,15 +95,14 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              let cd = projectsList.findIndex(function(proj){    // project index
               return proj.name === n.value;
               });
-
+              div1.textContent = projectsList[cd].name;
               if(projectsList[cd].start === ''){
                 div22.textContent = ''
               }else{
                 let dmy = projectsList[cd].start.split('-')
                 dmy[1] = Number(dmy[1])
-                div1.textContent = projectsList[cd].name;
             // div22.textContent = projectsList[cd].start;
-                div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
+              div22.textContent = dmy[2] + ' ' + month[dmy[1] - 1] + ' ' + dmy[0] 
               }
              p1.textContent = 'Start:'
              //div2.textContent = 'Start: ' + projectsList[cd].start;
