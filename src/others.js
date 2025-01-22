@@ -41,7 +41,7 @@ function showTask(){ //show and hide tasks for each project
       const sec = d.getSeconds();
       const  dayName = d.getDay()
       let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      let weekday = ['Saunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
       currentDate.textContent =  weekday[dayName] + ': ' + day +' ' + months[month] + ' ' + year ;
       currentHour.textContent = 'Time: ' + hour + ':' + min + ':' + sec;
       currentDateP.textContent =  weekday[dayName] + ': '  + day +' ' + months[month] + ' ' + year ;

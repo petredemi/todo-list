@@ -1,5 +1,11 @@
 export { removeDayTask};
+import Search from './icons/search.svg'
 
+const searchicon = new Image()
+searchicon.src = Search
+const lin = document.querySelector('div.lin')
+lin.addEventListener(('click'), (e) => {
+})
 
 function removeDayTask(tl, y){ //remove project button , change color 
     let task = document.querySelectorAll('#task_list > div.task');
@@ -36,6 +42,7 @@ function removeDayTask(tl, y){ //remove project button , change color
     let temp = document.querySelector('div.temp');
     const motto = document.querySelector('div.motto')
     let lookfor = document.querySelector('#lookfor')
+   // lookfor.appendChild(searchicon)
     let location = document.querySelector('#location')
     //let loc = 'London'
     let loc = JSON.parse(localStorage.getItem('weather'));

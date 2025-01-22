@@ -1,15 +1,19 @@
 //export default dueDate
 import _, { forEach, sortedIndexOf } from 'lodash';
 import './style.css';
-import search from './icons/search.svg'
+import Link from './pictures/linkedin.png'
+import Bin from './icons/icons8-bin-24.png'
 import { addProject, addTasks, domTask, taskBackground, deleteProjectTasks, getTask, getProject, getProjectTasks} from './functions.js';
 import {n, s, endDate, projectStatus, projectsList} from './functions.js';
 import {t, d, hourDue, taskStatus, tasksList} from './functions.js';
 import { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorProjectsTask,
         removeProject} from './others.js';
 import {removeDayTask} from './print.js';
-const searchimg = new Image()
-searchimg.src = search
+
+const linkin = new Image()
+const binicon = new Image()
+linkin.src = Link
+binicon.src = Bin
 
 let keys = []; // it is not used in program
 let arrBtn = []; // project delete buttons;
@@ -120,7 +124,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
               }
              div3.append(p3, div33);
              div23.append(div2, div3)
-             del.textContent = 'del';
+          //   del.textContent = '';
              checkbox.checked = projectsList[cd].status;
              div0.append(div23, div1, div4, del);
              div00.append(div0, domTask());
@@ -182,8 +186,6 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     div3.classList.add('hour', 'width');
     div33.classList.add('dateDueTsk')
     p1.classList.add('startDayTsk')
-
-
     del.classList.add('del');
     checkbox.setAttribute('type', 'checkbox');
     checkbox.classList.add('check');
@@ -204,12 +206,11 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
           div1.textContent = tasksList[ti].title;
           div2.textContent = 'day: ' + tasksList[ti].date;
          // div3.textContent = 'hour: ' + tasksList[ti].hour;
-          del.textContent = 'del';
+        //  del.textContent = 'del';
+      //    del.appendChild(binicon)
           checkbox.checked = tasksList[ti].status;
           div33.textContent = tasksList[ti].hour;
           p1.textContent = 'Start:'
-
-
           if( tasksList[ti].status == true){
             div0.setAttribute('style', 'background-color: mediumseagreen; color: white;');
             div5.setAttribute('style', 'display: block');
@@ -250,7 +251,8 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
             const div9 = document.createElement('div')
             div9.classList.add('check_del')
 
-            del.textContent = 'del';
+           // del.textContent = 'del';
+        //   del.append(binicon)
             checkbox.checked = projectsList[projindex].projectTasks[ti].status;
             if( projectsList[projindex].projectTasks[ti].status == true){
               div0.setAttribute('style', 'background-color: mediumseagreen; color: floralwhite');
@@ -374,4 +376,3 @@ function checkboxProjectTasks(){  // store checkbox status
   }));
 }
 checkboxProjectTasks();
-

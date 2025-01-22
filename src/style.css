@@ -107,8 +107,14 @@ h4{
     border-radius: 50%;
 }
 #lookfor{
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    background: none;
+    background-image: url('./icons/icons8-find.svg');
+    background-size: contain;
+    margin-bottom: 1px;
+    border: none;
+
 }
 .temp{
     text-align: center;
@@ -219,6 +225,11 @@ h3{
     font-size: 1rem;
     padding: 1px;
     height: 25px;
+    width: 25px;
+    background: none;
+    border: none;
+    margin-right: 15px;
+    background-image: url('./icons/icons8-bin-24.png');
 }
 .addTask, .addProject{
     display: flex;
@@ -507,13 +518,28 @@ div.project, div.projectx{
 }
 footer > p{
     text-align: center;
-    margin: 1px;
-    padding: 1px;
-    font-size: 15px;
+    font-size: 16px;
+    width: fit-content;
+    height: fit-content;
+}
+.contemail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lin{
+    background-image: url('./pictures/linkedin.png');
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    margin-left: 5px;
+    
 }
 footer{
     width: 100%;
     margin: auto;
     background-color: rgb(207, 204, 204);
+    padding-bottom: 3px;
+    padding-top: 3px;
 
 }
