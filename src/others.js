@@ -2,7 +2,7 @@ export { showTask, dialogProject, dialogTask, callDialog, colorProjects, colorPr
 function showTask(){ //show and hide tasks for each project
   let click = true;
   let indexproj;
-  let project = document.querySelectorAll('div.item1 > div.project, div.item1x > div.projectx');
+  let project1 = document.querySelectorAll('div.item1 > div.project, div.item1x > div.projectx');
   let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
   let todo = document.querySelectorAll('div.item1 > div.todo, div.item1x > div.todo');
 
@@ -13,7 +13,7 @@ function showTask(){ //show and hide tasks for each project
         indexproj = false;
        }));
 
-      project.forEach((node, index) => node.addEventListener('click', (e) => {
+      project1.forEach((node, index) => node.addEventListener('click', (e) => {
         if (indexproj == true) return;
          if( click == true){
               todo[index].setAttribute('style', 'display: block');
@@ -155,17 +155,18 @@ function removeProject(pl, y){ //remove project button , change color
   let j; // find index of project
   let l; //project list length
       function lookIndexButton(button){
-          if( button.style.backgroundColor == 'yellow'){
+          if( button.style.backgroundColor === 'yellow'){
           return button;
           }
       }
    y.forEach(button => button.addEventListener('mouseover', (e) => {
          j = y.findIndex(lookIndexButton);
          l = pl.length - 1;
+         console.log(j)
 
    }));
    y.forEach(item => item.addEventListener('click', (e) => { //remove project
-        if (y[j].style.backgroundColor == 'yellow'){
+        if (y[j].style.backgroundColor === 'yellow'){
           pl.splice(j, 1);
           y.splice(j, 1);
         for ( let i = 0; i <= l; i++){

@@ -222,14 +222,11 @@ h3{
     max-width: 1200px;
 }
 .del{
-    font-size: 1rem;
     padding: 1px;
     height: 25px;
     width: 25px;
-    background: none;
     border: none;
     margin-right: 15px;
-    background-image: url('./icons/icons8-bin-24.png');
 }
 .addTask, .addProject{
     display: flex;

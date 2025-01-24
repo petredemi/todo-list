@@ -247,7 +247,7 @@ let i;
                   div3.append(p1, div33)
                   div33.textContent = tasksList[x].hour;
                   p1.textContent = 'Start:'
-                  //del.textContent = 'del';
+                  del.textContent = 'del';
                   checkbox.checked = tasksList[x].status;
                   if ( tasksList[x].status == true){
                       div0.setAttribute('style', 'background-color: mediumseagreen');
@@ -337,7 +337,7 @@ let i;
            p3.textContent = 'End: ';
            div3.append(p3, div33);
            div23.append(div2, div3)
-          // del.textContent = 'del'
+           del.textContent = 'del'
            checkbox.checked = projectsList[i].status;
            if ( projectsList[i].status == true){
             div0.setAttribute('style', 'background-color: darkcyan; color: white');
@@ -400,7 +400,7 @@ let i;
                 div8.append(div2, div3)
                 div9.append(div4, del)
 
-               // del.textContent = 'del';
+                del.textContent = 'del';
                 checkbox.checked = projectsList[x].projectTasks[y].status;
                 if( projectsList[x].projectTasks[y].status == true){
                   div0.setAttribute('style', 'background-color: mediumseagreen; color: floralwhite;');
