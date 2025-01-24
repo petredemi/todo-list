@@ -227,6 +227,7 @@ h3{
     width: 25px;
     border: none;
     margin-right: 15px;
+    font-size: 1rem;
 }
 .addTask, .addProject{
     display: flex;
@@ -378,6 +379,7 @@ div.project, div.projectx{
     width: 60%;
     color: #00000028;
     text-align: center;
+    rotate: 350deg;
 }
 .todo{
     display: none;
