@@ -148,34 +148,32 @@ function colorProjectsTask(){     //change background for each project by mouse 
 
 // pl = projectsList
 
-function removeProject(pl, y){ //remove project button , change color 
+function removeProject(pl){ //remove project button , change color 
   // pl - project list
-  // y - arrey from delete buttons for projects
-  let item1 = document.querySelectorAll('#projects-list > div.item1');
+  let projectItem1 = document.querySelectorAll('#projects-list > div.item1');
+  let deleteButton = document.querySelectorAll('#projects-list > div.item1 > div.project > button');
+
   let j; // find index of project
-  let l; //project list length
-      function lookIndexButton(button){
-          if( button.style.backgroundColor === 'yellow'){
-          return button;
+  let arrP 
+      function lookIndexButton(div){
+          if( div.style.backgroundColor === 'lightyellow'){
+          return div;
           }
       }
-   y.forEach(button => button.addEventListener('mouseover', (e) => {
-         j = y.findIndex(lookIndexButton);
-         l = pl.length - 1;
+   projectItem1.forEach((node) => node.addEventListener('mouseover', (e) => {
+         arrP = Array.from(projectItem1) 
+         j = arrP.findIndex(lookIndexButton);
          console.log(j)
-
    }));
-   y.forEach(item => item.addEventListener('click', (e) => { //remove project
-        if (y[j].style.backgroundColor === 'yellow'){
+   deleteButton.forEach((button, index) => button.addEventListener('click', (e) => { //remove project
+        if (deleteButton[index].style.backgroundColor === 'yellow'){
           pl.splice(j, 1);
-          y.splice(j, 1);
-        for ( let i = 0; i <= l; i++){
-              localStorage.setItem( `prj${i}`, JSON.stringify(pl[i]));
-                }
-            localStorage.removeItem(`prj${l}`);
+          arrP.splice(j, 1);
+      //  for ( let i = 0; i <= l; i++){
+           //   localStorage.setItem( `prj${i}`, JSON.stringify(pl[i]));
+            //    }
+            localStorage.removeItem(`prj${index}`);
           }
-      item1[j].remove();
-      item1 = document.querySelectorAll('#projects-list > div.item1');
-
+      projectItem1[index].remove();
     }));
   } 

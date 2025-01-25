@@ -6,36 +6,35 @@ searchicon.src = Search
 const lin = document.querySelector('div.lin')
 lin.addEventListener(('click'), (e) => {
 })
-
-function removeDayTask(tl, y){ //remove project button , change color 
-    let task = document.querySelectorAll('#task_list > div.task');
-    let j; // find index of task
-    let l; //task list lengt
-    //tl task list
-    // y arrey from delete buttons
-    function lookIndexButton(button){
-            if( button.style.backgroundColor == 'yellow'){
-            return button;
-            }
+function removeDayTask(tl){ //remove project button , change color 
+  let task = document.querySelectorAll('#task_list > div.task');
+  let btn = document.querySelectorAll('#task_list > div.task > div.controlbtn  > button.del')
+  let j; // find index of task
+  //tl task list
+  let arr 
+  function lookIndexButton(button){
+          if( button.style.backgroundColor == 'lightyellow'){
+          return button;
+          }
+      }
+  task.forEach((node) => node.addEventListener('mouseover', (e) => {
+        arr = Array.from (task) 
+         j = arr.findIndex(lookIndexButton);
+         console.log(j)
+   }));
+   btn.forEach((button, index) => button.addEventListener('click', (e) => { //remove task
+        if (btn[index].style.backgroundColor == 'yellow'){
+          tl.splice(j, 1);
+          arr.splice(j, 1);
+          task[index].remove();
         }
-    y.forEach(button => button.addEventListener('mouseover', (e) => {
-           j = y.findIndex(lookIndexButton);
-           l = tl.length - 1;
-     }));
-     y.forEach(item => item.addEventListener('click', (e) => { //remove task
-          if (y[j].style.backgroundColor == 'yellow'){
-            tl.splice(j, 1);
-            y.splice(j, 1);
-          for ( let i = 0; i <= l; i++){
-                localStorage.setItem( `tsk${i}`, JSON.stringify(tl[i]));
-                  }
-            localStorage.removeItem(`tsk${l}`);
-            }
-        task[j].remove();
-        task = document.querySelectorAll('#task_list > div.task');
-  
-      }));
-    }
+     //  for ( let i = 0; i < l; i++){
+      //  localStorage.setItem( `tsk${i}`, JSON.stringify(tl[i]));
+    //    }
+      localStorage.removeItem(`tsk${index}`);
+      console.log(tl)
+    }));
+  }
 
     let weathericon = document.querySelector('#weathericon');
     let nodata = document.querySelector('#nodata');
@@ -44,7 +43,6 @@ function removeDayTask(tl, y){ //remove project button , change color
     let lookfor = document.querySelector('#lookfor')
    // lookfor.appendChild(searchicon)
     let location = document.querySelector('#location')
-    //let loc = 'London'
     let loc = JSON.parse(localStorage.getItem('weather'));
     location.value = loc
 
@@ -89,7 +87,7 @@ async function dayMotto(){
       motto.textContent = mottoData.summary;
       wonderlocation.textContent = 'location:' + mottoData.location
   }catch(error){
-  //  nodata.textContent = error;
+    nodata.textContent = error;
    // console.log(error)
   };
 }

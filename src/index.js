@@ -16,8 +16,8 @@ linkin.src = Link
 binicon.src = Bin
 
 let keys = []; // it is not used in program
-let arrBtn = []; // project delete buttons;
-let delTsk = []; // day task delete buttons;
+let arrBtn = []; // project delete buttons; not used
+let delTsk = []; // day task delete buttons; not used
 function getKey(){
       for (let i = 0; i < localStorage.length; i++){
         let x = localStorage.key(i);
@@ -50,6 +50,7 @@ const addProjectBtn = document.querySelector('#addProject');
 let tasklistProject = document.querySelectorAll('div.item1 > div.todo > div.task_list'); //tasks in projects
 callDialog(); // for projects and day tasks only 
 let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+let task = document.querySelectorAll('#task_list > div.task');
 //projects
 let projindex = undefined; // index for add task to a project
 addProjectBtn.addEventListener('click', () =>{ // button to add projects 
@@ -125,6 +126,7 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
              div3.append(p3, div33);
              div23.append(div2, div3)
              del.textContent = 'del';
+          //   del.appendChild(binicon)
              checkbox.checked = projectsList[cd].status;
              div0.append(div23, div1, div4, del);
              div00.append(div0, domTask());
@@ -138,7 +140,6 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
                 div6.setAttribute('style', 'display: none');
             };
 
-            arrBtn.push(del);
             n.value = '';
             s.value = '';
             endDate.value = '';
@@ -151,18 +152,15 @@ addProjectBtn.addEventListener('click', () =>{ // button to add projects
       deleteProjectTasks();
       removeStoredItems();
       colorProjects();
-      removeProject(projectsList, arrBtn);
+      removeProject(projectsList);
       dueDate()
-   //   checkboxProjectTasks();
-   //   console.log(projectsList);
-    //  console.log(del);
+
   });
 showTask(); // for each project
 
 //tasks
 const taskDate = document.querySelector('#disply'); // hide date for daytasks 
 taskDate.setAttribute('style', 'display: none');
-
 addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
   let dayTask = document.querySelector('#task_list');
     dialogTask.close();
@@ -207,7 +205,7 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
           div2.textContent = 'day: ' + tasksList[ti].date;
          // div3.textContent = 'hour: ' + tasksList[ti].hour;
           del.textContent = 'del';
-      //    del.appendChild(binicon)
+        //  del.appendChild(binicon)
           checkbox.checked = tasksList[ti].status;
           div33.textContent = tasksList[ti].hour;
           p1.textContent = 'Start:'
@@ -220,7 +218,7 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
           div7.append(div3,  div4, del)
           div0.append(div2, div1,div7);
           dayTask.insertBefore(div0, dayTask.children[ti]);
-        //  daytaskDelete();
+         // daytaskDelete();
           projindex = undefined;
           div2.setAttribute('style', 'display: none');
           for ( let i = 0; i < tasksList.length; i++){
@@ -229,9 +227,9 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     //      tasksList.forEach((item, index) =>{
     //      localStorage.setItem(`tsk${index}`, JSON.stringify(item));
     //    });
-        delTsk.push(del); // insert delete button
+        task = document.querySelectorAll('#task_list > div.task');
+          removeDayTask(tasksList);
 
-          
       }else if (projindex != undefined){
          let ti = projectsList[projindex].projectTasks.findIndex(function(tsk){
           return tsk.title === t.value;
@@ -279,18 +277,15 @@ addTaskBtn.addEventListener('click', () =>{  // button to add tasks on th list
     checkboxProjectTasks();
     dueDateDayTask()
     projindex = undefined;
-    removeDayTask(tasksList, delTsk);
-
-
 });
 colorProjects();
 colorProjectsTask();
 callDialogTaskProjects();
 taskBackground();
 deleteProjectTasks();
-//daytaskDelete();
-removeProject(projectsList, arrBtn);
-removeDayTask(tasksList, delTsk);
+removeProject(projectsList);
+removeDayTask(tasksList);
+//daytaskDelete()
 function dueDate(){
       let currentDay = new Date()
       let project = document.querySelectorAll('#projects-list > div.item1 > div.project');
@@ -336,9 +331,10 @@ function callDialogTaskProjects(){ //call dialog modal  for each task for projec
             let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
             checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
                 projectsList[index].status = checkbox[index].checked;
-                dueDate()
                 localStorage.setItem( `prj${index}`, JSON.stringify(projectsList[index]));
+                dueDate()
             }));
+
         }
 checkboxProject();
 

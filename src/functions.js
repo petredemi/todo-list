@@ -2,9 +2,6 @@ export  {addProject, addTasks, domTask, taskBackground, deleteProjectTasks,
         getProject, getTask, getProjectTasks};
 export  {n, s, endDate, projectStatus, projectsList};
 export  {t, d, hourDue, taskStatus, tasksList};
-//add projects
-//const binicon = new Image()
-
 const projectsList = [];
 const tasksList = [];
 let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
@@ -131,6 +128,8 @@ function taskBackground(){     //change background for each current day task by 
     let  btn = document.querySelectorAll('div.todo > div.task_list > div.task  button') // list del btn for task project
     let  task = document.querySelectorAll('div.item1 > div.todo > div.task_list > div.task'); 
     let  tsklist = document.querySelectorAll('div.task_list');// get index for each project task list
+    console.log(tsklist)
+    
     function checkIndex(div){
       if(div.style.backgroundColor == 'lightyellow'){
          return div;
@@ -149,6 +148,7 @@ function taskBackground(){     //change background for each current day task by 
         indexP = index;
             arrT = Array.from(tsklist[index].children);
             indextsk = arrT.findIndex(checkIndex);
+            console.log(indextsk)
         })); 
       btn.forEach((node, index) => node.addEventListener('click', (e) => {
           if ( btn[index].style.backgroundColor == 'red'){
@@ -156,54 +156,8 @@ function taskBackground(){     //change background for each current day task by 
             arrT.splice(indextsk, 1);
           }
           projectsList[indexP].projectTasks.splice(indextsk, 1);
-      }));
+      }));      
 }
-
-let task;
-let i;
-//let removeindex;  //remove index; v
-  function daytaskDelete(){ //remove button , change color 
-    let node1 = document.querySelectorAll('#task_list > div.task > button.del');
-    let node2 = document.querySelectorAll('#task_list > div.task');
-        task = Array.from(node2);
-        function checkIndex(div){
-          if(div.style.backgroundColor == 'lightyellow'){
-             return div;
-            }
-          }
-        node2.forEach((node, index) => node.addEventListener('mouseenter', () => {
-          node1 = document.querySelectorAll('#task_list > div.task > button.del');
-          node2 = document.querySelectorAll('#task_list > div.task');
-          i = task.findIndex(checkIndex);
-
-        }));
-        node1.forEach((button, index) => button.addEventListener('mouseover', (e) => {
-          node1[index].style.backgroundColor = 'yellow';
-      //    console.log( i + 'index');
-          }));   
-         node1.forEach((button, index) => button.addEventListener('mouseleave', (e) => {
-              node1[index].setAttribute('style', 'background-color: none');
-         }));
-         node1.forEach((node, index) => node.addEventListener('click', () => {
-              tasksList.splice(i, 1);
-              task.splice(i, 1);      
-              localStorage.removeItem(`tsk${index}`);
-              console.log(index + 'indextsk')
-              console.log(tasksList);
-              node1[i].remove();
-              node2[i].remove();
-              task = Array.from(node2);
-              node1 = document.querySelectorAll('#task_list > div.task > button.del');
-              node2 = document.querySelectorAll('#task_list > div.task');
-
-          }));
-     //    tasksList.forEach((item, index) =>{
-        //    localStorage.setItem(`tsk${index}`, JSON.stringify(item))
-      //    });
-  
-      };
-
-      
   function getTask(y){ // from local store
         let dayTaskList = document.querySelector('#task_list');
           for (let x = 0; x < tasksList.length; x++ ){
