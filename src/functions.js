@@ -86,8 +86,11 @@ function taskBackground(){     //change background for each current day task by 
       let checkbox = document.querySelectorAll('#task_list > div.task input.check');
       let done  = document.querySelectorAll('#task_list > div.task div.done');
       let activ = document.querySelectorAll('#task_list > div.task div.activ');
-
+      let colo
       task.forEach((node, index) => node.addEventListener('mouseover', (e) => {
+       // console.log(node.style.backgroundColor)
+          colo = node.style.backgroundColor
+          console.log(colo)
           let check = checkbox[index].checked;
           if(check == false && task[index].style.backgroundColor != 'lightpink'){
       task[index].setAttribute('style', 'background-color: lightyellow');
@@ -117,7 +120,7 @@ function taskBackground(){     //change background for each current day task by 
             activ[index].setAttribute('style', 'display: none');
             console.log(tasksList);
           } else if(checkbox[index].checked == false){
-            task[index].setAttribute('style', 'background-color: none');
+            task[index].setAttribute('style', `background-color: ${colo}`);
             done[index].setAttribute('style', 'display: none');
             activ[index].setAttribute('style', 'display: block');
           }

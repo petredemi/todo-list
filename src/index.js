@@ -326,9 +326,9 @@ function callDialogTaskProjects(){ //call dialog modal  for each task for projec
       projindex = index;  //where to add task for project
     }));
 }
-
   function checkboxProject(){
             let checkbox = document.querySelectorAll('#projects-list > div.item1 > div.project input.check');
+            let project = document.querySelectorAll('#projects-list > div.item1 > div.project');
             checkbox.forEach((node, index) => node.addEventListener('change', (e) => {
                 projectsList[index].status = checkbox[index].checked;
                 localStorage.setItem( `prj${index}`, JSON.stringify(projectsList[index]));
